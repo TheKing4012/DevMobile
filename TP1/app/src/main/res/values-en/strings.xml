@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TP1</string>
+    <string name="text_name">Name</string>
+    <string name="text_surname">Surname</string>
+    <string name="text_age">Age</string>
+    <string name="text_skillDomain">Skill Domain</string>
+    <string name="text_phoneNumber">Phone Number</string>
+    <string name="text_btn_send">Send</string>
+</resources>

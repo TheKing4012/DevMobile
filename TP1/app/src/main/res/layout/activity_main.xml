@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!--Exo 2 -->
+    <!-- TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"/ -->
+
+    <!--Exo 3 -->
+    <EditText android:id="@+id/editTextName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:hint="@string/text_name" />
+    <EditText android:id="@+id/editTextSurname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/text_surname" />
+    <EditText android:id="@+id/editTextAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:hint="@string/text_age" />
+    <EditText android:id="@+id/editTextSkillDomain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/text_skillDomain" />
+    <EditText android:id="@+id/editTextPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:hint="@string/text_phoneNumber" />
+    <Button
+        android:id="@+id/button_send"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/text_btn_send" />
+
+
+
+</LinearLayout>
+
+
