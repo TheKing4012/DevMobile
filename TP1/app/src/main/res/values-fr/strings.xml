@@ -7,4 +7,9 @@
     <string name="text_skillDomain">Domaine de Compétence</string>
     <string name="text_phoneNumber">Numéro de Téléphone</string>
     <string name="text_btn_send">Envoyer</string>
+    <string-array name="skillDomains">
+        <item>Ingénierie Logiciel</item>
+        <item>Intelligence Artificielle</item>
+        <item>Algorithmie</item>
+    </string-array>
 </resources>

@@ -12,9 +12,9 @@
 
     <!--Exo 3 -->
     <EditText android:id="@+id/editTextName"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:hint="@string/text_name" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/text_name" />
     <EditText android:id="@+id/editTextSurname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,9 +24,11 @@
         android:layout_height="wrap_content"
         android:inputType="numberSigned"
         android:hint="@string/text_age" />
-    <EditText android:id="@+id/editTextSkillDomain"
+    <Spinner
+        android:id="@+id/editTextSkillDomain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:entries="@array/skillDomains"
         android:hint="@string/text_skillDomain" />
     <EditText android:id="@+id/editTextPhoneNumber"
         android:layout_width="wrap_content"

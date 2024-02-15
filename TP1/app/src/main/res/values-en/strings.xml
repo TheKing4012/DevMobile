@@ -7,4 +7,9 @@
     <string name="text_skillDomain">Skill Domain</string>
     <string name="text_phoneNumber">Phone Number</string>
     <string name="text_btn_send">Send</string>
+    <string-array name="skillDomains">
+        <item>Software Engineering</item>
+        <item>Artificial Intelligence</item>
+        <item>Algorithmics</item>
+    </string-array>
 </resources>
