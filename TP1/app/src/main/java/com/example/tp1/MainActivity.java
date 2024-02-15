@@ -12,13 +12,6 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
     //EXO 3
-
-    private String[] skillDomain = {"Software Engineering", "Artificial Intelligence", "Algorithm", "Other"};
-    private EditText ETName, ETSurname, ETPhoneNbr, ETAge, ETSkillDomain;
-    private Button sendBtn;
-
-    private ArrayAdapter<String> adapterSkillDomain;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //EXO 2
@@ -33,7 +26,6 @@ public class MainActivity extends Activity {
 
         setContentView(R.layout.activity_main);
 
-        adapterSkillDomain = new ArrayAdapter<>(this, R.layout.list_skilldomain, skillDomain);
 
 
         //Classe anonyme utilisant la méthode de callback onClick
