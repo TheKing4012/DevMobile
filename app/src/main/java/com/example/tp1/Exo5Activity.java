@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class Exo5Activity extends Activity {
 
     Button btn1;
 
@@ -59,13 +59,13 @@ public class MainActivity extends Activity {
     }
 
     private void showAlterDialogInterract(String title, String message, String msg_yes, String msg_no) {
-        AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+        AlertDialog dialog = new AlertDialog.Builder(getApplicationContext())
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton(msg_yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainActivity.this, "Nice Job", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Nice Job", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton(msg_no, new DialogInterface.OnClickListener() {
@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
     }
 
     private void showAlterDialog(String title, String message) {
-        AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
+        AlertDialog dialog = new AlertDialog.Builder(getApplicationContext())
                 .setTitle(title)
                 .setMessage(message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {

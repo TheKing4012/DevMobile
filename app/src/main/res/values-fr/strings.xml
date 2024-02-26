@@ -8,8 +8,13 @@
     <string name="text_phoneNumber">Numéro de Téléphone</string>
     <string name="text_btn_send">Envoyer</string>
     <string-array name="skillDomains">
+        <item>Veuillez selectionner un domaine</item>
         <item>Ingénierie Logiciel</item>
         <item>Intelligence Artificielle</item>
         <item>Algorithmie</item>
     </string-array>
+    <string name="text_confirmation">Etes-vous sur ?</string>
+    <string name="text_confirmation_yes">Oui</string>
+    <string name="text_confirmation_no">Non</string>
+    <string name="text_missing_item">Merci de remplir complètement le formulaire</string>
 </resources>
