@@ -28,7 +28,7 @@ public class Exo5Activity extends Activity {
         EditText nameED = findViewById(R.id.editTextName);
         EditText surnameED = findViewById(R.id.editTextSurname);
         EditText ageED = findViewById(R.id.editTextAge);
-        Spinner skillED = findViewById(R.id.editTextSkillDomain);
+        Spinner skillED = findViewById(R.id.spinnerSkillDomain);
         EditText numED = findViewById(R.id.editTextPhoneNumber);
 
         btn1 = (Button) findViewById(R.id.button_send);
