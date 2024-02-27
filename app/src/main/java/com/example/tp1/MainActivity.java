@@ -1,14 +1,16 @@
 package com.example.tp1;
 
 
+import static com.example.tp1.utils.View.checkNotEmptySpinner;
+import static com.example.tp1.utils.View.checkNotEmptyText;
+
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
+
+import com.example.tp1.utils.Dialog;
 
 public class MainActivity extends Activity {
 
@@ -34,61 +36,11 @@ public class MainActivity extends Activity {
             String skillText = skillED.getSelectedItem().toString();
             String numText = numED.getText().toString();
 
-            if(checkEmptyText(nameText) && checkEmptyText(surnameText) && checkEmptyText(ageText) && checkEmptySpinner(skillED, skillText) && checkEmptyText(numText)) {
-                showAlterDialogInterract("Are you sure ?", getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no));
+            if (checkNotEmptyText(this, nameText) && checkNotEmptyText(this, surnameText) && checkNotEmptyText(this, ageText) && checkNotEmptySpinner(this, skillED, skillText) && checkNotEmptyText(this, numText)) {
+                Dialog.showInterractDialog(btn1, this, getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no), "Nice Job");
             } else {
-                showAlterDialog(getResources().getString(R.string.text_missing_item), getResources().getString(R.string.text_missing_item));
+                Dialog.showErrorDialog(this, getResources().getString(R.string.text_missing_item), getResources().getString(R.string.text_missing_item));
             }
         });
-    }
-
-    private boolean checkEmptyText(String text) {
-        if(text.isEmpty()) {
-            showDialog(R.string.text_missing_item);
-            return false;
-        }
-        return true;
-    }
-
-    private boolean checkEmptySpinner(Spinner spinner, String text) {
-        if(text.equals(spinner.getAdapter().getItem(0).toString())) {
-            showDialog(R.string.text_missing_item);
-            return false;
-        }
-        return true;
-    }
-
-    private void showAlterDialogInterract(String title, String message, String msg_yes, String msg_no) {
-        AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(msg_yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MainActivity.this, "Nice Job", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton(msg_no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
-
-    }
-
-    private void showAlterDialog(String title, String message) {
-        AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
-
     }
 }

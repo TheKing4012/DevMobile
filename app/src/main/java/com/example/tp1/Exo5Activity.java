@@ -1,20 +1,16 @@
 package com.example.tp1;
 
 
-import static com.example.tp1.utils.View.checkEmptySpinner;
-import static com.example.tp1.utils.View.checkEmptyText;
+import static com.example.tp1.utils.View.checkNotEmptySpinner;
+import static com.example.tp1.utils.View.checkNotEmptyText;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.tp1.utils.Dialog;
-import com.example.tp1.utils.View;
 
 public class Exo5Activity extends Activity {
 
@@ -40,8 +36,8 @@ public class Exo5Activity extends Activity {
             String skillText = skillED.getSelectedItem().toString();
             String numText = numED.getText().toString();
 
-            if (checkEmptyText(this, nameText) && checkEmptyText(this, surnameText) && checkEmptyText(this, ageText) && checkEmptySpinner(this, skillED, skillText) && checkEmptyText(this, numText)) {
-                Dialog.showInterractDialog(this, getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no), "Nice Job");
+            if (checkNotEmptyText(this, nameText) && checkNotEmptyText(this, surnameText) && checkNotEmptyText(this, ageText) && checkNotEmptySpinner(this, skillED, skillText) && checkNotEmptyText(this, numText)) {
+                Dialog.showInterractDialog(btn1, this, getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no), "Nice Job");
             } else {
                 Dialog.showErrorDialog(this, getResources().getString(R.string.text_missing_item), getResources().getString(R.string.text_missing_item));
             }

@@ -3,13 +3,15 @@ package com.example.tp1.utils;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.tp1.R;
 
 public class Dialog {
-    public static void showInterractDialog(Context context, String title, String message, String msg_yes, String msg_no, String msg_popup) {
+    public static void showInterractDialog(Button button, Context context, String title, String message, String msg_yes, String msg_no, String msg_popup) {
         AlertDialog dialog = new AlertDialog.Builder(context)
                 .setTitle(title)
                 .setMessage(message)
@@ -17,12 +19,14 @@ public class Dialog {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(context, msg_popup, Toast.LENGTH_SHORT).show();
+                        button.setBackgroundColor(Color.GREEN);
                     }
                 })
                 .setNegativeButton(msg_no, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
+                        button.setBackgroundColor(Color.RED);
+                        //dialog.dismiss();
                     }
                 })
                 .show();
