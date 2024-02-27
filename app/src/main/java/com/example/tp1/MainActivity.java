@@ -1,14 +1,27 @@
 package com.example.tp1;
 
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 public class MainActivity extends Activity {
 
@@ -25,6 +38,14 @@ public class MainActivity extends Activity {
         Spinner skillED = findViewById(R.id.spinnerSkillDomain);
         EditText numED = findViewById(R.id.editTextPhoneNumber);
 
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if(ContextCompat.checkSelfPermission(MainActivity.this,
+                    Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(MainActivity.this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
+            }
+        }
+
         btn1 = (Button) findViewById(R.id.button_send);
 
         btn1.setOnClickListener(view -> {
@@ -34,12 +55,51 @@ public class MainActivity extends Activity {
             String skillText = skillED.getSelectedItem().toString();
             String numText = numED.getText().toString();
 
+            makeNotification();
+            /*
             if(checkEmptyText(nameText) && checkEmptyText(surnameText) && checkEmptyText(ageText) && checkEmptySpinner(skillED, skillText) && checkEmptyText(numText)) {
                 showAlterDialogInterract("Are you sure ?", getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no));
             } else {
                 showAlterDialog(getResources().getString(R.string.text_missing_item), getResources().getString(R.string.text_missing_item));
             }
+             */
         });
+    }
+
+    public void makeNotification() {
+        String chanelID = "CHANNEL_ID_NOTIFICATION";
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(getApplicationContext(), chanelID);
+        builder
+                .setSmallIcon(R.drawable.baseline_warning_24)
+                .setContentTitle("Test Title")
+                .setContentText("Some text for notification here")
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+        Intent intent = new Intent(getApplicationContext(), NotificationActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("data", "Some value to be passed here");
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(),
+                0, intent, PendingIntent.FLAG_MUTABLE);
+        builder.setContentIntent(pendingIntent);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel =
+                    notificationManager.getNotificationChannel(chanelID);
+            if(notificationChannel == null) {
+                int importante = NotificationManager.IMPORTANCE_HIGH;
+                notificationChannel = new NotificationChannel(chanelID,
+                        "Some description", importante);
+                notificationChannel.setLightColor(Color.WHITE);
+                notificationChannel.enableVibration(true);
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
+        }
+
+        notificationManager.notify(0, builder.build());
     }
 
     private boolean checkEmptyText(String text) {
