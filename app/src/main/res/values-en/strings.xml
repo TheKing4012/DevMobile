@@ -17,4 +17,5 @@
     <string name="text_confirmation_yes">Yes</string>
     <string name="text_confirmation_no">No</string>
     <string name="text_missing_item">Thanks to entierly fill the form</string>
+    <string name="title_process">Recap:</string>
 </resources>

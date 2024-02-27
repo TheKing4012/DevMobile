@@ -17,4 +17,5 @@
     <string name="text_confirmation_yes">Oui</string>
     <string name="text_confirmation_no">Non</string>
     <string name="text_missing_item">Merci de remplir complètement le formulaire</string>
+    <string name="title_process">Résumé:</string>
 </resources>
