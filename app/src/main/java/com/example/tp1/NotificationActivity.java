@@ -14,7 +14,7 @@ public class NotificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         textView = findViewById(R.id.textViewData);
-        String data = getIntent().getStringExtra("data");
+        String data = getIntent().getStringExtra("data"); // getCharSequenceArrayListExtra
         textView.setText(data);
     }
 }
