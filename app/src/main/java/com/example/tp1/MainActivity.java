@@ -6,8 +6,11 @@ import static com.example.tp1.utils.View.checkNotEmptyText;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.InputType;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.example.tp1.utils.Dialog;
@@ -16,34 +19,63 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
-    Button btn1;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        EditText nameED = findViewById(R.id.editTextName);
-        EditText surnameED = findViewById(R.id.editTextSurname);
-        EditText ageED = findViewById(R.id.editTextAge);
-        Spinner skillED = findViewById(R.id.spinnerSkillDomain);
-        EditText numED = findViewById(R.id.editTextPhoneNumber);
+        // Création d'un LinearLayout pour contenir les éléments
+        LinearLayout layout = new LinearLayout(this);
+        layout.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT));
+        layout.setOrientation(LinearLayout.VERTICAL);
 
-        btn1 = (Button) findViewById(R.id.button_send);
+        // Création des EditText
+        EditText editTextName = new EditText(this);
+        editTextName.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        editTextName.setHint(getString(R.string.text_name));
+        layout.addView(editTextName);
 
-        btn1.setOnClickListener(view -> {
-            String nameText = nameED.getText().toString();
-            String surnameText = surnameED.getText().toString();
-            String ageText = ageED.getText().toString();
-            String skillText = skillED.getSelectedItem().toString();
-            String numText = numED.getText().toString();
+        EditText editTextSurname = new EditText(this);
+        editTextSurname.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        editTextSurname.setHint(getString(R.string.text_surname));
+        layout.addView(editTextSurname);
 
-            if (checkNotEmptyText(this, nameText) && checkNotEmptyText(this, surnameText) && checkNotEmptyText(this, ageText) && checkNotEmptySpinner(this, skillED, skillText) && checkNotEmptyText(this, numText)) {
-                Dialog.showInterractDialog(btn1, this, getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no), "Nice Job",
-                        nameText, surnameText, ageText, skillText, numText);
-            } else {
-                Dialog.showErrorDialog(this, getResources().getString(R.string.text_missing_item), getResources().getString(R.string.text_missing_item));
-            }
-        });
+        EditText editTextAge = new EditText(this);
+        editTextAge.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        editTextAge.setHint(getString(R.string.text_age));
+        editTextAge.setInputType(InputType.TYPE_CLASS_NUMBER);
+        layout.addView(editTextAge);
+
+        Spinner spinnerSkillDomain = new Spinner(this);
+        spinnerSkillDomain.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        spinnerSkillDomain.setAdapter(ArrayAdapter.createFromResource(this, R.array.skillDomains, android.R.layout.simple_spinner_item));
+        spinnerSkillDomain.setPrompt(getString(R.string.text_skillDomain));
+        layout.addView(spinnerSkillDomain);
+
+        EditText editTextPhoneNumber = new EditText(this);
+        editTextPhoneNumber.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        editTextPhoneNumber.setHint(getString(R.string.text_phoneNumber));
+        editTextPhoneNumber.setInputType(InputType.TYPE_CLASS_PHONE);
+        layout.addView(editTextPhoneNumber);
+
+        Button buttonSend = new Button(this);
+        buttonSend.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT));
+        buttonSend.setText(getString(R.string.text_btn_send));
+        layout.addView(buttonSend);
+
+        setContentView(layout);
     }
 }
