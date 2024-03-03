@@ -59,11 +59,11 @@ public class MainActivity extends Activity {
         });
 
         btn7.setOnClickListener(view -> {
-            Toast.makeText(this, getResources().getText(R.string.text_soon));
+            Toast.makeText(this, getResources().getText(R.string.text_soon), Toast.LENGTH_SHORT).show();
         });
 
         btn8.setOnClickListener(view -> {
-            Toast.makeText(this, );
+            Toast.makeText(this, getResources().getText(R.string.text_soon), Toast.LENGTH_SHORT).show();
         });
     }
 }
