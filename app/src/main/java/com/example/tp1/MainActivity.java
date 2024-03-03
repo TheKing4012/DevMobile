@@ -16,7 +16,7 @@ import com.example.tp1.utils.Dialog;
 
 public class MainActivity extends Activity {
 
-    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7;
+    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
         btn5 = (Button) findViewById(R.id.button_exo5);
         btn6 = (Button) findViewById(R.id.button_exo6);
         btn7 = (Button) findViewById(R.id.button_exo7);
+        btn8 = (Button) findViewById(R.id.button_exo8);
 
 
         btn1.setOnClickListener(view -> {
@@ -41,22 +42,26 @@ public class MainActivity extends Activity {
         });
 
         btn3.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new Exo5Activity());
+            CommonHelper.changeActivity(this, new Exo3ActivityOnlyJava());
         });
 
         btn4.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new Exo6Activity());
+            CommonHelper.changeActivity(this, new Exo5Activity());
         });
 
         btn5.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new Exo7Activity());
+            CommonHelper.changeActivity(this, new Exo6Activity());
         });
 
         btn6.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new Exo8Activity());
+            CommonHelper.changeActivity(this, new Exo7Activity());
         });
 
         btn7.setOnClickListener(view -> {
+            CommonHelper.changeActivity(this, new Exo8Activity());
+        });
+
+        btn8.setOnClickListener(view -> {
             CommonHelper.changeActivity(this, new Exo9Activity());
         });
     }

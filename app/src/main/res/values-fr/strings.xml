@@ -21,11 +21,12 @@
     <string name="title_main">Exercices:</string>
     <string name="text_btn_exo1">HelloWorld</string>
     <string name="text_btn_exo2">Exercice 3</string>
-    <string name="text_btn_exo3">Exercice 5</string>
-    <string name="text_btn_exo4">Exercice 6</string>
-    <string name="text_btn_exo5">Exercice 7</string>
-    <string name="text_btn_exo6">Exercice 8</string>
-    <string name="text_btn_exo7">Exercice 9</string>
+    <string name="text_btn_exo3">Exercice 3 (Seulement Java)</string>
+    <string name="text_btn_exo4">Exercice 5</string>
+    <string name="text_btn_exo5">Exercice 6</string>
+    <string name="text_btn_exo6">Exercice 7</string>
+    <string name="text_btn_exo7">Exercice 8</string>
     <string name="text_btn_return">Retour</string>
     <string name="title_call">Appeler</string>
+    <string name="text_btn_exo8">Exercice 9</string>
 </resources>
