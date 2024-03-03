@@ -27,13 +27,13 @@
 
     <Button
         android:id="@+id/button_call"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="163dp"
-        android:layout_marginTop="700dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="167dp"
+        android:layout_marginTop="677dp"
+        android:background="@drawable/round_button"
         android:text="call"
-        android:visibility="visible"
-        />
+        android:visibility="visible" />
 
 
 </RelativeLayout>

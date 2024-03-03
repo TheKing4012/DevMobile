@@ -4,13 +4,17 @@ import static com.example.tp1.utils.View.checkNotEmptySpinner;
 import static com.example.tp1.utils.View.checkNotEmptyText;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.tp1.utils.Dialog;
 import com.example.tp1.utils.LambaExpr;
@@ -21,12 +25,12 @@ public class CallActivity extends AppCompatActivity {
     TextView tvPhoneNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Vérifier si la permission est déjà accordée
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            // Demander la permission à l'utilisateur
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, requestCode);
-        } else {
-            // La permission est déjà accordée, effectuer l'action désirée ici
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // Vérifier si la permission est déjà accordée
+            if (ContextCompat.checkSelfPermission(CallActivity.this, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                // Demander la permission à l'utilisateur
+                ActivityCompat.requestPermissions(CallActivity.this, new String[]{android.Manifest.permission.CALL_PHONE}, 101);
+            }
         }
 
         super.onCreate(savedInstanceState);
