@@ -21,17 +21,29 @@ public class CallActivity extends AppCompatActivity {
     TextView tvPhoneNumber;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Vérifier si la permission est déjà accordée
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            // Demander la permission à l'utilisateur
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, requestCode);
+        } else {
+            // La permission est déjà accordée, effectuer l'action désirée ici
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_call);
 
-        tvPhoneNumber = findViewById(R.id.textViewPhoneNumber);
+        tvPhoneNumber = findViewById(R.id.tVPhoneNumber);
 
         Intent intent = getIntent();
         phoneNumber = intent.getStringExtra("phoneNumber");
 
-        tvPhoneNumber.setText(getResources().getString(R.string.text_phoneNumber) +": "+ phoneNumber);
+        tvPhoneNumber.setText(phoneNumber);
 
         btn1 = (Button) findViewById(R.id.button_call);
+
+        btn1.setBackgroundColor(Color.TRANSPARENT);
+
+        btn1.setText("   ");
 
         btn1.setOnClickListener(view -> {
             Intent intentCall = new Intent(Intent.ACTION_CALL);

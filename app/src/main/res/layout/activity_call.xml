@@ -27,14 +27,13 @@
 
     <Button
         android:id="@+id/button_call"
-        style="@style/Widget.AppCompat.CompoundButton.RadioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="163dp"
         android:layout_marginTop="700dp"
         android:text="call"
-        android:visibility="invisible"
-        app:shapeAppearance="@style/ShapeAppearanceOverlay.Material3.Chip" />
+        android:visibility="visible"
+        />
 
 
 </RelativeLayout>

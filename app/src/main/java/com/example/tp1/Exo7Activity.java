@@ -45,7 +45,7 @@ public class Exo7Activity extends Activity {
             String numText = numED.getText().toString();
 
             LambaExpr lambaExprYes = () -> {
-                Intent intent = new Intent(this, ProcessActivity2.class);
+                Intent intent = new Intent(this, ProcessActivity3.class);
                 intent.putExtra("name", nameText);
                 intent.putExtra("surname", surnameText);
                 intent.putExtra("age", ageText);
