@@ -5,12 +5,17 @@ import static com.example.tp1.utils.View.checkNotEmptySpinner;
 import static com.example.tp1.utils.View.checkNotEmptyText;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.example.tp1.utils.CommonHelper;
 import com.example.tp1.utils.Dialog;
+import com.example.tp1.utils.LambaExpr;
 
 public class Exo7Activity extends Activity {
 
@@ -21,6 +26,8 @@ public class Exo7Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exo3);
 
+        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.exo3_menu));
+
         EditText nameED = findViewById(R.id.editTextName);
         EditText surnameED = findViewById(R.id.editTextSurname);
         EditText ageED = findViewById(R.id.editTextAge);
@@ -30,14 +37,29 @@ public class Exo7Activity extends Activity {
         btn1 = (Button) findViewById(R.id.button_send);
 
         btn1.setOnClickListener(view -> {
+
             String nameText = nameED.getText().toString();
             String surnameText = surnameED.getText().toString();
             String ageText = ageED.getText().toString();
             String skillText = skillED.getSelectedItem().toString();
             String numText = numED.getText().toString();
 
+            LambaExpr lambaExprYes = () -> {
+                Intent intent = new Intent(this, ProcessActivity2.class);
+                intent.putExtra("name", nameText);
+                intent.putExtra("surname", surnameText);
+                intent.putExtra("age", ageText);
+                intent.putExtra("skillDomain", skillText);
+                intent.putExtra("phoneNumber", numText);
+                this.startActivity(intent);
+            };
+
+            LambaExpr lambaExprNo = () -> {
+                btn1.setBackgroundColor(Color.RED);
+            };
+
             if (checkNotEmptyText(this, nameText) && checkNotEmptyText(this, surnameText) && checkNotEmptyText(this, ageText) && checkNotEmptySpinner(this, skillED, skillText) && checkNotEmptyText(this, numText)) {
-                //Dialog.showInterractDialog(btn1, this, getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no), "Nice Job");
+                Dialog.showInterractDialog(this, getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no), lambaExprYes, lambaExprNo);
             } else {
                 Dialog.showErrorDialog(this, getResources().getString(R.string.text_missing_item), getResources().getString(R.string.text_missing_item));
             }

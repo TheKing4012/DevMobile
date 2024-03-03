@@ -27,4 +27,5 @@
     <string name="text_btn_exo6">Exercice 8</string>
     <string name="text_btn_exo7">Exercice 9</string>
     <string name="text_btn_return">Return</string>
+    <string name="title_call">Call</string>
 </resources>
