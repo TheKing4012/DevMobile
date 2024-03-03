@@ -16,6 +16,30 @@
             android:name=".ProcessActivity"
             android:exported="false" />
         <activity
+            android:name=".ProcessActivity2"
+            android:exported="false" />
+        <activity
+            android:name=".HelloWorldActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Exo3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Exo5Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Exo6Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Exo7Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Exo8Activity"
+            android:exported="false" />
+        <activity
+            android:name=".Exo9Activity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -6,18 +6,15 @@ import static com.example.tp1.utils.View.checkNotEmptyText;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import com.example.tp1.utils.CommonHelper;
 import com.example.tp1.utils.Dialog;
 import com.example.tp1.utils.LambaExpr;
 
-public class Exo5Activity extends Activity {
+public class MainActivity2 extends Activity {
 
     Button btn1;
 
@@ -25,7 +22,8 @@ public class Exo5Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exo3);
-        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.exo3_menu));
+
+
 
         EditText nameED = findViewById(R.id.editTextName);
         EditText surnameED = findViewById(R.id.editTextSurname);
@@ -43,19 +41,24 @@ public class Exo5Activity extends Activity {
             String skillText = skillED.getSelectedItem().toString();
             String numText = numED.getText().toString();
 
-            LambaExpr lambaExprYes = () -> {
-                btn1.setBackgroundColor(Color.GREEN);
+            LambaExpr lambaExpr = () -> {
+                Intent intent = new Intent(this, ProcessActivity.class);
+                intent.putExtra("name", nameText);
+                intent.putExtra("surname", surnameText);
+                intent.putExtra("age", ageText);
+                intent.putExtra("skillDomain", skillText);
+                intent.putExtra("phoneNumber", numText);
+                this.startActivity(intent);
             };
 
-            LambaExpr lambaExprNo = () -> {
-                btn1.setBackgroundColor(Color.RED);
-            };
-
+            /*
             if (checkNotEmptyText(this, nameText) && checkNotEmptyText(this, surnameText) && checkNotEmptyText(this, ageText) && checkNotEmptySpinner(this, skillED, skillText) && checkNotEmptyText(this, numText)) {
-                Dialog.showInterractDialog(this, getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no), lambaExprYes, lambaExprNo);
+                Dialog.showInterractDialog(btn1, this, getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no), lambaExpr);
             } else {
                 Dialog.showErrorDialog(this, getResources().getString(R.string.text_missing_item), getResources().getString(R.string.text_missing_item));
             }
+
+             */
         });
     }
 }

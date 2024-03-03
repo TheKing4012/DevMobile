@@ -17,7 +17,7 @@ import com.example.tp1.utils.CommonHelper;
 import com.example.tp1.utils.Dialog;
 import com.example.tp1.utils.LambaExpr;
 
-public class Exo5Activity extends Activity {
+public class Exo6Activity extends Activity {
 
     Button btn1;
 
@@ -25,6 +25,7 @@ public class Exo5Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exo3);
+
         CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.exo3_menu));
 
         EditText nameED = findViewById(R.id.editTextName);
@@ -44,7 +45,13 @@ public class Exo5Activity extends Activity {
             String numText = numED.getText().toString();
 
             LambaExpr lambaExprYes = () -> {
-                btn1.setBackgroundColor(Color.GREEN);
+                Intent intent = new Intent(this, ProcessActivity2.class);
+                intent.putExtra("name", nameText);
+                intent.putExtra("surname", surnameText);
+                intent.putExtra("age", ageText);
+                intent.putExtra("skillDomain", skillText);
+                intent.putExtra("phoneNumber", numText);
+                this.startActivity(intent);
             };
 
             LambaExpr lambaExprNo = () -> {

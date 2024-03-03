@@ -8,42 +8,56 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.example.tp1.utils.CommonHelper;
 import com.example.tp1.utils.Dialog;
-
-import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
-    Button btn1;
+    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EditText nameED = findViewById(R.id.editTextName);
-        EditText surnameED = findViewById(R.id.editTextSurname);
-        EditText ageED = findViewById(R.id.editTextAge);
-        Spinner skillED = findViewById(R.id.spinnerSkillDomain);
-        EditText numED = findViewById(R.id.editTextPhoneNumber);
+        btn1 = (Button) findViewById(R.id.button_exo1);
+        btn2 = (Button) findViewById(R.id.button_exo2);
+        btn3 = (Button) findViewById(R.id.button_exo3);
+        btn4 = (Button) findViewById(R.id.button_exo4);
+        btn5 = (Button) findViewById(R.id.button_exo5);
+        btn6 = (Button) findViewById(R.id.button_exo6);
+        btn7 = (Button) findViewById(R.id.button_exo7);
 
-        btn1 = (Button) findViewById(R.id.button_send);
 
         btn1.setOnClickListener(view -> {
-            String nameText = nameED.getText().toString();
-            String surnameText = surnameED.getText().toString();
-            String ageText = ageED.getText().toString();
-            String skillText = skillED.getSelectedItem().toString();
-            String numText = numED.getText().toString();
+            CommonHelper.changeActivity(this, new HelloWorldActivity());
+        });
 
-            if (checkNotEmptyText(this, nameText) && checkNotEmptyText(this, surnameText) && checkNotEmptyText(this, ageText) && checkNotEmptySpinner(this, skillED, skillText) && checkNotEmptyText(this, numText)) {
-                Dialog.showInterractDialog(btn1, this, getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no), "Nice Job",
-                        nameText, surnameText, ageText, skillText, numText);
-            } else {
-                Dialog.showErrorDialog(this, getResources().getString(R.string.text_missing_item), getResources().getString(R.string.text_missing_item));
-            }
+        btn2.setOnClickListener(view -> {
+            CommonHelper.changeActivity(this, new Exo3Activity());
+        });
+
+        btn3.setOnClickListener(view -> {
+            CommonHelper.changeActivity(this, new Exo5Activity());
+        });
+
+        btn4.setOnClickListener(view -> {
+            CommonHelper.changeActivity(this, new Exo6Activity());
+        });
+
+        btn5.setOnClickListener(view -> {
+            CommonHelper.changeActivity(this, new Exo7Activity());
+        });
+
+        btn6.setOnClickListener(view -> {
+            CommonHelper.changeActivity(this, new Exo8Activity());
+        });
+
+        btn7.setOnClickListener(view -> {
+            CommonHelper.changeActivity(this, new Exo9Activity());
         });
     }
 }
