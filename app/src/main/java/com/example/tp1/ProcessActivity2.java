@@ -54,7 +54,7 @@ public class ProcessActivity2 extends AppCompatActivity {
         btn1 = (Button) findViewById(R.id.button_ok);
 
         btn1.setOnClickListener(view -> {
-            this.finish();
+            CommonHelper.changeActivity(this, new HelloWorldActivity());
         });
 
     }
