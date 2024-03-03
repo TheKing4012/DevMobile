@@ -21,6 +21,7 @@
     <string name="text_btn_exo6">Exercice 7</string>
     <string name="text_btn_exo7">Exercice 8</string>
     <string name="text_btn_return">Return</string>
+    <string name="text_soon">Soon</string>
     <string-array name="skillDomains">
         <item>None</item>
         <item>Software Engineering</item>

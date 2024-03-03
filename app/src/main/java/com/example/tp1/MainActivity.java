@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.tp1.utils.CommonHelper;
 import com.example.tp1.utils.Dialog;
@@ -58,11 +59,11 @@ public class MainActivity extends Activity {
         });
 
         btn7.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new Exo8Activity());
+            Toast.makeText(this, getResources().getText(R.string.text_soon));
         });
 
         btn8.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new Exo9Activity());
+            Toast.makeText(this, );
         });
     }
 }
