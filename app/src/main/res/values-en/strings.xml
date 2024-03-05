@@ -33,4 +33,13 @@
     <string name="text_btn_tp1">TP 1</string>
     <string name="text_btn_tp2">TP 2</string>
     <string name="text_btn_tp3">TP 3</string>
+
+    <!--TP2-->
+    <string name="text_type">Type</string>
+    <string name="text_version">Version</string>
+    <string name="text_resolution">Resolution</string>
+    <string name="text_power">Power (mA)</string>
+    <string name="text_vendor">Vendor</string>
+    <string name="text_range">Range</string>
+    <string name="text_delay">Delay (ms)</string>
 </resources>

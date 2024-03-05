@@ -29,14 +29,6 @@ public class TP2Activity extends Activity {
 
         btn1 = (Button) findViewById(R.id.button_exo1);
         btn2 = (Button) findViewById(R.id.button_exo2);
-        /*btn3 = (Button) findViewById(R.id.button_exo3);
-        btn4 = (Button) findViewById(R.id.button_exo4);
-        btn5 = (Button) findViewById(R.id.button_exo5);
-        btn6 = (Button) findViewById(R.id.button_exo6);
-        btn7 = (Button) findViewById(R.id.button_exo7);
-        btn8 = (Button) findViewById(R.id.button_exo8);
-
-         */
 
 
         btn1.setOnClickListener(view -> {

@@ -33,4 +33,13 @@
     <string name="text_btn_tp1">TP 1</string>
     <string name="text_btn_tp2">TP 2</string>
     <string name="text_btn_tp3">TP 3</string>
+
+    <!--TP2-->
+    <string name="text_type">Type</string>
+    <string name="text_version">Version</string>
+    <string name="text_resolution">Résolution</string>
+    <string name="text_power">Utilisation énergétique (mA)</string>
+    <string name="text_vendor">Constructeur</string>
+    <string name="text_range">Portée du catpeur</string>
+    <string name="text_delay">Délais de mesure (ms)</string>
 </resources>
