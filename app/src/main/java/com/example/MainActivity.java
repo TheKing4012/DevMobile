@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.tp1.R;
+import com.example.R;
 import com.example.tp1.TP1Activity;
 import com.example.tp2.TP2Activity;
 import com.example.utils.CommonHelper;

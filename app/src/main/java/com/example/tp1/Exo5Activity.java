@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import com.example.R;
 
 import com.example.utils.CommonHelper;
 import com.example.utils.Dialog;

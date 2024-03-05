@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import com.example.R;
 
 import com.example.utils.CommonHelper;
 

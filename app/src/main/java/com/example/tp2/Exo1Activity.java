@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.example.tp1.R;
+import com.example.R;
 import com.example.utils.CommonHelper;
 
 public class Exo1Activity extends Activity {

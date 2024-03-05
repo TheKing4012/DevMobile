@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.tp1.R;
+import com.example.R;
 
 public class CommonHelper {
     public static void createReturnBtn(Activity activity, LinearLayout layout) {

@@ -9,6 +9,13 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
+    <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="true" />
+    <uses-feature android:name="android.hardware.sensor.light" android:required="true" />
+    <uses-feature android:name="android.hardware.sensor.proximity" android:required="true" />
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -20,19 +27,19 @@
         android:theme="@style/Theme.Tp1"
         tools:targetApi="31">
         <activity
-            android:name=".ProcessActivity"
+            android:name=".tp1.ProcessActivity"
             android:exported="false" />
         <activity
-            android:name=".ProcessActivity2"
+            android:name=".tp1.ProcessActivity2"
             android:exported="false" />
         <activity
-            android:name=".ProcessActivity3"
+            android:name=".tp1.ProcessActivity3"
             android:exported="false" />
         <activity
-            android:name=".Exo3ActivityOnlyJava"
+            android:name=".tp1.Exo3ActivityOnlyJava"
             android:exported="false" />
         <activity
-            android:name=".TP1Activity"
+            android:name=".tp1.TP1Activity"
             android:exported="false" />
         <activity
             android:name="com.example.tp2.TP2Activity"
@@ -41,22 +48,28 @@
             android:name="com.example.tp3.TP3Activity"
             android:exported="false" />
         <activity
-            android:name=".CallActivity"
+            android:name=".tp1.CallActivity"
             android:exported="false" />
         <activity
-            android:name=".HelloWorldActivity"
+            android:name=".tp1.HelloWorldActivity"
             android:exported="false" />
         <activity
-            android:name=".Exo3Activity"
+            android:name=".tp1.Exo3Activity"
             android:exported="false" />
         <activity
-            android:name=".Exo5Activity"
+            android:name=".tp2.Exo1Activity"
             android:exported="false" />
         <activity
-            android:name=".Exo6Activity"
+            android:name=".tp2.Exo2Activity"
             android:exported="false" />
         <activity
-            android:name=".Exo7Activity"
+            android:name=".tp1.Exo5Activity"
+            android:exported="false" />
+        <activity
+            android:name=".tp1.Exo6Activity"
+            android:exported="false" />
+        <activity
+            android:name=".tp1.Exo7Activity"
             android:exported="false" />
         <activity
             android:name="com.example.MainActivity"

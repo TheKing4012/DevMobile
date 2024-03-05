@@ -3,7 +3,7 @@ package com.example.utils;
 import android.app.Activity;
 import android.widget.Spinner;
 
-import com.example.tp1.R;
+import com.example.R;
 
 public class View {
     public static boolean checkNotEmptyText(Activity activity, String text) {

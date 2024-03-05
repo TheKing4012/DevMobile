@@ -13,7 +13,7 @@ import com.example.tp1.Exo5Activity;
 import com.example.tp1.Exo6Activity;
 import com.example.tp1.Exo7Activity;
 import com.example.tp1.HelloWorldActivity;
-import com.example.tp1.R;
+import com.example.R;
 import com.example.utils.CommonHelper;
 
 public class TP2Activity extends Activity {
