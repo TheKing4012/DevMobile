@@ -63,6 +63,9 @@
             android:name=".tp2.Exo2Activity"
             android:exported="false" />
         <activity
+            android:name=".tp2.Exo3Activity"
+            android:exported="false" />
+        <activity
             android:name=".tp1.Exo5Activity"
             android:exported="false" />
         <activity

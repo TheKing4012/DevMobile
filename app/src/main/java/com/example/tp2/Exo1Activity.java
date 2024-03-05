@@ -23,6 +23,8 @@ public class Exo1Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tp2_exo1);
+
+        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
         CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp2_exo1_menu));
 
         sm = (SensorManager)getSystemService(Context.SENSOR_SERVICE);

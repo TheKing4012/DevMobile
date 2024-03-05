@@ -26,6 +26,7 @@ public class Exo5Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exo3);
         CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp1_exo3_menu));
+        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
 
         EditText nameED = findViewById(R.id.editTextName);
         EditText surnameED = findViewById(R.id.editTextSurname);

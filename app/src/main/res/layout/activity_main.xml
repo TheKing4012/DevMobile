@@ -9,25 +9,32 @@
         android:id="@+id/textViewTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_main"
+        android:text="@string/title_main_tp"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:fontFamily="@font/sf"
+        android:textSize="28sp" />
 
     <Button
         android:id="@+id/button_tp1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/sf"
+        android:textSize="20sp"
         android:text="@string/text_btn_tp1" />
 
     <Button
         android:id="@+id/button_tp2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:fontFamily="@font/sf"
         android:text="@string/text_btn_tp2" />
 
     <Button
         android:id="@+id/button_tp3"
         android:layout_width="wrap_content"
+        android:textSize="20sp"
+        android:fontFamily="@font/sf"
         android:layout_height="wrap_content"
         android:text="@string/text_btn_tp3" />
 

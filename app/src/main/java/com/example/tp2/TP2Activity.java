@@ -19,9 +19,11 @@ public class TP2Activity extends Activity {
         setContentView(R.layout.activity_tp2);
 
         CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp2_menu));
+        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
 
         btn1 = (Button) findViewById(R.id.button_exo1);
         btn2 = (Button) findViewById(R.id.button_exo2);
+        btn3 = (Button) findViewById(R.id.button_exo3);
 
 
         btn1.setOnClickListener(view -> {
@@ -32,11 +34,12 @@ public class TP2Activity extends Activity {
             CommonHelper.changeActivity(this, new Exo2Activity());
         });
 
-        /*
+
         btn3.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new Exo3ActivityOnlyJava());
+            CommonHelper.changeActivity(this, new Exo3Activity());
         });
 
+        /*
         btn4.setOnClickListener(view -> {
             CommonHelper.changeActivity(this, new Exo5Activity());
         });

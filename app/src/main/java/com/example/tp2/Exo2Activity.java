@@ -22,6 +22,7 @@ public class Exo2Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tp2_exo2);
 
+        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
         CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp2_exo2_menu));
 
         TextView textView = findViewById(R.id.textView);

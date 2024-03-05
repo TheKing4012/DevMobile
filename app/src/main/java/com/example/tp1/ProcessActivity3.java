@@ -22,6 +22,7 @@ public class ProcessActivity3 extends AppCompatActivity {
         setContentView(R.layout.activity_process3);
 
         CommonHelper.createReturnBtn((Activity) this, (ConstraintLayout) this.findViewById(R.id.tp1_process_menu3));
+        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
 
         tvName = findViewById(R.id.textViewName);
         tvSurname = findViewById(R.id.textViewSurname);

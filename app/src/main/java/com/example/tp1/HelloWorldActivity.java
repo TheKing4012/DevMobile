@@ -16,5 +16,6 @@ public class HelloWorldActivity extends Activity {
         setContentView(R.layout.helloworld);
 
         CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp1_helloworld_menu));
+        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
     }
 }
