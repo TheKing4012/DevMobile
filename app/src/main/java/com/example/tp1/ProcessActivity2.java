@@ -1,24 +1,15 @@
 package com.example.tp1;
 
-import static com.example.tp1.utils.View.checkNotEmptySpinner;
-import static com.example.tp1.utils.View.checkNotEmptyText;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.tp1.utils.CommonHelper;
-import com.example.tp1.utils.Dialog;
-import com.example.tp1.utils.LambaExpr;
-
-import java.util.ArrayList;
+import com.example.utils.CommonHelper;
 
 public class ProcessActivity2 extends AppCompatActivity {
     Button btn1;

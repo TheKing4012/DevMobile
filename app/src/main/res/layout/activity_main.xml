@@ -14,52 +14,23 @@
         android:textSize="24sp" />
 
     <Button
-        android:id="@+id/button_exo1"
+        android:id="@+id/button_tp1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_btn_exo1" />
+        android:text="@string/text_btn_tp1" />
 
     <Button
-        android:id="@+id/button_exo2"
+        android:id="@+id/button_tp2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_btn_exo2" />
+        android:text="@string/text_btn_tp2" />
 
     <Button
-        android:id="@+id/button_exo3"
+        android:id="@+id/button_tp3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_btn_exo3" />
+        android:text="@string/text_btn_tp3" />
 
-    <Button
-        android:id="@+id/button_exo4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_btn_exo4" />
-
-    <Button
-        android:id="@+id/button_exo5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_btn_exo5" />
-
-    <Button
-        android:id="@+id/button_exo6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_btn_exo6" />
-
-    <Button
-        android:id="@+id/button_exo7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_btn_exo7" />
-
-    <Button
-        android:id="@+id/button_exo8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_btn_exo8" />
 
 
 </LinearLayout>

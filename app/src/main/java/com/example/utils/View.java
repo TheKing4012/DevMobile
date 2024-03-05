@@ -1,4 +1,4 @@
-package com.example.tp1.utils;
+package com.example.utils;
 
 import android.app.Activity;
 import android.widget.Spinner;

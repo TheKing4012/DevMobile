@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.tp1.utils.CommonHelper;
+import com.example.utils.CommonHelper;
 
 public class ProcessActivity3 extends AppCompatActivity {
     Button btn1;

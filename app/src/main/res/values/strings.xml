@@ -13,6 +13,9 @@
     <string name="title_process">Recap:</string>
     <string name="title_main">Exercices:</string>
     <string name="title_call">Call</string>
+    <string name="text_btn_tp1">TP 1</string>
+    <string name="text_btn_tp2">TP 2</string>
+    <string name="text_btn_tp3">TP 3</string>
     <string name="text_btn_exo1">HelloWorld</string>
     <string name="text_btn_exo2">Exercice 3</string>
     <string name="text_btn_exo3">Exercice 3 (Only Java)</string>

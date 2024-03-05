@@ -30,4 +30,7 @@
     <string name="title_call">Appeler</string>
     <string name="text_btn_exo8">Exercice 9</string>
     <string name="text_soon">Bientot</string>
+    <string name="text_btn_tp1">TP 1</string>
+    <string name="text_btn_tp2">TP 2</string>
+    <string name="text_btn_tp3">TP 3</string>
 </resources>

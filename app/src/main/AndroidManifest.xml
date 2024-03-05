@@ -32,6 +32,15 @@
             android:name=".Exo3ActivityOnlyJava"
             android:exported="false" />
         <activity
+            android:name=".TP1Activity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.tp2.TP2Activity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.tp3.TP3Activity"
+            android:exported="false" />
+        <activity
             android:name=".CallActivity"
             android:exported="false" />
         <activity
@@ -56,7 +65,7 @@
             android:name=".Exo9Activity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

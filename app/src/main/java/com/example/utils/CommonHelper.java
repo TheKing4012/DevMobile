@@ -1,4 +1,4 @@
-package com.example.tp1.utils;
+package com.example.utils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,9 +10,6 @@ import android.widget.LinearLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.example.tp1.HelloWorldActivity;
-import com.example.tp1.MainActivity;
-import com.example.tp1.ProcessActivity;
 import com.example.tp1.R;
 
 public class CommonHelper {

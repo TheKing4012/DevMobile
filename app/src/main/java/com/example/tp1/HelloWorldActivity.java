@@ -3,10 +3,9 @@ package com.example.tp1;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.example.tp1.utils.CommonHelper;
+import com.example.utils.CommonHelper;
 
 public class HelloWorldActivity extends Activity {
 

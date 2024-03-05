@@ -1,4 +1,4 @@
-package com.example.tp1.utils;
+package com.example.utils;
 
 public interface LambaExpr {
     void exec();

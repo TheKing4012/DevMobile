@@ -1,8 +1,8 @@
 package com.example.tp1;
 
 
-import static com.example.tp1.utils.View.checkNotEmptySpinner;
-import static com.example.tp1.utils.View.checkNotEmptyText;
+import static com.example.utils.View.checkNotEmptySpinner;
+import static com.example.utils.View.checkNotEmptyText;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.tp1.utils.Dialog;
+import com.example.utils.Dialog;
 
 public class Exo9Activity extends Activity {
 

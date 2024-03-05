@@ -1,9 +1,8 @@
-package com.example.tp1.utils;
+package com.example.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.widget.Button;
 
 public class Dialog {
     public static void showInterractDialog(Context context, String title, String message, String msg_yes, String msg_no, LambaExpr lambaExprYes, LambaExpr lambaExprNo) {

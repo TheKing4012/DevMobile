@@ -1,21 +1,21 @@
-package com.example.tp1;
+package com.example.tp2;
 
-
-import static com.example.tp1.utils.View.checkNotEmptySpinner;
-import static com.example.tp1.utils.View.checkNotEmptyText;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.tp1.utils.CommonHelper;
-import com.example.tp1.utils.Dialog;
+import com.example.tp1.Exo3Activity;
+import com.example.tp1.Exo3ActivityOnlyJava;
+import com.example.tp1.Exo5Activity;
+import com.example.tp1.Exo6Activity;
+import com.example.tp1.Exo7Activity;
+import com.example.tp1.HelloWorldActivity;
+import com.example.tp1.R;
+import com.example.utils.CommonHelper;
 
-public class MainActivity extends Activity {
+public class TP2Activity extends Activity {
 
     Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8;
 

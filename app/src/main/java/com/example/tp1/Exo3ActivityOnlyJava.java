@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-import com.example.tp1.utils.CommonHelper;
+import com.example.utils.CommonHelper;
 
 public class Exo3ActivityOnlyJava extends Activity {
     Button btn1;

@@ -1,8 +1,5 @@
 package com.example.tp1;
 
-import static com.example.tp1.utils.View.checkNotEmptySpinner;
-import static com.example.tp1.utils.View.checkNotEmptyText;
-
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -15,9 +12,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
-import com.example.tp1.utils.Dialog;
-import com.example.tp1.utils.LambaExpr;
 
 public class CallActivity extends AppCompatActivity {
     Button btn1;
