@@ -11,7 +11,7 @@ import com.example.utils.CommonHelper;
 
 public class TP2Activity extends Activity {
 
-    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8;
+    Button btn1, btn2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
