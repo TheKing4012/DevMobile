@@ -1,5 +1,4 @@
 <resources>
-    <!--TP1-->
     <string name="app_name">TP1</string>
     <string name="text_name">Name</string>
     <string name="text_surname">Surname</string>
@@ -26,6 +25,13 @@
     <string name="text_btn_exo7">Exercice 8</string>
     <string name="text_btn_return">Return</string>
     <string name="text_soon">Soon</string>
+    <string-array name="skillDomains">
+        <item>None</item>
+        <item>Software Engineering</item>
+        <item>Artificial Intelligence</item>
+        <item>Algorithmics</item>
+    </string-array>
+    <string name="text_btn_exo8">Exercice 9</string>
 
     <!--TP2-->
     <string name="text_type">Type</string>
@@ -35,12 +41,10 @@
     <string name="text_vendor">Vendor</string>
     <string name="text_range">Range</string>
     <string name="text_delay">Delay (ms)</string>
-
-    <string-array name="skillDomains">
-        <item>None</item>
-        <item>Software Engineering</item>
-        <item>Artificial Intelligence</item>
-        <item>Algorithmics</item>
-    </string-array>
-    <string name="text_btn_exo8">Exercice 9</string>
+    <string name="text_accelerometer">Accelerometer</string>
+    <string name="text_gyroscope">Gyroscope</string>
+    <string name="text_light_sensor">Light Sensor</string>
+    <string name="text_proximity_sensor">Proximity Sensor</string>
+    <string name="text_btn_tp2_exo1">Exercice 1</string>
+    <string name="text_btn_tp2_exo2">Exercice 2</string>
 </resources>

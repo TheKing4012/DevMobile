@@ -6,7 +6,6 @@ import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,7 +14,7 @@ import com.example.utils.CommonHelper;
 
 import java.util.List;
 
-public class Exo2Activity extends Activity {
+public class Exo3Activity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

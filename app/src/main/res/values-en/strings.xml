@@ -42,4 +42,10 @@
     <string name="text_vendor">Vendor</string>
     <string name="text_range">Range</string>
     <string name="text_delay">Delay (ms)</string>
+    <string name="text_accelerometer">Accelerometer</string>
+    <string name="text_gyroscope">Gyroscope</string>
+    <string name="text_light_sensor">Light Sensor</string>
+    <string name="text_proximity_sensor">Proximity Sensor</string>
+    <string name="text_btn_tp2_exo1">Exercice 1</string>
+    <string name="text_btn_tp2_exo2">Exercice 2</string>
 </resources>

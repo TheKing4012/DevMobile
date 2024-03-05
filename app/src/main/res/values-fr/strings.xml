@@ -42,4 +42,10 @@
     <string name="text_vendor">Constructeur</string>
     <string name="text_range">Portée du catpeur</string>
     <string name="text_delay">Délais de mesure (ms)</string>
+    <string name="text_accelerometer">Accéléromètre</string>
+    <string name="text_gyroscope">Gyroscope</string>
+    <string name="text_light_sensor">Capteur de lumière</string>
+    <string name="text_proximity_sensor">Capteur de Proximité</string>
+    <string name="text_btn_tp2_exo1">Exercice 1</string>
+    <string name="text_btn_tp2_exo2">Exercice 2</string>
 </resources>
