@@ -20,6 +20,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
+
         btn1 = (Button) findViewById(R.id.button_tp1);
         btn2 = (Button) findViewById(R.id.button_tp2);
         btn3 = (Button) findViewById(R.id.button_tp3);

@@ -20,6 +20,7 @@ public class TP1Activity extends Activity {
         setContentView(R.layout.activity_tp1);
 
         CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp1_menu));
+        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
 
         btn1 = (Button) findViewById(R.id.button_exo1);
         btn2 = (Button) findViewById(R.id.button_exo2);

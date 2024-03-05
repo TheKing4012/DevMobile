@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TP1</string>
+    <string name="app_name">Ryxcode</string>
     <string name="text_name">Nom</string>
     <string name="text_surname">Prenom</string>
     <string name="text_age">Age</string>
@@ -18,7 +18,7 @@
     <string name="text_confirmation_no">Non</string>
     <string name="text_missing_item">Merci de remplir complètement le formulaire</string>
     <string name="title_process">Résumé:</string>
-    <string name="title_main">Exercices:</string>
+    <string name="title_main_exercice">Exercices:</string>
     <string name="text_btn_exo1">HelloWorld</string>
     <string name="text_btn_exo2">Exercice 3</string>
     <string name="text_btn_exo3">Exercice 3 (Seulement Java)</string>
@@ -48,4 +48,6 @@
     <string name="text_proximity_sensor">Capteur de Proximité</string>
     <string name="text_btn_tp2_exo1">Exercice 1</string>
     <string name="text_btn_tp2_exo2">Exercice 2</string>
+    <string name="title_main_tp">TP:</string>
+    <string name="text_btn_tp2_exo3">Exercice 3</string>
 </resources>

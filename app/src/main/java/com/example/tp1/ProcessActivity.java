@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import com.example.R;
+import com.example.utils.CommonHelper;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class ProcessActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_process);
+        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
 
         tvName = findViewById(R.id.textViewName);
         tvSurname = findViewById(R.id.textViewSurname);

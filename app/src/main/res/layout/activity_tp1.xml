@@ -9,7 +9,7 @@
         android:id="@+id/textViewTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/title_main"
+        android:text="@string/title_main_exercice"
         android:textAlignment="center"
         android:textSize="24sp" />
 

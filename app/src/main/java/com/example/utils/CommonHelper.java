@@ -1,6 +1,7 @@
 package com.example.utils;
 
 import android.app.Activity;
+import android.os.Build;
 import android.content.Intent;
 import android.view.Gravity;
 import android.view.ViewGroup;
@@ -63,5 +64,11 @@ public class CommonHelper {
     public static void changeActivity(Activity from, Activity where) {
         Intent intent = new Intent(from, where.getClass());
         from.startActivity(intent);
+    }
+
+    public static void changeActionbarColor(Activity from, int id) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            from.getWindow().setStatusBarColor(id);
+        }
     }
 }

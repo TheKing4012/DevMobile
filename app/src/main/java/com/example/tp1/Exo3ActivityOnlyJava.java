@@ -20,6 +20,7 @@ public class Exo3ActivityOnlyJava extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
 
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setLayoutParams(new LinearLayout.LayoutParams(
