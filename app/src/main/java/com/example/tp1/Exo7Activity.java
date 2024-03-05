@@ -26,7 +26,7 @@ public class Exo7Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exo3);
 
-        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.exo3_menu));
+        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp1_exo3_menu));
 
         EditText nameED = findViewById(R.id.editTextName);
         EditText surnameED = findViewById(R.id.editTextSurname);

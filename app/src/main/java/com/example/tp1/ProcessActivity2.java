@@ -20,7 +20,7 @@ public class ProcessActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_process2);
 
-        CommonHelper.createReturnBtn((Activity) this, (ConstraintLayout) this.findViewById(R.id.process_menu2));
+        CommonHelper.createReturnBtn((Activity) this, (ConstraintLayout) this.findViewById(R.id.tp1_process_menu2));
 
         tvName = findViewById(R.id.textViewName);
         tvSurname = findViewById(R.id.textViewSurname);

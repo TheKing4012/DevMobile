@@ -1,4 +1,4 @@
-package com.example.tp1;
+package com.example.tp2;
 
 
 import android.app.Activity;
@@ -6,9 +6,10 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.example.tp1.R;
 import com.example.utils.CommonHelper;
 
-public class Exo3Activity extends Activity {
+public class Exo2Activity extends Activity {
     Button btn1;
 
     @Override

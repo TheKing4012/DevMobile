@@ -14,6 +14,6 @@ public class HelloWorldActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.helloworld);
 
-        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.helloworld_menu));
+        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp1_helloworld_menu));
     }
 }

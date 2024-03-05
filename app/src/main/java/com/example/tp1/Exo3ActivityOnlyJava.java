@@ -26,7 +26,7 @@ public class Exo3ActivityOnlyJava extends Activity {
                 LinearLayout.LayoutParams.MATCH_PARENT
         ));
         linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setId(R.id.exo3_menu);
+        linearLayout.setId(R.id.tp1_exo3_menu);
 
 
         EditText editTextName = new EditText(this);
