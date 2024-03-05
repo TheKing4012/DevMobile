@@ -4,6 +4,7 @@ package com.example.tp1;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.utils.CommonHelper;
@@ -16,6 +17,8 @@ public class TP1Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tp1);
+
+        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp1_menu));
 
         btn1 = (Button) findViewById(R.id.button_exo1);
         btn2 = (Button) findViewById(R.id.button_exo2);
