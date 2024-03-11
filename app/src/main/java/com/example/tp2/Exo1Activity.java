@@ -1,12 +1,14 @@
 package com.example.tp2;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +17,7 @@ import com.example.R;
 import com.example.utils.CommonHelper;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Exo1Activity extends Activity {
     private SensorManager sm;
@@ -23,24 +26,33 @@ public class Exo1Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tp2_exo1);
-
-        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
-        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp2_exo1_menu));
+        LinearLayout linearLayout = findViewById(R.id.tp2_exo1_menu);
 
         sm = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
         List<Sensor> sensors = sm.getSensorList(Sensor.TYPE_ALL);
 
-        StringBuffer sensorDesc = new StringBuffer();
+        String sensorDesc = "";
         for (Sensor sensor : sensors) {
-            sensorDesc.append(getResources().getString(R.string.text_name)).append(" : ").append(sensor.getName()).append("\r\n")
-            .append(getResources().getString(R.string.text_type)).append(" : ").append(sensor.getType()).append("\r\n")
-            .append(getResources().getString(R.string.text_version)).append(" : ").append(sensor.getVersion()).append("\r\n")
-            .append(getResources().getString(R.string.text_resolution)).append(" : ").append(sensor.getResolution()).append("\r\n")
-            .append(getResources().getString(R.string.text_power)).append(" : ").append(sensor.getPower()).append("\r\n")
-            .append(getResources().getString(R.string.text_vendor)).append(" : ").append(sensor.getVendor()).append("\r\n")
-            .append(getResources().getString(R.string.text_range)).append(" : ").append(sensor.getMaximumRange()).append("\r\n")
-            .append(getResources().getString(R.string.text_delay)).append(" : ").append(sensor.getMinDelay()).append("\r\n");
+            sensorDesc = "";
+            sensorDesc = sensorDesc.concat(getResources().getString(R.string.text_name)).concat(" : ").concat(sensor.getName()).concat("\r\n")
+            .concat(getResources().getString(R.string.text_type)).concat(" : ").concat(String.valueOf(sensor.getType())).concat("\r\n")
+            .concat(getResources().getString(R.string.text_version)).concat(" : ").concat(String.valueOf(sensor.getVersion())).concat("\r\n")
+            .concat(getResources().getString(R.string.text_resolution)).concat(" : ").concat(String.valueOf(sensor.getResolution())).concat("\r\n")
+            .concat(getResources().getString(R.string.text_power)).concat(" : ").concat(String.valueOf(sensor.getPower())).concat("\r\n")
+            .concat(getResources().getString(R.string.text_vendor)).concat(" : ").concat(sensor.getVendor()).concat("\r\n")
+            .concat(getResources().getString(R.string.text_range)).concat(" : ").concat(String.valueOf(sensor.getMaximumRange())).concat("\r\n")
+            .concat(getResources().getString(R.string.text_delay)).concat(" : ").concat(String.valueOf(sensor.getMinDelay())).concat("\r\n");
+
+            TextView textview = new TextView(this);
+            textview.setLayoutParams(new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+            ));
+            //System.out.println(sensorDesc);
+            textview.setText(sensorDesc);
+            linearLayout.addView(textview);
         }
-        Toast.makeText(this, sensorDesc.toString(), Toast.LENGTH_LONG).show();
+
+        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp2_exo1_menu));
     }
 }
