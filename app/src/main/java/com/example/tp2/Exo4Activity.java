@@ -1,6 +1,9 @@
 package com.example.tp2;
 
 
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -17,7 +20,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.R;
 import com.example.utils.CommonHelper;
 
-public class Exo3Activity extends Activity implements SensorEventListener {
+public class Exo4Activity extends Activity implements SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor accelerometer;
@@ -25,10 +28,10 @@ public class Exo3Activity extends Activity implements SensorEventListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tp2_exo3);
+        setContentView(R.layout.activity_tp2_exo4);
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
-        CommonHelper.createReturnBtn((Activity) this, (ConstraintLayout) this.findViewById(R.id.tp2_exo3_menu));
+        CommonHelper.createReturnBtn((Activity) this, (ConstraintLayout) this.findViewById(R.id.tp2_exo4_menu));
 
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -48,27 +51,37 @@ public class Exo3Activity extends Activity implements SensorEventListener {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        TextView directiontv = findViewById(R.id.directiontv);
         float x = event.values[0];
         float y = event.values[1];
-        float z = event.values[2];
+        double angle = Math.atan2(y, x) * (180 / Math.PI);
 
         // Calcul de l'accélération totale
-        double acceleration = Math.sqrt(x * x + y * y + z * z);
+        double acceleration = Math.sqrt(x * x + y * y);
 
-        // Affichage de la valeur d'accélération
-        TextView accelerometretv = findViewById(R.id.accelerometre);
-        accelerometretv.setText(getResources().getString(R.string.text_accelerometer) +"\n\n"+ String.valueOf(acceleration));
+        // Récupérer une référence à l'ImageView de la flèche
+        ImageView arrowImageView = findViewById(R.id.arrow);
+        arrowImageView.setRotation((float) angle);
 
-        // Détermination de la couleur en fonction de l'accélération
-        ImageView background = findViewById(R.id.imageView);
-        if (acceleration < 20) {
-            if (acceleration > 10) {
-                background.setImageResource(R.drawable.abstract_black); // Accélération moyenne : noir
-            } else {
-                background.setImageResource(R.drawable.abstract_green); // Faible accélération : vert
+        // Détermination du texte en fonction de l'accélération
+        String direction_affichage = getResources().getString(R.string.direction);
+        if (acceleration > 1) {
+            if(abs(x) >= abs(y)){ //x est le plus grand en valeur absolue
+                if(x > 0){
+                    direction_affichage = getResources().getString(R.string.left);
+                } else {
+                    direction_affichage = getResources().getString(R.string.right);
+                }
+            } else { //y est le plus grand en valeur absolue
+                if(y > 0){
+                    direction_affichage = getResources().getString(R.string.up);
+                } else {
+                    direction_affichage = getResources().getString(R.string.down);
+                }
             }
+            directiontv.setText(direction_affichage);
         } else {
-            background.setImageResource(R.drawable.abstract_red); // Forte accélération : rouge
+            directiontv.setText(getResources().getString(R.string.direction));
         }
     }
 

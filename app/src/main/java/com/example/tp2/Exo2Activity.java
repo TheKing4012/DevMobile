@@ -3,12 +3,15 @@ package com.example.tp2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.R;
 import com.example.utils.CommonHelper;
@@ -23,7 +26,7 @@ public class Exo2Activity extends Activity {
         setContentView(R.layout.activity_tp2_exo2);
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
-        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp2_exo2_menu));
+        CommonHelper.createReturnBtn((Activity) this, (ConstraintLayout) this.findViewById(R.id.tp2_exo2_menu));
 
         TextView textView = findViewById(R.id.textView);
 
@@ -46,11 +49,14 @@ public class Exo2Activity extends Activity {
             unavailableSensors.append(getResources().getString(R.string.text_proximity_sensor)+"\n");
         }
 
+        ImageView background = findViewById(R.id.imageView);
         // Affichage du message d'indisponibilité le cas échéant
         if (unavailableSensors.length() > 0) {
-            textView.setText("Les fonctionnalités suivantes ne sont pas disponibles sur votre appareil:\n\n" + unavailableSensors.toString());
+            textView.setText(getResources().getString(R.string.unavailableFeatures) + unavailableSensors.toString());
+            background.setImageResource(R.drawable.abstract_red);
         } else {
-            textView.setText("Toutes les fonctionnalités sont disponibles sur votre appareil.");
+            textView.setText(getResources().getString(R.string.allFeaturesAvailable));
+            background.setImageResource(R.drawable.abstract_green);
         }
     }
 }
