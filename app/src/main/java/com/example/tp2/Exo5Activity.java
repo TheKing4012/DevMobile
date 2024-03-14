@@ -66,7 +66,7 @@ public class Exo5Activity extends Activity implements SensorEventListener {
         // Calcul de l'accélération totale
         double acceleration = Math.sqrt(x * x + y * y + z * z);
 
-        // Détermination du texte en fonction de l'accélération
+        // Détermination du texte en fonction de l'accélérationFlashLightState
         ImageView light = findViewById(R.id.light);
         TextView lighttv = findViewById(R.id.light_text);
         if (acceleration > 15) {

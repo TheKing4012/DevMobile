@@ -83,6 +83,9 @@
             android:name=".tp2.Exo5Activity"
             android:exported="false" />
         <activity
+            android:name=".tp2.Exo6Activity"
+            android:exported="false" />
+        <activity
             android:name="com.example.MainActivity"
             android:exported="true">
             <intent-filter>

@@ -49,6 +49,8 @@
     <string name="text_btn_tp2_exo3">Exercice 3</string>
     <string name="text_btn_tp2_exo4">Exercice 4</string>
     <string name="text_btn_tp2_exo5">Exercice 5</string>
+    <string name="text_btn_tp2_exo6">Exercice 6</string>
+    <string name="text_btn_tp2_exo7">Exercice 7</string>
     <string name="title_main_tp">TP:</string>
     <string name="text_accelerometer">Accelerometer Value : </string>
     <string name="unavailableFeatures">Following features are not available on your device :\n\n</string>
@@ -56,6 +58,9 @@
     <string name="direction">Not Moving</string>
     <string name="light_text_off">Light Off</string>
     <string name="light_text_on">Light On</string>
+
+    <string name="distance_far">Far</string>
+    <string name="distance_close">Close</string>
 
     <string name="up">UP</string>
     <string name="down">DOWN</string>

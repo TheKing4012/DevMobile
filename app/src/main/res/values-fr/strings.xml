@@ -52,11 +52,16 @@
     <string name="text_btn_tp2_exo3">Exercice 3</string>
     <string name="text_btn_tp2_exo4">Exercice 4</string>
     <string name="text_btn_tp2_exo5">Exercice 5</string>
+    <string name="text_btn_tp2_exo6">Exercice 6</string>
+    <string name="text_btn_tp2_exo7">Exercice 7</string>
     <string name="unavailableFeatures">Les fonctionnalités suivantes ne sont pas disponibles sur votre appareil:\n\n</string>
     <string name="allFeaturesAvailable">Toutes les fonctionnalités sont disponibles sur votre appareil.\nFélicitations !</string>
     <string name="direction">Immobile</string>
     <string name="light_text_off">Lampe éteinte</string>
     <string name="light_text_on">Lampe allumée</string>
+
+    <string name="distance_far">Éloigné</string>
+    <string name="distance_close">Proche</string>
 
     <string name="up">HAUT</string>
     <string name="down">BAS</string>

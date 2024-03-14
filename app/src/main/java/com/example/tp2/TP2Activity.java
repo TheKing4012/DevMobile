@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -28,6 +29,8 @@ public class TP2Activity extends Activity {
         btn3 = (Button) findViewById(R.id.button_exo3);
         btn4 = (Button) findViewById(R.id.button_exo4);
         btn5 = (Button) findViewById(R.id.button_exo5);
+        btn6 = (Button) findViewById(R.id.button_exo6);
+        btn7 = (Button) findViewById(R.id.button_exo7);
 
         btn1.setOnClickListener(view -> {
             CommonHelper.changeActivity(this, new Exo1Activity());
@@ -49,7 +52,7 @@ public class TP2Activity extends Activity {
         btn5.setOnClickListener(view -> {
             CommonHelper.changeActivity(this, new Exo5Activity());
         });
-/*
+
         btn6.setOnClickListener(view -> {
             CommonHelper.changeActivity(this, new Exo6Activity());
         });
@@ -57,11 +60,5 @@ public class TP2Activity extends Activity {
         btn7.setOnClickListener(view -> {
             Toast.makeText(this, getResources().getText(R.string.text_soon), Toast.LENGTH_SHORT).show();
         });
-
-        btn8.setOnClickListener(view -> {
-            Toast.makeText(this, getResources().getText(R.string.text_soon), Toast.LENGTH_SHORT).show();
-        });
-
-         */
     }
 }

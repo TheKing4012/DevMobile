@@ -84,6 +84,28 @@
         app:layout_constraintStart_toStartOf="@+id/button_exo4"
         app:layout_constraintTop_toBottomOf="@+id/button_exo4" />
 
+    <Button
+        android:id="@+id/button_exo6"
+        android:layout_width="152dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/sf"
+        android:text="@string/text_btn_tp2_exo6"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/button_exo5"
+        app:layout_constraintTop_toBottomOf="@+id/button_exo5" />
+
+    <Button
+        android:id="@+id/button_exo7"
+        android:layout_width="152dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/sf"
+        android:text="@string/text_btn_tp2_exo7"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/button_exo6"
+        app:layout_constraintTop_toBottomOf="@+id/button_exo6" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
