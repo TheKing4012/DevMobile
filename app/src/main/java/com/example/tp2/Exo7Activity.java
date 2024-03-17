@@ -3,29 +3,31 @@ package com.example.tp2;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 
 import com.example.R;
 import com.example.utils.CommonHelper;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
-import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
-import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 
 public class Exo7Activity extends Activity {
     private MapView mapView;
+    private FusedLocationProviderClient fusedLocationClient;
+
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,7 @@ public class Exo7Activity extends Activity {
         Configuration.getInstance().load(getApplicationContext(), getSharedPreferences("osmdroid", MODE_PRIVATE));
         setContentView(R.layout.activity_tp2_exo7);
 
-
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
-
-        // Récupérer la référence au MapView
         mapView = findViewById(R.id.mapView);
 
         // Vérifier si la référence est null
@@ -45,36 +44,55 @@ public class Exo7Activity extends Activity {
             mapView.setBuiltInZoomControls(true);
             mapView.setMultiTouchControls(true);
 
-            // Ajouter un marqueur pour la position de l'utilisateur
-            GeoPoint startPoint = new GeoPoint(48.8583, 2.2944); // Exemple: Coordonnées de la Tour Eiffel
-            Marker startMarker = new Marker(mapView);
-            startMarker.setPosition(startPoint);
-            mapView.getOverlays().add(startMarker);
-
-            mapView.getController().setZoom(15);
-            mapView.getController().setCenter(startPoint);
-
-            // Associer un gestionnaire d'événements de clic au marqueur
-            startMarker.setOnMarkerClickListener(new Marker.OnMarkerClickListener() {
-                @Override
-                public boolean onMarkerClick(Marker marker, MapView mapView) {
-                    // Créer et afficher un AlertDialog
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Exo7Activity.this);
-                    builder.setTitle("Info");
-                    builder.setMessage(getResources().getString(R.string.position));
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // Action à effectuer lorsque l'utilisateur clique sur "OK"
-                            dialog.dismiss();
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                    return true;
-                }
-            });
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+            getLastLocation();
         }
-        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp2_exo7_menu));
+    }
+
+    private void getLastLocation() {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_REQUEST_CODE);
+            return;
+        }
+
+        fusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, location -> {
+                    System.out.println("eeeeee");
+                    if (location != null) {
+                        GeoPoint startPoint = new GeoPoint(location.getLatitude(), location.getLongitude());
+                        Marker startMarker = new Marker(mapView);
+                        startMarker.setPosition(startPoint);
+                        mapView.getOverlays().add(startMarker);
+
+                        mapView.getController().setZoom(15);
+                        mapView.getController().setCenter(startPoint);
+                        mapView.getController().animateTo(startPoint);
+
+                        System.out.println("Latitude: " + location.getLatitude() + ", Longitude: " + location.getLongitude());
+                    } else {
+                        System.out.println("Location is null");
+                    }
+                })
+                .addOnFailureListener(this, e -> {
+                    System.out.println("zeeze");
+                    Toast.makeText(this, "Failed to get location.", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Autorisations accordées, obtenir la dernière position
+                getLastLocation();
+            } else {
+                // Autorisations refusées, afficher un message d'erreur
+                Toast.makeText(this, "Location permission denied.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
