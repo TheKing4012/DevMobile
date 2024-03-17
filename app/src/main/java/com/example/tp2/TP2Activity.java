@@ -58,7 +58,7 @@ public class TP2Activity extends Activity {
         });
 
         btn7.setOnClickListener(view -> {
-            Toast.makeText(this, getResources().getText(R.string.text_soon), Toast.LENGTH_SHORT).show();
+            CommonHelper.changeActivity(this, new Exo7Activity());
         });
     }
 }

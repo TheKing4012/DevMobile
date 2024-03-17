@@ -67,4 +67,5 @@
     <string name="down">BAS</string>
     <string name="left">GAUCHE</string>
     <string name="right">DROITE</string>
+    <string name="position">Votre Position</string>
 </resources>
