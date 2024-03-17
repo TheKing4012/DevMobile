@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.R;
+import com.example.utils.CommonHelper;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
@@ -29,6 +32,9 @@ public class Exo7Activity extends Activity {
         super.onCreate(savedInstanceState);
         Configuration.getInstance().load(getApplicationContext(), getSharedPreferences("osmdroid", MODE_PRIVATE));
         setContentView(R.layout.activity_tp2_exo7);
+
+
+        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
 
         // Récupérer la référence au MapView
         mapView = findViewById(R.id.mapView);
@@ -68,6 +74,7 @@ public class Exo7Activity extends Activity {
                 }
             });
         }
+        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp2_exo7_menu));
     }
 
     @Override
