@@ -1,6 +1,5 @@
 package com.example.tp2;
 
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -14,7 +13,7 @@ import com.example.utils.CommonHelper;
 
 public class TP2Activity extends Activity {
 
-    Button btn1, btn2;
+    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
