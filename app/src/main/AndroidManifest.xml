@@ -6,14 +6,17 @@
         android:name="android.hardware.telephony"
         android:required="false" />
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
     <uses-feature android:name="android.hardware.sensor.gyroscope" android:required="true" />
     <uses-feature android:name="android.hardware.sensor.light" android:required="true" />
     <uses-feature android:name="android.hardware.sensor.proximity" android:required="true" />
+    <uses-feature android:name="android.hardware.camera.flash" />
 
 
     <application
@@ -73,6 +76,18 @@
             android:exported="false" />
         <activity
             android:name=".tp1.Exo7Activity"
+            android:exported="false" />
+        <activity
+            android:name=".tp2.Exo4Activity"
+            android:exported="false" />
+        <activity
+            android:name=".tp2.Exo5Activity"
+            android:exported="false" />
+        <activity
+            android:name=".tp2.Exo6Activity"
+            android:exported="false" />
+        <activity
+            android:name=".tp2.Exo7Activity"
             android:exported="false" />
         <activity
             android:name="com.example.MainActivity"

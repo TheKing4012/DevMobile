@@ -6,6 +6,10 @@ espresso-core = "3.5.1"
 appcompat = "1.6.1"
 material = "1.11.0"
 constraintlayout = "2.1.4"
+play-services-maps = "18.2.0"
+google-play-services-maps = "18.0.0"
+osmdroid-android = "6.1.18"
+play-services-location = "21.2.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -14,6 +18,10 @@ espresso-core = { group = "androidx.test.espresso", name = "espresso-core", vers
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "play-services-maps" }
+gms-play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "google-play-services-maps" }
+osmdroid-android = { group = "org.osmdroid", name = "osmdroid-android", version = "6.1.11" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "play-services-location" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

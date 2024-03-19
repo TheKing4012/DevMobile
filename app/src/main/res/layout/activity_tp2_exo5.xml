@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tp2_exo5_menu"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000">
+
+    <!--Exo 5 -->
+
+    <ImageView
+        android:id="@+id/light"
+        android:layout_width="419dp"
+        android:layout_height="414dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="64dp"
+        android:gravity="center"
+        android:src="@drawable/lightoff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/light_text"
+        android:layout_width="411dp"
+        android:layout_height="236dp"
+        android:layout_marginTop="476dp"
+        android:gravity="center_horizontal"
+        android:text="@string/light_text_off"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

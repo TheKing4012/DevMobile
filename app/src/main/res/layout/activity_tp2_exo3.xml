@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tp2_exo2_menu"
+    android:id="@+id/tp2_exo3_menu"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
@@ -13,20 +13,20 @@
         android:scaleType="fitXY"
         android:src="@drawable/abstract_black"/>
 
-    <!--Exo 2 -->
+    <!--Exo 3 -->
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="408dp"
-        android:layout_height="257dp"
+        android:id="@+id/accelerometre"
+        android:layout_width="411dp"
+        android:layout_height="236dp"
         android:textColor="#FFFFFF"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="204dp"
+        android:layout_marginTop="144dp"
         android:gravity="center_horizontal"
-        android:text="Hello World!"
-        android:textSize="30sp"
+        android:text="@string/text_accelerometer"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

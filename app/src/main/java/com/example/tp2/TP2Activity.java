@@ -5,6 +5,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.R;
 import com.example.utils.CommonHelper;
@@ -18,13 +21,16 @@ public class TP2Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tp2);
 
-        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp2_menu));
+        CommonHelper.createReturnBtn((Activity) this, (ConstraintLayout) this.findViewById(R.id.tp2_menu));
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
 
         btn1 = (Button) findViewById(R.id.button_exo1);
         btn2 = (Button) findViewById(R.id.button_exo2);
         btn3 = (Button) findViewById(R.id.button_exo3);
-
+        btn4 = (Button) findViewById(R.id.button_exo4);
+        btn5 = (Button) findViewById(R.id.button_exo5);
+        btn6 = (Button) findViewById(R.id.button_exo6);
+        btn7 = (Button) findViewById(R.id.button_exo7);
 
         btn1.setOnClickListener(view -> {
             CommonHelper.changeActivity(this, new Exo1Activity());
@@ -39,27 +45,20 @@ public class TP2Activity extends Activity {
             CommonHelper.changeActivity(this, new Exo3Activity());
         });
 
-        /*
         btn4.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new Exo5Activity());
+            CommonHelper.changeActivity(this, new Exo4Activity());
         });
 
         btn5.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new Exo6Activity());
+            CommonHelper.changeActivity(this, new Exo5Activity());
         });
 
         btn6.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new Exo7Activity());
+            CommonHelper.changeActivity(this, new Exo6Activity());
         });
 
         btn7.setOnClickListener(view -> {
-            Toast.makeText(this, getResources().getText(R.string.text_soon), Toast.LENGTH_SHORT).show();
+            CommonHelper.changeActivity(this, new Exo7Activity());
         });
-
-        btn8.setOnClickListener(view -> {
-            Toast.makeText(this, getResources().getText(R.string.text_soon), Toast.LENGTH_SHORT).show();
-        });
-
-         */
     }
 }
