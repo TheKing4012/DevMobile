@@ -7,6 +7,7 @@
         android:required="false" />
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
@@ -88,6 +89,12 @@
             android:exported="false" />
         <activity
             android:name=".tp2.Exo7Activity"
+            android:exported="false" />
+        <activity
+            android:name=".tp3.TP3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".tp3.Exo1_1Activity"
             android:exported="false" />
         <activity
             android:name="com.example.MainActivity"

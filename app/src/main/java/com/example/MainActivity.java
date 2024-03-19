@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.example.R;
 import com.example.tp1.TP1Activity;
 import com.example.tp2.TP2Activity;
+import com.example.tp3.TP3Activity;
 import com.example.utils.CommonHelper;
 
 public class MainActivity extends Activity {
@@ -36,8 +37,7 @@ public class MainActivity extends Activity {
         });
 
         btn3.setOnClickListener(view -> {
-            Toast.makeText(this, getResources().getText(R.string.text_soon), Toast.LENGTH_SHORT).show();
-            //CommonHelper.changeActivity(this, new Exo3ActivityOnlyJava());
+            CommonHelper.changeActivity(this, new TP3Activity());
         });
     }
 }

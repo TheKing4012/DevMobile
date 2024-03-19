@@ -68,4 +68,24 @@
     <string name="left">GAUCHE</string>
     <string name="right">DROITE</string>
     <string name="position">Votre Position</string>
+    <string name="text_email">Adresse Email</string>
+    <string name="text_hobbies">Sélectionnez vos centres d\'intérêt :</string>
+    <string name="text_sport">Sport</string>
+    <string name="text_music">Musique</string>
+    <string name="text_reading">Lecture</string>
+    <string name="text_synchronisation">Synchroniser Info ?</string>
+    <string-array name="months_array">
+        <item>Janvier</item>
+        <item>Février</item>
+        <item>Mars</item>
+        <item>Avril</item>
+        <item>Mai</item>
+        <item>Juin</item>
+        <item>Juillet</item>
+        <item>Août</item>
+        <item>Septembre</item>
+        <item>Octobre</item>
+        <item>Novembre</item>
+        <item>Décembre</item>
+    </string-array>
 </resources>

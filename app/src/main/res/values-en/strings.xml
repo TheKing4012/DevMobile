@@ -68,4 +68,24 @@
     <string name="left">LEFT</string>
     <string name="right">RIGHT</string>
     <string name="position">Your Position</string>
+    <string name="text_email">Email Adress</string>
+    <string name="text_hobbies">Select your hobbies :</string>
+    <string name="text_sport">Sport</string>
+    <string name="text_music">Music</string>
+    <string name="text_reading">Reading</string>
+    <string name="text_synchronisation">Synchronise Info ?</string>
+    <string-array name="months_array">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
 </resources>
