@@ -39,6 +39,7 @@ dependencies {
     implementation(libs.gms.play.services.maps)
     implementation(libs.osmdroid.android)
     implementation(libs.play.services.location)
+    implementation(libs.androidx.fragment)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

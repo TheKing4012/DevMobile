@@ -73,7 +73,10 @@
     <string name="text_sport">Sport</string>
     <string name="text_music">Music</string>
     <string name="text_reading">Reading</string>
-    <string name="text_synchronisation">Synchronise Info ?</string>
+    <string name="text_synchronisation">Synchronise</string>
+    <string name="text_interests">Interests</string>
+    <string name="summary">Summary</string>
+    <string name="form">Form</string>
     <string-array name="months_array">
         <item>January</item>
         <item>February</item>

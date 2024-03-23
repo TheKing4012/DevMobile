@@ -1,6 +1,7 @@
 package com.example.tp3;
 
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -23,12 +24,14 @@ public class Exo1_1Activity extends Activity {
 
     CheckBox checkBoxSport, checkBoxMusique, checkBoxLecture, checkBoxSynchronisation;
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tp3_exo1);
 
         // Récupération des vues
+        /*
         editTextName = findViewById(R.id.editTextName);
         editTextSurname = findViewById(R.id.editTextSurname);
         editTextPhoneNumber = findViewById(R.id.editTextPhoneNumber);
@@ -43,6 +46,7 @@ public class Exo1_1Activity extends Activity {
 
         // Configuration des Spinners
         setupSpinners(spinnerDay, spinnerMonth, spinnerYear);
+        */
     }
 
     private void setupSpinners(Spinner spinnerDay, Spinner spinnerMonth, Spinner spinnerYear) {

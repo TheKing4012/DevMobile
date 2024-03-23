@@ -94,7 +94,7 @@
             android:name=".tp3.TP3Activity"
             android:exported="false" />
         <activity
-            android:name=".tp3.Exo1_1Activity"
+            android:name=".tp3.Exo1Activity"
             android:exported="false" />
         <activity
             android:name="com.example.MainActivity"

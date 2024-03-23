@@ -22,22 +22,13 @@ import com.example.utils.CommonHelper;
 import com.example.utils.Dialog;
 import com.example.utils.LambaExpr;
 
-public class Exo1Activity extends Activity {
+public class Exo1Activity extends FragmentActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tp3_exo1);
-        CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp1_exo3_menu));
-
-        Exo1_FormFragment form_fragment = new Exo1_FormFragment();
-
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, form_fragment, null)
-                .setReorderingAllowed(true)
-                .addToBackStack(null)
-                .commit();
+        //CommonHelper.createReturnBtn((Activity) this, (LinearLayout) this.findViewById(R.id.tp1_exo3_menu));
 
     }
 }

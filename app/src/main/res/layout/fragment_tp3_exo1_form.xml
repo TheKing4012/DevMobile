@@ -1,131 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tp3.Exo1_FormFragment">
+    tools:context=".tp3.Exo1_SummaryFragment"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/paper"/>
+
+    <!-- Layout horizontal pour la date de naissance -->
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="408dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/sf"
+        android:text="@string/form"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_name" />
+        android:layout_width="152dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="0dp"
+        android:fontFamily="@font/sf"
+        android:textColor="#000000"
+        android:hint="Name"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/textViewTitle"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+
+
+    <!-- Texte d'explication -->
 
     <EditText
         android:id="@+id/editTextSurname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/text_surname" />
-
-    <!-- Layout horizontal pour la date de naissance -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Spinner pour le jour -->
-        <Spinner
-            android:id="@+id/spinnerDay"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:text="/"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <!-- Spinner pour le mois -->
-        <Spinner
-            android:id="@+id/spinnerMonth"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:text="/"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <!-- Spinner pour l'année -->
-        <Spinner
-            android:id="@+id/spinnerYear"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
+        android:hint="@string/text_surname"
+        android:layout_width="152dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="0dp"
+        android:fontFamily="@font/sf"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/editTextName"
+        app:layout_constraintTop_toBottomOf="@+id/editTextName" />
 
     <EditText
         android:id="@+id/editTextPhoneNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:hint="@string/text_phoneNumber"
-        android:inputType="phone" />
+        android:layout_width="152dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="0dp"
+        android:fontFamily="@font/sf"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:inputType="numberSigned"
+        app:layout_constraintStart_toStartOf="@+id/editTextSurname"
+        app:layout_constraintTop_toBottomOf="@+id/editTextSurname" />
 
     <EditText
         android:id="@+id/editTextEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:hint="@string/text_email"/>
+        android:hint="@string/text_email"
+        android:layout_width="152dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="0dp"
+        android:fontFamily="@font/sf"
+        android:textColor="#000000"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/editTextPhoneNumber"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhoneNumber" />
 
-    <!-- Texte d'explication -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_hobbies"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"/>
-
-    <!-- Cases à cocher pour les centres d'intérêt -->
-    <CheckBox
-        android:id="@+id/checkBoxSport"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_sport"/>
-    <CheckBox
-        android:id="@+id/checkBoxMusique"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_music"/>
-    <CheckBox
-        android:id="@+id/checkBoxLecture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_reading"/>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="67dp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/interestLayout"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- CheckBox pour le centre d'intérêt -->
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/editTextEmail"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" >
+        <!-- Cases à cocher pour les centres d'intérêt -->
         <CheckBox
-            android:id="@+id/checkBoxSynchronisation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_synchronisation"
-            android:layout_weight="1"/>
-
-        <!-- Espacement flexible -->
-        <View
+            android:id="@+id/checkBoxSport"
+            android:text="@string/text_sport"
+            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_height="45dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/sf"
+            android:textColor="#000000"
+            android:textSize="15sp"/>
 
-        <!-- Bouton à droite -->
-        <Button
-            android:id="@+id/button_send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_btn_send" />
+        <CheckBox
+            android:id="@+id/checkBoxLecture"
+            android:text="@string/text_reading"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/sf"
+            android:textColor="#000000"
+            android:textSize="15sp"/>
+
+        <CheckBox
+            android:id="@+id/checkBoxMusique"
+            android:text="@string/text_music"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/sf"
+            android:textColor="#000000"
+            android:textSize="15sp"/>
     </LinearLayout>
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/dateLayout"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/interestLayout"
+        app:layout_constraintTop_toBottomOf="@+id/interestLayout" >
+
+        <!-- Premier élément occupant un tiers de la largeur -->
+        <Spinner
+            android:id="@+id/spinnerDay"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/holo_blue_light"
+            android:layout_width="0dp"/>
+
+        <!-- Deuxième élément occupant un tiers de la largeur -->
+        <Spinner
+            android:id="@+id/spinnerMonth"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/holo_green_light"
+            android:layout_width="0dp"/>
+
+        <!-- Troisième élément occupant un tiers de la largeur -->
+        <Spinner
+            android:id="@+id/spinnerYear"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/holo_red_light"
+            android:layout_width="0dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/switchLayout"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="@+id/dateLayout"
+        app:layout_constraintTop_toBottomOf="@+id/dateLayout" >
+
+        <Switch
+            android:id="@+id/switchSynchronisation"
+            android:text="@string/text_synchronisation"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:fontFamily="@font/sf"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+        <Button
+            android:id="@+id/button_send"
+            android:text="@string/text_btn_send"
+            android:layout_width="152dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="0dp"
+            android:fontFamily="@font/sf"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

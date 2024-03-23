@@ -1,66 +1,85 @@
 package com.example.tp3;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
-import android.app.Fragment;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.example.R;
+import com.example.tp1.CallActivity;
+import com.example.utils.CommonHelper;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Exo1_SummaryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class Exo1_SummaryFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    TextView tvName, tvSurname, tvPhoneNumber, tvEmail, tvDay, tvMonth, tvYear, tvInterests;
+    private Bundle bundle;
 
     public Exo1_SummaryFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Exo1_SummaryFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Exo1_SummaryFragment newInstance(String param1, String param2) {
-        Exo1_SummaryFragment fragment = new Exo1_SummaryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tp_exo1_summary, container, false);
+        View myView = inflater.inflate(R.layout.fragment_tp_exo1_summary, container, false);
+        passArguments(myView);
+        return myView;
+    }
+
+    public void passArguments(View myView) {
+        Bundle bundle = getArguments();
+        this.setArguments(bundle);
+
+        //CommonHelper.createReturnBtn((Activity) requireView().getContext(), (ConstraintLayout) requireView().findViewById(R.id.tp1_process_menu3));
+        //CommonHelper.changeActionbarColor((Activity) requireView().getContext(), getResources().getColor(R.color.ruby));
+
+        tvName = myView.findViewById(R.id.textViewName);
+        tvSurname = myView.findViewById(R.id.textViewSurname);
+        tvPhoneNumber = myView.findViewById(R.id.textViewPhoneNumber);
+        tvEmail = myView.findViewById(R.id.textViewEmail);
+
+        tvInterests = myView.findViewById(R.id.textViewInterests);
+
+        tvDay = myView.findViewById(R.id.textViewDay);
+        tvMonth = myView.findViewById(R.id.textViewMonth);
+        tvYear = myView.findViewById(R.id.textViewYear);
+
+        assert bundle != null;
+        tvName.setText(getResources().getString(R.string.text_name) + ": " + bundle.getString("Name"));
+        tvSurname.setText(getResources().getString(R.string.text_surname) +": "+ bundle.getString("Surname"));
+        tvPhoneNumber.setText(getResources().getString(R.string.text_phoneNumber) +": "+ bundle.getString("Phone"));
+        tvEmail.setText(getResources().getString(R.string.text_email) +": "+ bundle.getString("Email"));
+
+        String chaine_interets = "";
+        if(bundle.getBoolean("Sport")){chaine_interets += (getResources().getString(R.string.text_sport));}
+        if(bundle.getBoolean("Music")){
+            if(chaine_interets != ""){
+                chaine_interets += ", ";
+            }
+            chaine_interets += (getResources().getString(R.string.text_music));
+        }
+        if(bundle.getBoolean("Reading")){
+            if(chaine_interets != ""){
+                chaine_interets += ", ";
+            }
+            chaine_interets += (getResources().getString(R.string.text_reading));
+        }
+        tvInterests.setText(getResources().getString(R.string.text_interests) +": "+ chaine_interets);
+
+        tvDay.setText(bundle.getString("Day"));
+        tvMonth.setText(bundle.getString("Month"));
+        tvYear.setText(bundle.getString("Year"));
     }
 }

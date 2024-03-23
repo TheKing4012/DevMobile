@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Ryxcode</string>
+    <string name="app_name">TP DevMobile</string>
     <string name="text_name">Nom</string>
-    <string name="text_surname">Prenom</string>
+    <string name="text_surname">Prénom</string>
     <string name="text_age">Age</string>
     <string name="text_skillDomain">Domaine de Compétence</string>
     <string name="text_phoneNumber">Numéro de Téléphone</string>
@@ -73,7 +73,10 @@
     <string name="text_sport">Sport</string>
     <string name="text_music">Musique</string>
     <string name="text_reading">Lecture</string>
-    <string name="text_synchronisation">Synchroniser Info ?</string>
+    <string name="text_synchronisation">Synchroniser</string>
+    <string name="text_interests">Intérêts</string>
+    <string name="summary">Résumé</string>
+    <string name="form">Formulaire</string>
     <string-array name="months_array">
         <item>Janvier</item>
         <item>Février</item>

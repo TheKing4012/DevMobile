@@ -44,21 +44,5 @@ public class TP3Activity extends Activity {
         btn4.setOnClickListener(view -> {
             CommonHelper.changeActivity(this, new Exo5Activity());
         });
-
-        btn5.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new Exo6Activity());
-        });
-
-        btn6.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new Exo7Activity());
-        });
-
-        btn7.setOnClickListener(view -> {
-            Toast.makeText(this, getResources().getText(R.string.text_soon), Toast.LENGTH_SHORT).show();
-        });
-
-        btn8.setOnClickListener(view -> {
-            Toast.makeText(this, getResources().getText(R.string.text_soon), Toast.LENGTH_SHORT).show();
-        });
     }
 }
