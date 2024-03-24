@@ -2,4 +2,5 @@
 <resources>
     <string name="text_interests">Interests</string>
     <string name="summary">Summary</string>
+    <string name="text_missing_sync">Data are not synchronised, do you want to continue ?</string>
 </resources>

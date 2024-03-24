@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/tp3_exo1_form"
     tools:context=".tp3.Exo1_SummaryFragment"
     android:orientation="vertical">
 

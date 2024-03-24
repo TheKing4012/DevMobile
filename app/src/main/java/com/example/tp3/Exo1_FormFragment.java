@@ -1,10 +1,5 @@
 package com.example.tp3;
 
-import static com.example.utils.View.checkNotEmptySpinner;
-import static com.example.utils.View.checkNotEmptyText;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -18,20 +13,21 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 
-import androidx.appcompat.widget.SwitchCompat;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.R;
-import com.example.utils.CommonHelper;
 import com.example.utils.Dialog;
 import com.example.utils.LambaExpr;
 
+import java.io.FileNotFoundException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Exo1_FormFragment extends Fragment {
 
@@ -60,10 +56,16 @@ public class Exo1_FormFragment extends Fragment {
         return fragment;
     }
 
+    public void onResume() {
+        fillFormFromJSON(requireView());
+        super.onResume();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View myView = inflater.inflate(R.layout.fragment_tp3_exo1_form, container, false);
         btn1 = (Button) myView.findViewById(R.id.button_send);
+        //fillFormFromJSON(myView);
 
         // Récupération des vues
         editTextName = myView.findViewById(R.id.editTextName);
@@ -86,16 +88,37 @@ public class Exo1_FormFragment extends Fragment {
             bundle.putString("Surname", String.valueOf(editTextSurname.getText()));
             bundle.putString("Phone", String.valueOf(editTextPhoneNumber.getText()));
             bundle.putString("Email", String.valueOf(editTextEmail.getText()));
+
+            bundle.putInt("DayPosition", spinnerDay.getSelectedItemPosition());
+            bundle.putInt("MonthPosition", spinnerMonth.getSelectedItemPosition());
+            bundle.putInt("YearPosition", spinnerYear.getSelectedItemPosition());
             bundle.putString("Day", String.valueOf(spinnerDay.getSelectedItem()));
             bundle.putString("Month", String.valueOf(spinnerMonth.getSelectedItem()));
             bundle.putString("Year", String.valueOf(spinnerYear.getSelectedItem()));
+
             bundle.putBoolean("Sport", checkBoxSport.isChecked());
             bundle.putBoolean("Music", checkBoxMusique.isChecked());
             bundle.putBoolean("Reading", checkBoxLecture.isChecked());
             bundle.putBoolean("Synchronise", switchSynchronisation.isChecked());
 
-            LambaExpr lambaExprYes = () -> {
-                // Créez une nouvelle instance de votre nouvelle vue (par exemple, une nouvelle activité ou un nouveau fragment)
+            LambaExpr lambaExprNoSyncYes = () -> {
+                JsonReader.deleteJSONFile(myView.getContext());
+
+                // Créez une nouvelle instance de summary
+                Exo1_SummaryFragment summary = new Exo1_SummaryFragment();
+                summary.setArguments(bundle);
+
+                // Remplacez le fragment actuel par le nouveau fragment
+                FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragmentContainerView, summary);
+                transaction.addToBackStack(null); // Si vous souhaitez ajouter la transaction à la pile de retour
+                transaction.commit();
+            };
+
+            LambaExpr lambaExprSyncYes = () -> {
+                JsonReader.createJSONFile(myView.getContext(), bundle);
+
+                // Créez une nouvelle instance de summary
                 Exo1_SummaryFragment summary = new Exo1_SummaryFragment();
                 summary.setArguments(bundle);
 
@@ -111,13 +134,62 @@ public class Exo1_FormFragment extends Fragment {
             };
 
             if (switchSynchronisation.isChecked()) {
-                Dialog.showInterractDialog(myView.getContext(), getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no), lambaExprYes, lambaExprNo);
+                Dialog.showInterractDialog(myView.getContext(), getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no), lambaExprSyncYes, lambaExprNo);
             } else {
-                Dialog.showErrorDialog(myView.getContext(), getResources().getString(R.string.text_missing_item), getResources().getString(R.string.text_missing_item));
+                Dialog.showInterractDialog(myView.getContext(), getResources().getString(R.string.text_missing_sync), getResources().getString(R.string.text_missing_sync), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no), lambaExprNoSyncYes,  lambaExprNo);
             }
         });
 
         return myView;
+    }
+
+    private void fillFormFromJSON(View myView) {
+        // Récupération des vues
+        editTextName = myView.findViewById(R.id.editTextName);
+        editTextSurname = myView.findViewById(R.id.editTextSurname);
+        editTextPhoneNumber = myView.findViewById(R.id.editTextPhoneNumber);
+        editTextEmail = myView.findViewById(R.id.editTextEmail);
+        spinnerDay = myView.findViewById(R.id.spinnerDay);
+        spinnerMonth = myView.findViewById(R.id.spinnerMonth);
+        spinnerYear = myView.findViewById(R.id.spinnerYear);
+        checkBoxSport = myView.findViewById(R.id.checkBoxSport);
+        checkBoxMusique = myView.findViewById(R.id.checkBoxMusique);
+        checkBoxLecture = myView.findViewById(R.id.checkBoxLecture);
+        switchSynchronisation = myView.findViewById(R.id.switchSynchronisation);
+        try{
+            JSONObject jsonObject = JsonReader.loadJSON(myView.getContext());
+
+            System.out.println(jsonObject);
+            System.out.println((Integer) jsonObject.get("DayPosition"));
+            editTextName.setText((CharSequence) jsonObject.get("Name"));
+            editTextSurname.setText((CharSequence) jsonObject.get("Surname"));
+            editTextPhoneNumber.setText("");
+            editTextEmail.setText("");
+            spinnerDay.setSelection((Integer) jsonObject.get("DayPosition"));
+            spinnerMonth.setSelection((Integer) jsonObject.get("MonthPosition"));
+            spinnerYear.setSelection((Integer) jsonObject.get("YearPosition"));
+            checkBoxSport.setChecked(false);
+            checkBoxMusique.setChecked(false);
+            checkBoxLecture.setChecked(false);
+            switchSynchronisation.setChecked(false);
+            System.out.println(spinnerMonth.getSelectedItem());
+
+            JsonReader.deleteJSONFile(myView.getContext());
+        } catch (FileNotFoundException | JSONException e){
+            System.out.println(e);
+            System.out.println("Fichier introuvable");
+            editTextName.setText("");
+            editTextSurname.setText("");
+            editTextPhoneNumber.setText("");
+            editTextEmail.setText("");
+            spinnerDay.setSelection(0);
+            spinnerMonth.setSelection(0);
+            spinnerYear.setSelection(0);
+            checkBoxSport.setChecked(false);
+            checkBoxMusique.setChecked(false);
+            checkBoxLecture.setChecked(false);
+            switchSynchronisation.setChecked(false);
+        }
     }
 
     private void setupSpinners(View myView, Spinner spinnerDay, Spinner spinnerMonth, Spinner spinnerYear) {

@@ -3,6 +3,7 @@ package com.example.utils;
 import android.app.Activity;
 import android.os.Build;
 import android.content.Intent;
+import android.text.Layout;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
 
 import com.example.R;
 
@@ -55,6 +57,26 @@ public class CommonHelper {
 
         monBouton.setOnClickListener(view -> {
             activity.finish();
+        });
+
+        // Ajout du bouton au layout ConstraintLayout
+        layout.addView(monBouton);
+    }
+
+    public static void createReturnBtn(Fragment fragment, ConstraintLayout layout) {
+
+        Button monBouton = new Button(fragment.getContext());
+        monBouton.setText(R.string.text_btn_return);
+        // Création des paramètres de layout pour le bouton
+        ConstraintLayout.LayoutParams buttonParams = new ConstraintLayout.LayoutParams(
+                ConstraintLayout.LayoutParams.MATCH_PARENT,
+                ConstraintLayout.LayoutParams.WRAP_CONTENT
+        );
+        buttonParams.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID; // Alignement du bas du bouton sur le bas du parent
+        monBouton.setLayoutParams(buttonParams);
+
+        monBouton.setOnClickListener(view -> {
+            fragment.getParentFragmentManager().popBackStackImmediate();
         });
 
         // Ajout du bouton au layout ConstraintLayout

@@ -1,25 +1,15 @@
 package com.example.tp3;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.R;
-import com.example.tp1.CallActivity;
 import com.example.utils.CommonHelper;
 
 public class Exo1_SummaryFragment extends Fragment {
@@ -34,6 +24,7 @@ public class Exo1_SummaryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View myView = inflater.inflate(R.layout.fragment_tp_exo1_summary, container, false);
+        CommonHelper.createReturnBtn(this,(ConstraintLayout) myView.findViewById(R.id.tp3_exo1_summary));
         passArguments(myView);
         return myView;
     }

@@ -77,6 +77,7 @@
     <string name="text_interests">Intérêts</string>
     <string name="summary">Résumé</string>
     <string name="form">Formulaire</string>
+    <string name="text_missing_sync">Données non-synchronisés, voulez-vous poursuivre ?</string>
     <string-array name="months_array">
         <item>Janvier</item>
         <item>Février</item>
