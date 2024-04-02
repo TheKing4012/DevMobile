@@ -39,7 +39,7 @@ import java.util.List;
 
 public class Exo2_FormFragment extends Fragment {
 
-    Button btnSend, btnDownload;
+    Button btnSend;
     EditText editTextName, editTextSurname, editTextPhoneNumber, editTextEmail;
     Spinner spinnerDay, spinnerMonth, spinnerYear;
     CheckBox checkBoxSport, checkBoxMusique, checkBoxLecture;
@@ -73,7 +73,6 @@ public class Exo2_FormFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View myView = inflater.inflate(R.layout.fragment_tp3_exo2_form, container, false);
         btnSend = (Button) myView.findViewById(R.id.button_send);
-        btnDownload = (Button) myView.findViewById(R.id.button_download);
         //fillFormFromJSON(myView);
 
         // Récupération des vues
@@ -149,60 +148,7 @@ public class Exo2_FormFragment extends Fragment {
             }
         });
 
-        btnDownload.setOnClickListener(view -> {
-            startDownload();
-
-            bundle.putString("Name", String.valueOf(editTextName.getText()));
-            bundle.putString("Surname", String.valueOf(editTextSurname.getText()));
-            bundle.putString("Phone", String.valueOf(editTextPhoneNumber.getText()));
-            bundle.putString("Email", String.valueOf(editTextEmail.getText()));
-
-            bundle.putInt("DayPosition", spinnerDay.getSelectedItemPosition());
-            bundle.putInt("MonthPosition", spinnerMonth.getSelectedItemPosition());
-            bundle.putInt("YearPosition", spinnerYear.getSelectedItemPosition());
-            bundle.putString("Day", String.valueOf(spinnerDay.getSelectedItem()));
-            bundle.putString("Month", String.valueOf(spinnerMonth.getSelectedItem()));
-            bundle.putString("Year", String.valueOf(spinnerYear.getSelectedItem()));
-
-            bundle.putBoolean("Sport", checkBoxSport.isChecked());
-            bundle.putBoolean("Music", checkBoxMusique.isChecked());
-            bundle.putBoolean("Reading", checkBoxLecture.isChecked());
-            bundle.putBoolean("Synchronise", switchSynchronisation.isChecked());
-
-
-        });
-
         return myView;
-    }
-
-    private void startDownload() {
-        // Obtenez une référence à votre base de données Firebase Realtime
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseRef = database.getReferenceFromUrl("https://rgrpo-af967-default-rtdb.firebaseio.com/");
-
-        // Récupérez les données depuis Firebase Realtime Database
-        databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Les données ont été récupérées avec succès
-                // Faites quelque chose avec les données JSON ici
-                String jsonData = dataSnapshot.getValue().toString();
-                Log.d(TAG, "JSON Data: " + jsonData);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Une erreur s'est produite lors de la récupération des données
-                Log.e(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
-    }
-    private void startDownloadService() {
-        // Démarrer le service DownloadAndParseService
-        // Notez que vous devrez ajuster l'Intent pour correspondre à votre configuration
-        //Intent intent = new Intent(getActivity(), DownloadAndParseService.class);
-        //getActivity().startService(intent);
     }
 
     private void fillFormFromJSON(View myView) {

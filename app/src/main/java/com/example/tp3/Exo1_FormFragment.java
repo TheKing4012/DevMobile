@@ -36,7 +36,7 @@ import java.util.Calendar;
 import java.util.List;
 public class Exo1_FormFragment extends Fragment {
 
-    Button btnSend, btnDownload;
+    Button btnSend;
     EditText editTextName, editTextSurname, editTextPhoneNumber, editTextEmail;
     Spinner spinnerDay, spinnerMonth, spinnerYear;
     CheckBox checkBoxSport, checkBoxMusique, checkBoxLecture;
@@ -69,7 +69,6 @@ public class Exo1_FormFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View myView = inflater.inflate(R.layout.fragment_tp3_exo1_form, container, false);
         btnSend = (Button) myView.findViewById(R.id.button_send);
-        btnDownload = (Button) myView.findViewById(R.id.button_download);
         //fillFormFromJSON(myView);
 
         // Récupération des vues
@@ -139,28 +138,6 @@ public class Exo1_FormFragment extends Fragment {
             } else {
                 Dialog.showInterractDialog(myView.getContext(), getResources().getString(R.string.text_missing_sync), getResources().getString(R.string.text_missing_sync), getResources().getString(R.string.text_confirmation_yes), getResources().getString(R.string.text_confirmation_no), lambaExprNoSyncYes,  lambaExprNo);
             }
-        });
-
-        btnDownload.setOnClickListener(view -> {
-
-            bundle.putString("Name", String.valueOf(editTextName.getText()));
-            bundle.putString("Surname", String.valueOf(editTextSurname.getText()));
-            bundle.putString("Phone", String.valueOf(editTextPhoneNumber.getText()));
-            bundle.putString("Email", String.valueOf(editTextEmail.getText()));
-
-            bundle.putInt("DayPosition", spinnerDay.getSelectedItemPosition());
-            bundle.putInt("MonthPosition", spinnerMonth.getSelectedItemPosition());
-            bundle.putInt("YearPosition", spinnerYear.getSelectedItemPosition());
-            bundle.putString("Day", String.valueOf(spinnerDay.getSelectedItem()));
-            bundle.putString("Month", String.valueOf(spinnerMonth.getSelectedItem()));
-            bundle.putString("Year", String.valueOf(spinnerYear.getSelectedItem()));
-
-            bundle.putBoolean("Sport", checkBoxSport.isChecked());
-            bundle.putBoolean("Music", checkBoxMusique.isChecked());
-            bundle.putBoolean("Reading", checkBoxLecture.isChecked());
-            bundle.putBoolean("Synchronise", switchSynchronisation.isChecked());
-
-
         });
 
         return myView;
