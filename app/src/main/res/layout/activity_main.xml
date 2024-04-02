@@ -1,52 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_menu"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/menu_activity">
 
-    <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/title_main_tp"
-        android:textAlignment="center"
-        android:fontFamily="@font/sf"
-        android:textSize="28sp" />
+    <ImageView
+        android:id="@+id/background_one"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/bluebackground"/>
 
-    <Button
-        android:id="@+id/button_tp1"
+    <ImageView
+        android:id="@+id/background_two"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/bluebackground"/>
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/sf"
-        android:textSize="20sp"
-        android:text="@string/text_btn_tp1" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/logocomplet"/>
 
     <Button
-        android:id="@+id/button_tp2"
-        android:layout_width="wrap_content"
+        android:id="@+id/button_annonyme"
+        android:layout_marginHorizontal="80dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/normal_button"
+        android:foreground="@drawable/normal_button_border"
         android:fontFamily="@font/sf"
-        android:text="@string/text_btn_tp2" />
+        android:textSize="30sp"
+        android:text="@string/text_annonyme" />
 
     <Button
-        android:id="@+id/button_tp3"
-        android:layout_width="wrap_content"
-        android:textSize="20sp"
-        android:fontFamily="@font/sf"
+        android:id="@+id/button_interimaire"
+        android:layout_marginHorizontal="80dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_btn_tp3" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="380dp"
+        android:background="@drawable/normal_button"
+        android:foreground="@drawable/normal_button_border"
+        android:textSize="30sp"
+        android:fontFamily="@font/sf"
+        android:text="@string/text_interimaire" />
 
     <Button
-        android:id="@+id/button_project"
-        android:layout_width="wrap_content"
-        android:textSize="20sp"
-        android:fontFamily="@font/sf"
+        android:id="@+id/button_employeur"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_btn_project" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="80dp"
+        android:layout_marginTop="520dp"
+        android:background="@drawable/normal_button"
+        android:foreground="@drawable/normal_button_border"
+        android:fontFamily="@font/sf"
+        android:text="@string/text_employeur"
+        android:textSize="30sp"
+        app:iconTint="#FFFFFF" />
 
-
-
-</LinearLayout>
-
+</FrameLayout>

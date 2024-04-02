@@ -1,21 +1,28 @@
 package com.example;
 
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import java.util.Random;
 
 import com.example.R;
-import com.example.project.MainMenuActivity;
-import com.example.tp1.TP1Activity;
-import com.example.tp2.TP2Activity;
-import com.example.tp3.TP3Activity;
 import com.example.utils.CommonHelper;
 
 public class MainActivity extends Activity {
 
-    Button btn1, btn2, btn3, btn4;
+    Button btnAnnonyme, btnInterimaire, btnEmployeur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,26 +31,55 @@ public class MainActivity extends Activity {
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
 
-        btn1 = (Button) findViewById(R.id.button_tp1);
-        btn2 = (Button) findViewById(R.id.button_tp2);
-        btn3 = (Button) findViewById(R.id.button_tp3);
-        btn4 = (Button) findViewById(R.id.button_project);
+        /*btnAnnonyme = (Button) findViewById(R.id.button_annonyme);
+        btnInterimaire = (Button) findViewById(R.id.button_interimaire);
+        btnEmployeur = (Button) findViewById(R.id.button_employeur);
 
-
-        btn1.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new TP1Activity());
+        btnAnnonyme.setOnClickListener(view -> {
+            //CommonHelper.changeActivity(this, new TP1Activity());
         });
 
-        btn2.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new TP2Activity());
+        btnInterimaire.setOnClickListener(view -> {
+            //CommonHelper.changeActivity(this, new TP2Activity());
         });
 
-        btn3.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new TP3Activity());
-        });
+        btnEmployeur.setOnClickListener(view -> {
+            //CommonHelper.changeActivity(this, new TP3Activity());
+        });*/
 
-        btn4.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new MainMenuActivity());
-        });
+        // Démarrer les animations
+        animateBackground();
     }
+
+    private void animateBackground(){
+        final ImageView backgroundOne = (ImageView) findViewById(R.id.background_one);
+        final ImageView backgroundTwo = (ImageView) findViewById(R.id.background_two);
+
+        final ValueAnimator animator = ValueAnimator.ofFloat(0.0f, 1.0f);
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.setInterpolator(new LinearInterpolator());
+        animator.setDuration(20000L);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                final float progress = (float) animation.getAnimatedValue();
+                final float width = backgroundOne.getWidth();
+                final float translationX = width * progress;
+                backgroundOne.setTranslationX(translationX);
+                backgroundTwo.setTranslationX(translationX - width);
+            }
+        });
+        animator.start();
+    }
+
+    /*private void animateBackground() {
+        int screenWidth = getResources().getDisplayMetrics().widthPixels;
+        int screenHeight = getResources().getDisplayMetrics().heightPixels;
+
+        TranslateAnimation animation = new TranslateAnimation(0, -random.nextInt(screenWidth), 0, -random.nextInt(screenHeight));
+        animation.setDuration(10000); // Durée de l'animation en millisecondes
+        animation.setRepeatCount(Animation.INFINITE); // Animation en boucle
+        animation.setRepeatMode(Animation.REVERSE); // Inversion à la fin de chaque itération
+        scrollView.startAnimation(animation);
+    }*/
 }
