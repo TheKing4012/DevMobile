@@ -11,7 +11,6 @@ public class Exo1Activity extends FragmentActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        JsonReader.deleteJSONFile(this);
         setContentView(R.layout.activity_tp3_exo1);
 
     }

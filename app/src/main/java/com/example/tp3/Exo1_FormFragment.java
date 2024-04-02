@@ -34,10 +34,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 public class Exo1_FormFragment extends Fragment {
 
     Button btnSend, btnDownload;
@@ -66,7 +62,6 @@ public class Exo1_FormFragment extends Fragment {
     }
 
     public void onResume() {
-        fillFormFromJSON(requireView());
         super.onResume();
     }
 
@@ -112,8 +107,6 @@ public class Exo1_FormFragment extends Fragment {
             bundle.putBoolean("Synchronise", switchSynchronisation.isChecked());
 
             LambaExpr lambaExprNoSyncYes = () -> {
-                JsonReader.deleteJSONFile(myView.getContext());
-
                 // Créez une nouvelle instance de summary
                 Exo1_SummaryFragment summary = new Exo1_SummaryFragment();
                 summary.setArguments(bundle);
@@ -126,8 +119,6 @@ public class Exo1_FormFragment extends Fragment {
             };
 
             LambaExpr lambaExprSyncYes = () -> {
-                JsonReader.createJSONFile(myView.getContext(), bundle);
-
                 // Créez une nouvelle instance de summary
                 Exo1_SummaryFragment summary = new Exo1_SummaryFragment();
                 summary.setArguments(bundle);
@@ -151,7 +142,6 @@ public class Exo1_FormFragment extends Fragment {
         });
 
         btnDownload.setOnClickListener(view -> {
-            startDownload();
 
             bundle.putString("Name", String.valueOf(editTextName.getText()));
             bundle.putString("Surname", String.valueOf(editTextSurname.getText()));
@@ -174,83 +164,6 @@ public class Exo1_FormFragment extends Fragment {
         });
 
         return myView;
-    }
-
-    private void startDownload() {
-        // Obtenez une référence à votre base de données Firebase Realtime
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseRef = database.getReferenceFromUrl("https://rgrpo-af967-default-rtdb.firebaseio.com/");
-
-        // Récupérez les données depuis Firebase Realtime Database
-        databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Les données ont été récupérées avec succès
-                // Faites quelque chose avec les données JSON ici
-                String jsonData = dataSnapshot.getValue().toString();
-                Log.d(TAG, "JSON Data: " + jsonData);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Une erreur s'est produite lors de la récupération des données
-                Log.e(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
-    }
-    private void startDownloadService() {
-        // Démarrer le service DownloadAndParseService
-        // Notez que vous devrez ajuster l'Intent pour correspondre à votre configuration
-        //Intent intent = new Intent(getActivity(), DownloadAndParseService.class);
-        //getActivity().startService(intent);
-    }
-
-    private void fillFormFromJSON(View myView) {
-        // Récupération des vues
-        editTextName = myView.findViewById(R.id.editTextName);
-        editTextSurname = myView.findViewById(R.id.editTextSurname);
-        editTextPhoneNumber = myView.findViewById(R.id.editTextPhoneNumber);
-        editTextEmail = myView.findViewById(R.id.editTextEmail);
-        spinnerDay = myView.findViewById(R.id.spinnerDay);
-        spinnerMonth = myView.findViewById(R.id.spinnerMonth);
-        spinnerYear = myView.findViewById(R.id.spinnerYear);
-        checkBoxSport = myView.findViewById(R.id.checkBoxSport);
-        checkBoxMusique = myView.findViewById(R.id.checkBoxMusique);
-        checkBoxLecture = myView.findViewById(R.id.checkBoxLecture);
-        switchSynchronisation = myView.findViewById(R.id.switchSynchronisation);
-        try{
-            JSONObject jsonObject = JsonReader.loadJSON(myView.getContext());
-
-            editTextName.setText((CharSequence) jsonObject.get("Name"));
-            editTextSurname.setText((CharSequence) jsonObject.get("Surname"));
-            editTextPhoneNumber.setText("");
-            editTextEmail.setText("");
-            spinnerDay.setSelection((Integer) jsonObject.get("DayPosition"));
-            spinnerMonth.setSelection((Integer) jsonObject.get("MonthPosition"));
-            spinnerYear.setSelection((Integer) jsonObject.get("YearPosition"));
-            checkBoxSport.setChecked(false);
-            checkBoxMusique.setChecked(false);
-            checkBoxLecture.setChecked(false);
-            switchSynchronisation.setChecked(false);
-            System.out.println(spinnerMonth.getSelectedItem());
-
-            JsonReader.deleteJSONFile(myView.getContext());
-        } catch (FileNotFoundException | JSONException e){
-            System.out.println(e);
-            System.out.println("Fichier introuvable");
-            editTextName.setText("");
-            editTextSurname.setText("");
-            editTextPhoneNumber.setText("");
-            editTextEmail.setText("");
-            spinnerDay.setSelection(0);
-            spinnerMonth.setSelection(0);
-            spinnerYear.setSelection(0);
-            checkBoxSport.setChecked(false);
-            checkBoxMusique.setChecked(false);
-            checkBoxLecture.setChecked(false);
-            switchSynchronisation.setChecked(false);
-        }
     }
 
     private void setupSpinners(View myView, Spinner spinnerDay, Spinner spinnerMonth, Spinner spinnerYear) {
