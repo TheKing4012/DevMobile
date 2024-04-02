@@ -4,6 +4,7 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.R;
+import com.example.utils.JsonReader;
 
 public class Exo1Activity extends FragmentActivity  {
 

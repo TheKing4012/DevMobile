@@ -1,8 +1,11 @@
 package com.example.tp3;
 
+import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
+
 import android.graphics.Color;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +16,21 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.R;
 import com.example.utils.Dialog;
+import com.example.utils.JsonReader;
 import com.example.utils.LambaExpr;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.FileNotFoundException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -31,7 +40,7 @@ import org.json.JSONObject;
 
 public class Exo1_FormFragment extends Fragment {
 
-    Button btn1;
+    Button btnSend, btnDownload;
     EditText editTextName, editTextSurname, editTextPhoneNumber, editTextEmail;
     Spinner spinnerDay, spinnerMonth, spinnerYear;
     CheckBox checkBoxSport, checkBoxMusique, checkBoxLecture;
@@ -64,7 +73,8 @@ public class Exo1_FormFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View myView = inflater.inflate(R.layout.fragment_tp3_exo1_form, container, false);
-        btn1 = (Button) myView.findViewById(R.id.button_send);
+        btnSend = (Button) myView.findViewById(R.id.button_send);
+        btnDownload = (Button) myView.findViewById(R.id.button_download);
         //fillFormFromJSON(myView);
 
         // Récupération des vues
@@ -83,7 +93,7 @@ public class Exo1_FormFragment extends Fragment {
         // Configuration des Spinners
         setupSpinners(myView, spinnerDay, spinnerMonth, spinnerYear);
 
-        btn1.setOnClickListener(view -> {
+        btnSend.setOnClickListener(view -> {
             bundle.putString("Name", String.valueOf(editTextName.getText()));
             bundle.putString("Surname", String.valueOf(editTextSurname.getText()));
             bundle.putString("Phone", String.valueOf(editTextPhoneNumber.getText()));
@@ -130,7 +140,7 @@ public class Exo1_FormFragment extends Fragment {
             };
 
             LambaExpr lambaExprNo = () -> {
-                btn1.setBackgroundColor(Color.RED);
+                btnSend.setBackgroundColor(Color.RED);
             };
 
             if (switchSynchronisation.isChecked()) {
@@ -140,7 +150,60 @@ public class Exo1_FormFragment extends Fragment {
             }
         });
 
+        btnDownload.setOnClickListener(view -> {
+            startDownload();
+
+            bundle.putString("Name", String.valueOf(editTextName.getText()));
+            bundle.putString("Surname", String.valueOf(editTextSurname.getText()));
+            bundle.putString("Phone", String.valueOf(editTextPhoneNumber.getText()));
+            bundle.putString("Email", String.valueOf(editTextEmail.getText()));
+
+            bundle.putInt("DayPosition", spinnerDay.getSelectedItemPosition());
+            bundle.putInt("MonthPosition", spinnerMonth.getSelectedItemPosition());
+            bundle.putInt("YearPosition", spinnerYear.getSelectedItemPosition());
+            bundle.putString("Day", String.valueOf(spinnerDay.getSelectedItem()));
+            bundle.putString("Month", String.valueOf(spinnerMonth.getSelectedItem()));
+            bundle.putString("Year", String.valueOf(spinnerYear.getSelectedItem()));
+
+            bundle.putBoolean("Sport", checkBoxSport.isChecked());
+            bundle.putBoolean("Music", checkBoxMusique.isChecked());
+            bundle.putBoolean("Reading", checkBoxLecture.isChecked());
+            bundle.putBoolean("Synchronise", switchSynchronisation.isChecked());
+
+
+        });
+
         return myView;
+    }
+
+    private void startDownload() {
+        // Obtenez une référence à votre base de données Firebase Realtime
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseRef = database.getReferenceFromUrl("https://rgrpo-af967-default-rtdb.firebaseio.com/");
+
+        // Récupérez les données depuis Firebase Realtime Database
+        databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Les données ont été récupérées avec succès
+                // Faites quelque chose avec les données JSON ici
+                String jsonData = dataSnapshot.getValue().toString();
+                Log.d(TAG, "JSON Data: " + jsonData);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Une erreur s'est produite lors de la récupération des données
+                Log.e(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+    }
+    private void startDownloadService() {
+        // Démarrer le service DownloadAndParseService
+        // Notez que vous devrez ajuster l'Intent pour correspondre à votre configuration
+        //Intent intent = new Intent(getActivity(), DownloadAndParseService.class);
+        //getActivity().startService(intent);
     }
 
     private void fillFormFromJSON(View myView) {
@@ -159,8 +222,6 @@ public class Exo1_FormFragment extends Fragment {
         try{
             JSONObject jsonObject = JsonReader.loadJSON(myView.getContext());
 
-            System.out.println(jsonObject);
-            System.out.println((Integer) jsonObject.get("DayPosition"));
             editTextName.setText((CharSequence) jsonObject.get("Name"));
             editTextSurname.setText((CharSequence) jsonObject.get("Surname"));
             editTextPhoneNumber.setText("");

@@ -1,4 +1,4 @@
-package com.example.tp3;
+package com.example.utils;
 
 import android.content.Context;
 import android.os.Bundle;

@@ -2,5 +2,6 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.androidApplication) apply false
+    id("com.google.gms.google-services") version "4.4.1" apply false
 }
 true // Needed to make the Suppress annotation work for the plugins block

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">TP DevMobile</string>
+    <string name="app_name">InteRRim</string>
     <string name="text_name">Nom</string>
     <string name="text_surname">Prénom</string>
     <string name="text_age">Age</string>
@@ -92,4 +92,5 @@
         <item>Novembre</item>
         <item>Décembre</item>
     </string-array>
+    <string name="text_btn_download">Télécharger</string>
 </resources>
