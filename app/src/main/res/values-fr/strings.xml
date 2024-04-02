@@ -93,4 +93,5 @@
         <item>Décembre</item>
     </string-array>
     <string name="text_btn_download">Télécharger</string>
+    <string name="text_btn_project">Projet</string>
 </resources>

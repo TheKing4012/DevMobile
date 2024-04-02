@@ -17,7 +17,7 @@ import com.example.utils.CommonHelper;
 
 public class TP3Activity extends Activity {
 
-    Button btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8;
+    Button btn1, btn2, btn3, btn4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +34,15 @@ public class TP3Activity extends Activity {
         });
 
         btn2.setOnClickListener(view -> {
-            Toast.makeText(this, getResources().getText(R.string.text_soon), Toast.LENGTH_SHORT).show();
+            CommonHelper.changeActivity(this, new Exo2Activity());
         });
 
         btn3.setOnClickListener(view -> {
-            Toast.makeText(this, getResources().getText(R.string.text_soon), Toast.LENGTH_SHORT).show();
+            CommonHelper.changeActivity(this, new Exo3Activity());
         });
 
         btn4.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new Exo5Activity());
+            CommonHelper.changeActivity(this, new Exo4Activity());
         });
     }
 }

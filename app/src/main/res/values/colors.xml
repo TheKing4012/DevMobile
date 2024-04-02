@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="ruby">#c80425</color>
+    <color name="blue">#01A4FF</color>
 </resources>

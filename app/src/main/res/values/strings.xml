@@ -16,6 +16,7 @@
     <string name="text_btn_tp1">TP 1</string>
     <string name="text_btn_tp2">TP 2</string>
     <string name="text_btn_tp3">TP 3</string>
+    <string name="text_btn_project">Project</string>
     <string name="text_btn_exo1">HelloWorld</string>
     <string name="text_btn_exo2">Exercice 3</string>
     <string name="text_btn_exo3">Exercice 3 (Only Java)</string>
