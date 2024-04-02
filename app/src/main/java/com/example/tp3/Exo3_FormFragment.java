@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.R;
 import com.example.utils.Dialog;
+import com.example.utils.FirebaseJsonDownloader;
 import com.example.utils.JsonReader;
 import com.example.utils.LambaExpr;
 import com.google.firebase.database.DataSnapshot;
@@ -176,27 +177,8 @@ public class Exo3_FormFragment extends Fragment {
     }
 
     private void startDownload() {
-        // Obtenez une référence à votre base de données Firebase Realtime
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference databaseRef = database.getReferenceFromUrl("https://rgrpo-af967-default-rtdb.firebaseio.com/");
-
-        // Récupérez les données depuis Firebase Realtime Database
-        databaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Les données ont été récupérées avec succès
-                // Faites quelque chose avec les données JSON ici
-                String jsonData = dataSnapshot.getValue().toString();
-                Log.d(TAG, "JSON Data: " + jsonData);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Une erreur s'est produite lors de la récupération des données
-                Log.e(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
+        FirebaseJsonDownloader firebaseJsonDownloader = new FirebaseJsonDownloader("https://rgrpo-af967-default-rtdb.firebaseio.com/", "users");
+        firebaseJsonDownloader.downloadJsonFile();
     }
     private void startDownloadService() {
         // Démarrer le service DownloadAndParseService
