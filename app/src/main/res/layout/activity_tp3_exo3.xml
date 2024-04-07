@@ -7,7 +7,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="com.example.tp3.Exo2_FormFragment"
+        android:name="com.example.tp3.Exo3_FormFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </LinearLayout>

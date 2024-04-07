@@ -43,8 +43,8 @@ public class FirebaseJsonDownloader {
 
                 // Now you can use this inputStream for further processing
                 // For example, you can pass it to your JsonParser class
-                JsonParser jsonParser = new JsonParser();
-                jsonParser.parseJsonFile(inputStream);
+                JsonParser jsonParser = new JsonParser(inputStream);
+                jsonParser.parseJsonFile();
             }
 
             @Override

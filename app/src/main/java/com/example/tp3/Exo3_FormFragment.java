@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.R;
 import com.example.utils.Dialog;
 import com.example.utils.FirebaseJsonDownloader;
+import com.example.utils.JsonParser;
 import com.example.utils.JsonReader;
 import com.example.utils.LambaExpr;
 import com.google.firebase.database.DataSnapshot;
@@ -51,6 +52,9 @@ public class Exo3_FormFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+    private boolean hasTryDownLoad = false;
+
+    private JsonParser jsonParser;
 
     public Exo3_FormFragment() {
         // Required empty public constructor
@@ -66,7 +70,11 @@ public class Exo3_FormFragment extends Fragment {
     }
 
     public void onResume() {
-        fillFormFromJSON(requireView());
+        if(hasTryDownLoad) {
+            fillFormFromDistantJSON(requireView());
+        } else {
+            fillFormFromJSON(requireView());
+        }
         super.onResume();
     }
 
@@ -180,14 +188,55 @@ public class Exo3_FormFragment extends Fragment {
         FirebaseJsonDownloader firebaseJsonDownloader = new FirebaseJsonDownloader("https://rgrpo-af967-default-rtdb.firebaseio.com/", "users");
         firebaseJsonDownloader.downloadJsonFile();
     }
-    private void startDownloadService() {
-        // Démarrer le service DownloadAndParseService
-        // Notez que vous devrez ajuster l'Intent pour correspondre à votre configuration
-        //Intent intent = new Intent(getActivity(), DownloadAndParseService.class);
-        //getActivity().startService(intent);
-    }
 
     private void fillFormFromJSON(View myView) {
+        // Récupération des vues
+        editTextName = myView.findViewById(R.id.editTextName);
+        editTextSurname = myView.findViewById(R.id.editTextSurname);
+        editTextPhoneNumber = myView.findViewById(R.id.editTextPhoneNumber);
+        editTextEmail = myView.findViewById(R.id.editTextEmail);
+        spinnerDay = myView.findViewById(R.id.spinnerDay);
+        spinnerMonth = myView.findViewById(R.id.spinnerMonth);
+        spinnerYear = myView.findViewById(R.id.spinnerYear);
+        checkBoxSport = myView.findViewById(R.id.checkBoxSport);
+        checkBoxMusique = myView.findViewById(R.id.checkBoxMusique);
+        checkBoxLecture = myView.findViewById(R.id.checkBoxLecture);
+        switchSynchronisation = myView.findViewById(R.id.switchSynchronisation);
+        try{
+            JSONObject jsonObject = JsonReader.loadJSON(myView.getContext());
+
+            editTextName.setText((CharSequence) jsonObject.get("Name"));
+            editTextSurname.setText((CharSequence) jsonObject.get("Surname"));
+            editTextPhoneNumber.setText("");
+            editTextEmail.setText("");
+            spinnerDay.setSelection((Integer) jsonObject.get("DayPosition"));
+            spinnerMonth.setSelection((Integer) jsonObject.get("MonthPosition"));
+            spinnerYear.setSelection((Integer) jsonObject.get("YearPosition"));
+            checkBoxSport.setChecked(false);
+            checkBoxMusique.setChecked(false);
+            checkBoxLecture.setChecked(false);
+            switchSynchronisation.setChecked(false);
+            System.out.println(spinnerMonth.getSelectedItem());
+
+            JsonReader.deleteJSONFile(myView.getContext());
+        } catch (FileNotFoundException | JSONException e){
+            System.out.println(e);
+            System.out.println("Fichier introuvable");
+            editTextName.setText("");
+            editTextSurname.setText("");
+            editTextPhoneNumber.setText("");
+            editTextEmail.setText("");
+            spinnerDay.setSelection(0);
+            spinnerMonth.setSelection(0);
+            spinnerYear.setSelection(0);
+            checkBoxSport.setChecked(false);
+            checkBoxMusique.setChecked(false);
+            checkBoxLecture.setChecked(false);
+            switchSynchronisation.setChecked(false);
+        }
+    }
+
+    private void fillFormFromDistantJSON(View myView) {
         // Récupération des vues
         editTextName = myView.findViewById(R.id.editTextName);
         editTextSurname = myView.findViewById(R.id.editTextSurname);

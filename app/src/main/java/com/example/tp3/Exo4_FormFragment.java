@@ -2,6 +2,7 @@ package com.example.tp3;
 
 import static androidx.constraintlayout.widget.ConstraintLayoutStates.TAG;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.R;
+import com.example.tp3.service.DownloadAndParseService;
 import com.example.utils.Dialog;
 import com.example.utils.FirebaseJsonDownloader;
 import com.example.utils.JsonReader;
@@ -151,7 +153,7 @@ public class Exo4_FormFragment extends Fragment {
         });
 
         btnDownload.setOnClickListener(view -> {
-            startDownload();
+            startDownloadService();
 
             bundle.putString("Name", String.valueOf(editTextName.getText()));
             bundle.putString("Surname", String.valueOf(editTextSurname.getText()));
@@ -176,15 +178,11 @@ public class Exo4_FormFragment extends Fragment {
         return myView;
     }
 
-    private void startDownload() {
-        FirebaseJsonDownloader firebaseJsonDownloader = new FirebaseJsonDownloader("https://rgrpo-af967-default-rtdb.firebaseio.com/", "users");
-        firebaseJsonDownloader.downloadJsonFile();
-    }
     private void startDownloadService() {
         // Démarrer le service DownloadAndParseService
         // Notez que vous devrez ajuster l'Intent pour correspondre à votre configuration
-        //Intent intent = new Intent(getActivity(), DownloadAndParseService.class);
-        //getActivity().startService(intent);
+        Intent intent = new Intent(getActivity(), DownloadAndParseService.class);
+        getActivity().startService(intent);
     }
 
     private void fillFormFromJSON(View myView) {

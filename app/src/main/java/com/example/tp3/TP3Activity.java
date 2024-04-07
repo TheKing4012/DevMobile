@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.tp1.Exo3Activity;
 import com.example.tp1.Exo3ActivityOnlyJava;
 import com.example.tp1.Exo5Activity;
 import com.example.tp1.Exo6Activity;
