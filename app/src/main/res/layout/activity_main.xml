@@ -69,4 +69,19 @@
         android:textSize="30sp"
         app:iconTint="#FFFFFF" />
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/sf_bold"
+            android:textSize="18sp"
+            android:text="@string/text_credit"
+            android:textColor="#000000" />
+    </FrameLayout>
+
 </FrameLayout>
