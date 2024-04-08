@@ -19,15 +19,12 @@ public class FirebaseJsonDownloader {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReferenceFromUrl(url);
 
-        // Reference to your JSON node"https://rgrpo-af967-default-rtdb.firebaseio.com/"
     }
 
     public FirebaseJsonDownloader(String url, String child) {
         // Initialize Firebase Database
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReferenceFromUrl(url).child(child);
-
-        // Reference to your JSON node"https://rgrpo-af967-default-rtdb.firebaseio.com/"
     }
 
     public void downloadJsonFile() {
