@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.ruby));
+        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
         /*btnAnnonyme = (Button) findViewById(R.id.button_annonyme);
         btnInterimaire = (Button) findViewById(R.id.button_interimaire);

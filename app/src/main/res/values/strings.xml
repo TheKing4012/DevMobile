@@ -2,7 +2,7 @@
     <string name="text_btn_return">Return</string>
     <string name="text_missing_item">Elément manquant</string>
 
-    <string name="text_annonyme">Unkown\nUser</string>
+    <string name="text_annonyme">Unknown\nUser</string>
     <string name="text_interimaire">Worker (connexion)</string>
     <string name="text_employeur">Employer (connexion)</string>
 
