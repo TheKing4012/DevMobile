@@ -86,6 +86,7 @@ public class CommonHelper {
     public static void changeActivity(Activity from, Activity where) {
         Intent intent = new Intent(from, where.getClass());
         from.startActivity(intent);
+        //from.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public static void changeActionbarColor(Activity from, int id) {

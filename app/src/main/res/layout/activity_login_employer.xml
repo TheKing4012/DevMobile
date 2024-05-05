@@ -27,7 +27,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:scaleType="fitXY"
-        android:clickable="true"
         android:src="@drawable/logocomplet"/>
 
     <Button
@@ -41,34 +40,7 @@
         android:foreground="@drawable/normal_button_border"
         android:fontFamily="@font/sf"
         android:textSize="30sp"
-        android:text="@string/text_annonyme" />
-
-    <Button
-        android:id="@+id/button_interimaire"
-        android:layout_marginHorizontal="80dp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="380dp"
-        android:background="@drawable/background_button"
-        android:foreground="@drawable/normal_button_border"
-        android:textSize="30sp"
-        android:fontFamily="@font/sf"
-        android:text="@string/text_interimaire" />
-
-    <Button
-        android:id="@+id/button_employeur"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginHorizontal="80dp"
-        android:layout_marginTop="520dp"
-        android:background="@drawable/background_button"
-        android:foreground="@drawable/normal_button_border"
-        android:fontFamily="@font/sf"
-        android:text="@string/text_employeur"
-        android:textSize="30sp"
-        app:iconTint="#FFFFFF" />
+        android:text="candidate" />
 
     <FrameLayout
         android:layout_width="wrap_content"

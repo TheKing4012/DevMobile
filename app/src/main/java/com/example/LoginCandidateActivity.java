@@ -1,57 +1,41 @@
 package com.example;
 
 
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import java.util.Random;
-
-import com.example.R;
 import com.example.utils.CommonHelper;
 
-public class MainActivity extends Activity {
+public class LoginCandidateActivity extends Activity {
 
     Button btnAnnonyme, btnInterimaire, btnEmployeur;
-    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login_candidate);
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
-        imageView = (ImageView) findViewById(R.id.imageViewLogo);
-        btnAnnonyme = (Button) findViewById(R.id.button_annonyme);
+        /*btnAnnonyme = (Button) findViewById(R.id.button_annonyme);
         btnInterimaire = (Button) findViewById(R.id.button_interimaire);
         btnEmployeur = (Button) findViewById(R.id.button_employeur);
-
-        imageView.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new MainActivity());
-        });
 
         btnAnnonyme.setOnClickListener(view -> {
             //CommonHelper.changeActivity(this, new TP1Activity());
         });
 
         btnInterimaire.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new LoginCandidateActivity());
+            //CommonHelper.changeActivity(this, new TP2Activity());
         });
 
         btnEmployeur.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new LoginEmployerActivity());
-        });
+            //CommonHelper.changeActivity(this, new TP3Activity());
+        });*/
 
         // Démarrer les animations
         animateBackground();
