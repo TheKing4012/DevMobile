@@ -32,14 +32,11 @@ public class MainActivity extends Activity {
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
-        imageView = (ImageView) findViewById(R.id.imageViewLogo);
+        CommonHelper.addReturnBtnOnImg(this);
         btnAnnonyme = (Button) findViewById(R.id.button_annonyme);
         btnInterimaire = (Button) findViewById(R.id.button_interimaire);
         btnEmployeur = (Button) findViewById(R.id.button_employeur);
 
-        imageView.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new MainActivity());
-        });
 
         btnAnnonyme.setOnClickListener(view -> {
             CommonHelper.makeNotification(this);

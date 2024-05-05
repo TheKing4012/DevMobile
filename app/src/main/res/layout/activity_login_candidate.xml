@@ -8,17 +8,10 @@
 
     <ImageView
         android:id="@+id/background_one"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="fill_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/bluebackground"/>
-
-    <ImageView
-        android:id="@+id/background_two"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/bluebackground"/>
+        android:src="@drawable/default_background" />
 
     <ImageView
         android:id="@+id/imageViewLogo"
@@ -27,6 +20,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:scaleType="fitXY"
+        android:clickable="true"
         android:src="@drawable/logocomplet"/>
 
     <Button

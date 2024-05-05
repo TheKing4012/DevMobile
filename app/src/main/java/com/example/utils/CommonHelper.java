@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -25,6 +26,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.MainActivity;
 import com.example.NotificationActivity;
 import com.example.R;
 
@@ -150,5 +152,14 @@ public class CommonHelper {
         }
 
         notificationManager.notify(0, builder.build());
+    }
+
+    public static void addReturnBtnOnImg(Activity activity) {
+        ImageView imageView;
+        imageView = (ImageView) activity.findViewById(R.id.imageViewLogo);
+
+        imageView.setOnClickListener(view -> {
+            CommonHelper.changeActivity(activity, new MainActivity());
+        });
     }
 }
