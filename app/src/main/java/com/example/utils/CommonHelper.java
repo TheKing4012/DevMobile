@@ -108,7 +108,7 @@ public class CommonHelper {
         }
     }
 
-    public static void makeNotification(Activity from, int id) {
+    public static void makeNotification(Activity from) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if(ContextCompat.checkSelfPermission(from,
                     Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {

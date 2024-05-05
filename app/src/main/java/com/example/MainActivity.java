@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
         });
 
         btnAnnonyme.setOnClickListener(view -> {
-            //CommonHelper.changeActivity(this, new TP1Activity());
+            CommonHelper.makeNotification(this);
         });
 
         btnInterimaire.setOnClickListener(view -> {
