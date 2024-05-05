@@ -6,8 +6,6 @@ import android.content.DialogInterface;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.tp1.R;
-
 public class Dialog {
     public static void showInterractDialog(Context context, String title, String message, String msg_yes, String msg_no, String msg_popup) {
         AlertDialog dialog = new AlertDialog.Builder(context)

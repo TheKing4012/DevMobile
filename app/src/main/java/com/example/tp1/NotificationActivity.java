@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.R;
+
 public class NotificationActivity extends AppCompatActivity {
 
     TextView textView;

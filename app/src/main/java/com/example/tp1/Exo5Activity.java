@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.R;
 import com.example.tp1.utils.Dialog;
 import com.example.tp1.utils.View;
 

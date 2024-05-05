@@ -23,6 +23,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.R;
+
 public class MainActivity extends Activity {
 
     Button btn1;
