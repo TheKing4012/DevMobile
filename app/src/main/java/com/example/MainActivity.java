@@ -19,6 +19,7 @@ import java.util.Random;
 
 import com.example.R;
 import com.example.utils.CommonHelper;
+import com.example.utils.LambaExpr;
 
 public class MainActivity extends Activity {
 
@@ -43,7 +44,7 @@ public class MainActivity extends Activity {
         });
 
         btnInterimaire.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new LoginEmployerActivity());
+            CommonHelper.changeActivity(this, new LoginCandidateActivity());
         });
 
         btnEmployeur.setOnClickListener(view -> {
