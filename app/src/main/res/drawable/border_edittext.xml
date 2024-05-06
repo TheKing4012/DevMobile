@@ -1,0 +1,16 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true">
+        <shape>
+            <solid android:color="#E0E0E0" /> <!-- Couleur de fond lorsque l'EditText est en focus -->
+            <stroke android:width="2dp" android:color="#212121" /> <!-- Bordure -->
+            <corners android:radius="0dp" /> <!-- Coins arrondis -->
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="#E0E0E0" /> <!-- Couleur de fond par défaut -->
+            <stroke android:width="2dp" android:color="#212121" /> <!-- Bordure -->
+            <corners android:radius="0dp" /> <!-- Coins arrondis -->
+        </shape>
+    </item>
+</selector>

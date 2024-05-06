@@ -23,18 +23,71 @@
         android:clickable="true"
         android:src="@drawable/logocomplet"/>
 
-    <Button
-        android:id="@+id/button_annonyme"
-        android:layout_marginHorizontal="80dp"
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="250dp"
-        android:background="@drawable/background_button"
-        android:foreground="@drawable/normal_button_border"
-        android:fontFamily="@font/sf"
-        android:textSize="30sp"
-        android:text="candidate" />
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+    <!-- Autres vues si nécessaire -->
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_bold"
+            android:text="Employeur, \nConnectez vous"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <EditText
+            android:layout_marginTop="5dp"
+            android:id="@+id/EditTextEnterprise"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom de l'entreprise"
+            android:textSize="30sp"
+            android:background="@drawable/border_edittext"
+            android:padding="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp" />
+
+        <EditText
+            android:id="@+id/EditTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_edittext"
+            android:hint="Mot de passe"
+            android:inputType="textPassword"
+            android:layout_marginTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:textSize="30sp" />
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="80dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/background_button"
+            android:fontFamily="@font/sf"
+            android:foreground="@drawable/normal_button_border"
+            android:text="@string/text_login"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:textSize="30sp" />
+        <!-- Autres vues si nécessaire -->
+
+    </LinearLayout>
+
 
     <FrameLayout
         android:layout_width="wrap_content"

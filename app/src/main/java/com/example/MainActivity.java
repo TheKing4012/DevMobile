@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
         });
 
         btnInterimaire.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new LoginCandidateActivity());
+            CommonHelper.changeActivity(this, new LoginEmployerActivity());
         });
 
         btnEmployeur.setOnClickListener(view -> {

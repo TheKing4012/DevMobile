@@ -35,7 +35,7 @@
         android:fontFamily="@font/sf"
         android:textSize="30sp"
         android:clickable="true"
-        android:text="employer" />
+        android:text="@string/text_login" />
 
     <FrameLayout
         android:layout_width="wrap_content"
