@@ -12,6 +12,8 @@ google-play-services-maps = "18.0.0"
 osmdroid-android = "6.1.18"
 play-services-location = "21.2.0"
 androidx-fragment = "1.6.2"
+google-gms-google-services = "4.4.1"
+firebase-auth = "23.0.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -25,7 +27,9 @@ gms-play-services-maps = { group = "com.google.android.gms", name = "play-servic
 osmdroid-android = { group = "org.osmdroid", name = "osmdroid-android", version = "6.1.11" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "play-services-location" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "androidx-fragment" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebase-auth" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
+googleGmsGoogleServices = { id = "com.google.gms.google-services", version.ref = "google-gms-google-services" }
 

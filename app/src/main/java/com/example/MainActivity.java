@@ -14,11 +14,13 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.Random;
 
 import com.example.R;
 import com.example.utils.CommonHelper;
+import com.example.utils.JsonReader;
 import com.example.utils.LambaExpr;
 
 public class MainActivity extends Activity {
@@ -50,6 +52,9 @@ public class MainActivity extends Activity {
         btnEmployeur.setOnClickListener(view -> {
             CommonHelper.changeActivity(this, new LoginEmployerActivity());
         });
+
+        LambaExpr lambaExprSyncYes = () -> {
+        };
 
         // Démarrer les animations
         animateBackground();
