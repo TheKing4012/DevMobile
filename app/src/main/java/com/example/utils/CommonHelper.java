@@ -1,6 +1,15 @@
 package com.example.utils;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
+import android.Manifest;
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.content.Intent;
 import android.text.Layout;
@@ -8,11 +17,17 @@ import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.MainActivity;
+import com.example.NotificationActivity;
 import com.example.R;
 
 public class CommonHelper {
@@ -86,11 +101,65 @@ public class CommonHelper {
     public static void changeActivity(Activity from, Activity where) {
         Intent intent = new Intent(from, where.getClass());
         from.startActivity(intent);
+        //from.overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     public static void changeActionbarColor(Activity from, int id) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             from.getWindow().setStatusBarColor(id);
         }
+    }
+
+    public static void makeNotification(Activity from) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if(ContextCompat.checkSelfPermission(from,
+                    Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(from,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
+            }
+        }
+
+        String chanelID = "CHANNEL_ID_NOTIFICATION";
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(from.getApplicationContext(), chanelID);
+        builder
+                .setSmallIcon(R.drawable.baseline_warning_24)
+                .setContentTitle("Test Title")
+                .setContentText("Some text for notification here")
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH);
+
+        Intent intent = new Intent(from.getApplicationContext(), NotificationActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("data", "Some value to be passed here");
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(from.getApplicationContext(),
+                0, intent, PendingIntent.FLAG_MUTABLE);
+        builder.setContentIntent(pendingIntent);
+        NotificationManager notificationManager = (NotificationManager) from.getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel notificationChannel =
+                    notificationManager.getNotificationChannel(chanelID);
+            if(notificationChannel == null) {
+                int importante = NotificationManager.IMPORTANCE_HIGH;
+                notificationChannel = new NotificationChannel(chanelID,
+                        "Some description", importante);
+                notificationChannel.setLightColor(Color.WHITE);
+                notificationChannel.enableVibration(true);
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
+        }
+
+        notificationManager.notify(0, builder.build());
+    }
+
+    public static void addReturnBtnOnImg(Activity activity) {
+        ImageView imageView;
+        imageView = (ImageView) activity.findViewById(R.id.imageViewLogo);
+
+        imageView.setOnClickListener(view -> {
+            CommonHelper.changeActivity(activity, new MainActivity());
+        });
     }
 }

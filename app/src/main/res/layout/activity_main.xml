@@ -27,6 +27,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:scaleType="fitXY"
+        android:clickable="true"
         android:src="@drawable/logocomplet"/>
 
     <Button
@@ -36,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="250dp"
-        android:background="@drawable/normal_button"
+        android:background="@drawable/background_button"
         android:foreground="@drawable/normal_button_border"
         android:fontFamily="@font/sf"
         android:textSize="30sp"
@@ -49,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="380dp"
-        android:background="@drawable/normal_button"
+        android:background="@drawable/background_button"
         android:foreground="@drawable/normal_button_border"
         android:textSize="30sp"
         android:fontFamily="@font/sf"
@@ -62,7 +63,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="80dp"
         android:layout_marginTop="520dp"
-        android:background="@drawable/normal_button"
+        android:background="@drawable/background_button"
         android:foreground="@drawable/normal_button_border"
         android:fontFamily="@font/sf"
         android:text="@string/text_employeur"

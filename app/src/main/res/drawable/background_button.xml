@@ -1,0 +1,6 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Bouton pressé -->
+    <item android:state_pressed="true" android:drawable="@drawable/pressed_button" />
+    <!-- Bouton non pressé -->
+    <item android:drawable="@drawable/normal_button" />
+</selector>

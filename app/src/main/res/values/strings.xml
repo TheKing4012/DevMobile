@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name" translatable="false">InteRRim</string>
     <string name="text_btn_return">Return</string>
     <string name="text_missing_item">Elément manquant</string>
 
@@ -6,5 +7,6 @@
     <string name="text_interimaire">Worker (connexion)</string>
     <string name="text_employeur">Employer (connexion)</string>
     <string name="text_credit">Creatted by \nRichard Picole-Ollivier &amp; Romain Gallerne</string>
+    <string name="text_login">Login</string>
 
 </resources>

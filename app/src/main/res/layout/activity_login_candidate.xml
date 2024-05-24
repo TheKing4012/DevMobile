@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/menu_activity">
+
+    <ImageView
+        android:id="@+id/background_one"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/default_background" />
+
+    <ImageView
+        android:id="@+id/imageViewLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:scaleType="fitXY"
+        android:clickable="true"
+        android:src="@drawable/logocomplet"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <!-- Autres vues si nécessaire -->
+        <TextView
+            android:layout_marginTop="40dp"
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_bold"
+            android:text="Candidat, \nConnectez vous"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/EditTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_edittext"
+            android:hint="Nom"
+            android:padding="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/EditTextSurname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Prenom"
+            android:textSize="30sp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/border_edittext"
+            android:padding="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp" />
+
+        <EditText
+            android:id="@+id/EditTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_edittext"
+            android:hint="Mot de passe"
+            android:inputType="textPassword"
+            android:layout_marginTop="8dp"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:textSize="30sp" />
+        <Button
+            android:id="@+id/button_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="80dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/background_button"
+            android:fontFamily="@font/sf"
+            android:foreground="@drawable/normal_button_border"
+            android:text="@string/text_login"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
+            android:textSize="30sp" />
+        <!-- Autres vues si nécessaire -->
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/sf_bold"
+            android:textSize="18sp"
+            android:text="@string/text_credit"
+            android:textColor="#000000" />
+    </FrameLayout>
+
+</FrameLayout>

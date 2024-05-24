@@ -41,6 +41,7 @@ dependencies {
     implementation(libs.osmdroid.android)
     implementation(libs.play.services.location)
     implementation(libs.androidx.fragment)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

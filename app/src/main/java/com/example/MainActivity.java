@@ -14,15 +14,19 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.Random;
 
 import com.example.R;
 import com.example.utils.CommonHelper;
+import com.example.utils.JsonReader;
+import com.example.utils.LambaExpr;
 
 public class MainActivity extends Activity {
 
     Button btnAnnonyme, btnInterimaire, btnEmployeur;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,21 +35,26 @@ public class MainActivity extends Activity {
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
-        /*btnAnnonyme = (Button) findViewById(R.id.button_annonyme);
+        CommonHelper.addReturnBtnOnImg(this);
+        btnAnnonyme = (Button) findViewById(R.id.button_annonyme);
         btnInterimaire = (Button) findViewById(R.id.button_interimaire);
         btnEmployeur = (Button) findViewById(R.id.button_employeur);
 
+
         btnAnnonyme.setOnClickListener(view -> {
-            //CommonHelper.changeActivity(this, new TP1Activity());
+            CommonHelper.makeNotification(this);
         });
 
         btnInterimaire.setOnClickListener(view -> {
-            //CommonHelper.changeActivity(this, new TP2Activity());
+            CommonHelper.changeActivity(this, new LoginCandidateActivity());
         });
 
         btnEmployeur.setOnClickListener(view -> {
-            //CommonHelper.changeActivity(this, new TP3Activity());
-        });*/
+            CommonHelper.changeActivity(this, new LoginEmployerActivity());
+        });
+
+        LambaExpr lambaExprSyncYes = () -> {
+        };
 
         // Démarrer les animations
         animateBackground();
