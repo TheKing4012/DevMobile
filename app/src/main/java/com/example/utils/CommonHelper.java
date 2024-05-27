@@ -10,15 +10,25 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.content.Intent;
 import android.text.Layout;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
+import android.text.style.AlignmentSpan;
+import android.text.style.ClickableSpan;
+import android.text.style.StyleSpan;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
@@ -29,6 +39,7 @@ import androidx.fragment.app.Fragment;
 import com.example.MainActivity;
 import com.example.NotificationActivity;
 import com.example.R;
+import com.example.SigninEmployerActivity;
 
 public class CommonHelper {
     public static void createReturnBtn(Activity activity, LinearLayout layout) {
@@ -108,6 +119,55 @@ public class CommonHelper {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             from.getWindow().setStatusBarColor(id);
         }
+    }
+
+    public static void centerAndIntalicEditTextHint(Activity from, String text, int elementId) {
+        SpannableString spannableString = new SpannableString(text);
+        spannableString.setSpan(new StyleSpan(Typeface.ITALIC), 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        EditText editText = from.findViewById(elementId);
+        editText.setHint(spannableString);
+    }
+
+    public static void setClickableTextFromString(Activity from, char starChar, int textViewID, String text, LambaExpr expr) {
+        TextView textView = from.findViewById(textViewID);
+        SpannableString spannableString = new SpannableString(text);
+
+        int start = -1;
+        int end;
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            @Override
+            public void onClick(View view) {
+                expr.exec();
+            }
+        };
+
+        StyleSpan styleSpan = new StyleSpan(Typeface.BOLD | Typeface.ITALIC);
+        StyleSpan colorSpan = new StyleSpan(R.color.blue);
+
+        for (int i = 0; i < text.length(); i++) {
+            if (text.charAt(i) == starChar) {
+                if (start > -1) {
+                    end = i;
+                    spannableString.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    spannableString.setSpan(styleSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
+
+                start = i + 1;
+            }
+        }
+
+        if (start > -1) {
+            end = text.length();
+            spannableString.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableString.setSpan(styleSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        textView.setMovementMethod(LinkMovementMethod.getInstance());
+        textView.setText(spannableString);
     }
 
     public static void makeNotification(Activity from) {

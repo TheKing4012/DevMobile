@@ -8,4 +8,16 @@
     <string name="text_employeur">Employeur (connexion)</string>
     <string name="text_credit">Created by \nRichard Picole-Ollivier &amp; Romain Gallerne</string>
     <string name="text_login">Se Connecter</string>
+    <string name="text_signin">S\'inscrire</string>
+    <string name="text_signin_hint">Vous avez pas déjà un compte ?\nSe connecter</string>
+    <string name="text_login_hint">Vous n\'avez pas de compte ?\nS\'inscrire</string>
+    <string name="text_password">Mot de Passe</string>
+    <string name="text_company_name">Nom de l\'entreprise</string>
+    <string name="text_email_adress">Adresse Mail</string>
+    <string name="text_phone_number">Numéro de Téléphone</string>
+    <string name="text_country">Pays</string>
+    <string name="text_city">Ville</string>
+    <string name="text_website">Site Web</string>
+    <string name="text_linkedin">LinkedIn</string>
+    <string name="text_facebook">Facebook</string>
 </resources>
