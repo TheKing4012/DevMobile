@@ -23,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.utils.CommonHelper;
+import com.example.utils.LambaExpr;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -46,32 +47,15 @@ public class LoginCandidateActivity extends Activity {
 
         CommonHelper.addReturnBtnOnImg(this);
 
-        // Créer un SpannableString pour le premier hint ("Nom de l'entreprise")
-        SpannableString spannableStringEntreprise = new SpannableString("Nom");
-        spannableStringEntreprise.setSpan(new StyleSpan(Typeface.ITALIC), 0, spannableStringEntreprise.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableStringEntreprise.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, spannableStringEntreprise.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_email_adress), R.id.EditTextMail);
+        CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_password), R.id.EditTextPassword);
 
-        // Appliquer le SpannableString au premier EditText
-        entrepriseEditText = findViewById(R.id.EditTextName);
-        entrepriseEditText.setHint(spannableStringEntreprise);
+        LambaExpr exprLoginIn = () -> {
+            CommonHelper.changeActivity(this, new SigninEmployerActivity());
+        };
 
-        // Créer un SpannableString pour le deuxième hint ("Mot de Passe")
-        SpannableString spannableStringMotDePasse = new SpannableString("Mot de passe");
-        spannableStringMotDePasse.setSpan(new StyleSpan(Typeface.ITALIC), 0, spannableStringMotDePasse.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableStringMotDePasse.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, spannableStringMotDePasse.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_login_hint), exprLoginIn);
 
-        // Appliquer le SpannableString au deuxième EditText
-        motDePasseEditText = findViewById(R.id.EditTextPassword);
-        motDePasseEditText.setHint(spannableStringMotDePasse);
-
-        // Créer un SpannableString pour le deuxième hint ("Mot de Passe")
-        SpannableString spannableStringPrenom = new SpannableString("Prenom");
-        spannableStringPrenom.setSpan(new StyleSpan(Typeface.ITALIC), 0, spannableStringPrenom.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableStringPrenom.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, spannableStringPrenom.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        // Appliquer le SpannableString au deuxième EditText
-        prenomEditText = findViewById(R.id.EditTextSurname);
-        prenomEditText.setHint(spannableStringPrenom);
 
         btnSend = findViewById(R.id.button_send);
 

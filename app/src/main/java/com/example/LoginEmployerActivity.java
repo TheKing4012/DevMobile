@@ -30,7 +30,7 @@ public class LoginEmployerActivity extends Activity {
 
         CommonHelper.addReturnBtnOnImg(this);
 
-        CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_company_name), R.id.EditTextEnterprise);
+        CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_email_adress), R.id.EditTextEnterprise);
         CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_password), R.id.EditTextPassword);
 
         LambaExpr exprLoginIn = () -> {
