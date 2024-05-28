@@ -17,7 +17,6 @@ firebase-auth = "23.0.0"
 security-crypto = "1.1.0-alpha06"
 
 [libraries]
-retrofit = { group = "com.squareup.retrofit", name = "retrofit", version = "2.9.0" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
