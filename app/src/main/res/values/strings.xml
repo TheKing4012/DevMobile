@@ -8,6 +8,8 @@
     <string name="text_employeur">Employer (connexion)</string>
     <string name="text_credit">Creatted by \nRichard Picole-Ollivier &amp; Romain Gallerne</string>
     <string name="text_login">Login</string>
+    <string name="text_search">Search</string>
+    <string name="text_btn_application">See my\n applications</string>
     <string name="text_signin">Signin</string>
     <string name="text_signin_hint">You already have an account ?\n Loggin in</string>
     <string name="text_login_hint">You don\'t have an account ?\nSign in</string>

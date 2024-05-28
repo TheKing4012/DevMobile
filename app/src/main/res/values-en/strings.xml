@@ -9,6 +9,7 @@
     <string name="text_credit">Created by \nRichard Picole-Ollivier &amp; Romain Gallerne</string>
     <string name="text_login">Login</string>
     <string name="text_signin">Signin</string>
+    <string name="text_btn_application">See my\n applications</string>
     <string name="text_signin_hint">You already have an account ?\n Loggin in</string>
     <string name="text_login_hint">You don\'t have an account ?\nSign in</string>
     <string name="text_password">Password</string>
@@ -25,4 +26,5 @@
     <string name="text_error_signin_password">Please have at least a 6 chars long password</string>
     <string name="text_error_mail_already_used">This email address is already used by an account</string>
     <string name="text_disconnected">You have been disconneted from your last session</string>
+    <string name="text_search">Search</string>
 </resources>

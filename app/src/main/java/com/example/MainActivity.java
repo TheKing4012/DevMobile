@@ -55,7 +55,9 @@ public class MainActivity extends Activity {
 
 
         btnAnnonyme.setOnClickListener(view -> {
-            CommonHelper.makeNotification(this, "Test tile", "Some text for notification here", R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+            //CommonHelper.makeNotification(this, "Test tile", "Some text for notification here", R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+            CommonHelper.changeActivity(this, new ListOffersActivity());
+
         });
 
         btnInterimaire.setOnClickListener(view -> {

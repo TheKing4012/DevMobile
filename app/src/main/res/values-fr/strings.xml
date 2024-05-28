@@ -9,6 +9,7 @@
     <string name="text_credit">Created by \nRichard Picole-Ollivier &amp; Romain Gallerne</string>
     <string name="text_login">Se Connecter</string>
     <string name="text_signin">S\'inscrire</string>
+    <string name="text_btn_application">Voir mes\n candidatures</string>
     <string name="text_signin_hint">Vous avez pas déjà un compte ?\nSe connecter</string>
     <string name="text_login_hint">Vous n\'avez pas de compte ?\nS\'inscrire</string>
     <string name="text_password">Mot de Passe</string>
@@ -25,4 +26,5 @@
     <string name="text_error_signin_password">Veuillez au moins préciser un mot de passe d\'au moins 6 caractères</string>
     <string name="text_error">Erreur</string>
     <string name="text_disconnected">Vous avez été déconnecté de votre précédante session</string>
+    <string name="text_search">Rechercher</string>
 </resources>
