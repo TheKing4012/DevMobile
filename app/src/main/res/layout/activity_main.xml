@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/bluebackground"/>
+        android:src="@drawable/fond_accueil"/>
 
     <ImageView
         android:id="@+id/background_two"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/bluebackground"/>
+        android:src="@drawable/fond_accueil"/>
 
     <ImageView
         android:id="@+id/imageViewLogo"
