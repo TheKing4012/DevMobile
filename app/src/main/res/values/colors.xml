@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="ruby">#c80425</color>
     <color name="blue">#01A4FF</color>
+    <color name="grey">#151515</color>
 </resources>

@@ -26,5 +26,11 @@
     <string name="text_error_signin_password">Veuillez au moins préciser un mot de passe d\'au moins 6 caractères</string>
     <string name="text_error">Erreur</string>
     <string name="text_disconnected">Vous avez été déconnecté de votre précédante session</string>
+    <string name="text_name">Nom</string>
+    <string name="text_firstname">Prénom</string>
+    <string name="text_birth_date">Date de Naissance</string>
+    <string name="text_description">Description</string>
+    <string name="text_cv">Déposer CV</string>
+
     <string name="text_search">Rechercher</string>
 </resources>

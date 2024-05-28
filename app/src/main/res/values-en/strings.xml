@@ -26,5 +26,11 @@
     <string name="text_error_signin_password">Please have at least a 6 chars long password</string>
     <string name="text_error_mail_already_used">This email address is already used by an account</string>
     <string name="text_disconnected">You have been disconneted from your last session</string>
+    <string name="text_name">Name</string>
+    <string name="text_firstname">Firstname</string>
+    <string name="text_birth_date">Birth date</string>
+    <string name="text_description">Description</string>
+    <string name="text_cv">Upload CV</string>
+
     <string name="text_search">Search</string>
 </resources>
