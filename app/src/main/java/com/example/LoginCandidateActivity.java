@@ -51,7 +51,7 @@ public class LoginCandidateActivity extends Activity {
         CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_password), R.id.EditTextPassword);
 
         LambaExpr exprLoginIn = () -> {
-            CommonHelper.changeActivity(this, new SigninEmployerActivity());
+            CommonHelper.changeActivity(this, new SigninCandidateActivity());
         };
 
         CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_login_hint), exprLoginIn);

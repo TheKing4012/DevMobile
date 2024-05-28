@@ -28,7 +28,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/icon_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Tp1"
+        android:theme="@style/ProjectTheme"
         tools:targetApi="31">
 
         <activity
@@ -50,6 +50,10 @@
         </activity>
         <activity
             android:name="com.example.SigninEmployerActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.example.SigninCandidateActivity"
             android:exported="true">
         </activity>
         <meta-data
