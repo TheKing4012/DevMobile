@@ -20,4 +20,9 @@
     <string name="text_website">Website</string>
     <string name="text_linkedin">LinkedIn</string>
     <string name="text_facebook">Facebook</string>
+    <string name="text_error_signin_employer">Please at least indicate email, password and company name</string>
+    <string name="text_error">Error</string>
+    <string name="text_error_signin_password">Please have at least a 6 chars long password</string>
+    <string name="text_error_mail_already_used">This email address is already used by an account</string>
+    <string name="text_disconnected">You have been disconneted from your last session</string>
 </resources>

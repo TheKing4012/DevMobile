@@ -8,6 +8,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -20,6 +21,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.AlignmentSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.StyleSpan;
+import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
@@ -40,6 +43,11 @@ import com.example.MainActivity;
 import com.example.NotificationActivity;
 import com.example.R;
 import com.example.SigninEmployerActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class CommonHelper {
     public static void createReturnBtn(Activity activity, LinearLayout layout) {
@@ -170,7 +178,48 @@ public class CommonHelper {
         textView.setText(spannableString);
     }
 
-    public static void makeNotification(Activity from) {
+    public static boolean isFireBaseUserConnected() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        return user != null;
+    }
+
+    public static String obfuscateToken(String token) {
+        return Base64.encodeToString(token.getBytes(), Base64.NO_WRAP);
+    }
+
+    public static String getSessionToken(Activity from) {
+        SharedPreferences preferences = from.getSharedPreferences("user_prefs", Context.MODE_PRIVATE);
+        return preferences.getString("session_token", null);
+    }
+
+    public static void saveTokenToSharedPreferences(Activity from, String token) {
+        SharedPreferences sharedPreferences = from.getSharedPreferences("MyAppPrefs", from.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("firebase_token", token);
+        editor.apply();
+    }
+
+    public static void checkTokenAndReauthenticate(Activity from, Activity to) {
+        SharedPreferences sharedPreferences = from.getSharedPreferences("MyAppPrefs", from.MODE_PRIVATE);
+        String token = sharedPreferences.getString("firebase_token", null);
+
+        if (token != null) {
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            mAuth.signInWithCustomToken(token)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                changeActivity(from, to);
+                            } else {
+                                CommonHelper.makeNotification(from, from.getResources().getString(R.string.text_disconnected), "", R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                            }
+                        }
+                    });
+        }
+    }
+
+    public static void makeNotification(Activity from, String title, String descShort, int iconID, int colorID, String dataString, String descDetailled) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if(ContextCompat.checkSelfPermission(from,
                     Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
@@ -183,15 +232,16 @@ public class CommonHelper {
         NotificationCompat.Builder builder =
                 new NotificationCompat.Builder(from.getApplicationContext(), chanelID);
         builder
-                .setSmallIcon(R.drawable.baseline_warning_24)
-                .setContentTitle("Test Title")
-                .setContentText("Some text for notification here")
+                .setSmallIcon(iconID) // R.drawable.baseline_warning_24
+                .setColor(from.getResources().getColor(colorID)) // R.color.ruby
+                .setContentTitle(title)
+                .setContentText(descShort)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
 
         Intent intent = new Intent(from.getApplicationContext(), NotificationActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("data", "Some value to be passed here");
+        intent.putExtra("data", dataString);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(from.getApplicationContext(),
                 0, intent, PendingIntent.FLAG_MUTABLE);
@@ -204,7 +254,7 @@ public class CommonHelper {
             if(notificationChannel == null) {
                 int importante = NotificationManager.IMPORTANCE_HIGH;
                 notificationChannel = new NotificationChannel(chanelID,
-                        "Some description", importante);
+                        descDetailled, importante);
                 notificationChannel.setLightColor(Color.WHITE);
                 notificationChannel.enableVibration(true);
                 notificationManager.createNotificationChannel(notificationChannel);

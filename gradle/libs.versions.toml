@@ -1,5 +1,5 @@
 [versions]
-agp = "8.2.2"
+agp = "8.4.1"
 fragment = "1.6.2"
 junit = "4.13.2"
 androidx-test-ext-junit = "1.1.5"
@@ -14,8 +14,10 @@ play-services-location = "21.2.0"
 androidx-fragment = "1.6.2"
 google-gms-google-services = "4.4.1"
 firebase-auth = "23.0.0"
+security-crypto = "1.1.0-alpha06"
 
 [libraries]
+retrofit = { group = "com.squareup.retrofit", name = "retrofit", version = "2.9.0" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
@@ -28,6 +30,7 @@ osmdroid-android = { group = "org.osmdroid", name = "osmdroid-android", version 
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "play-services-location" }
 androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "androidx-fragment" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebase-auth" }
+androidx-security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "security-crypto" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -18,25 +18,32 @@ import android.widget.TextView;
 
 import com.example.utils.CommonHelper;
 import com.example.utils.LambaExpr;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginEmployerActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_employer);
+        if(CommonHelper.isFireBaseUserConnected()) {
+            //TODO changeActivity() to listJobs
+        } else {
+            setContentView(R.layout.activity_login_employer);
 
-        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
+            CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
-        CommonHelper.addReturnBtnOnImg(this);
+            CommonHelper.addReturnBtnOnImg(this);
 
-        CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_email_adress), R.id.EditTextEnterprise);
-        CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_password), R.id.EditTextPassword);
+            CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_email_adress), R.id.EditTextEnterprise);
+            CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_password), R.id.EditTextPassword);
 
-        LambaExpr exprLoginIn = () -> {
+            LambaExpr exprLoginIn = () -> {
                 CommonHelper.changeActivity(this, new SigninEmployerActivity());
-        };
+            };
 
-        CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_login_hint), exprLoginIn);
+            CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_login_hint), exprLoginIn);
+
+        }
     }
 }
