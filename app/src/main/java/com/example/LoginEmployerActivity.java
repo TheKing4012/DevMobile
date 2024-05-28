@@ -1,53 +1,49 @@
 package com.example;
 
 
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Layout;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.text.style.AlignmentSpan;
+import android.text.style.ClickableSpan;
 import android.text.style.StyleSpan;
-import android.view.animation.LinearInterpolator;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.utils.CommonHelper;
+import com.example.utils.LambaExpr;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginEmployerActivity extends Activity {
-
-    Button btnAnnonyme, btnInterimaire, btnEmployeur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_employer);
+        if(CommonHelper.isFireBaseUserConnected()) {
+            //TODO changeActivity() to listJobs
+        } else {
+            setContentView(R.layout.activity_login_employer);
 
-        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
+            CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
-        CommonHelper.addReturnBtnOnImg(this);
+            CommonHelper.addReturnBtnOnImg(this);
 
-        // Créer un SpannableString pour le premier hint ("Nom de l'entreprise")
-        SpannableString spannableStringEntreprise = new SpannableString("Nom de l'entreprise");
-        spannableStringEntreprise.setSpan(new StyleSpan(Typeface.ITALIC), 0, spannableStringEntreprise.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableStringEntreprise.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, spannableStringEntreprise.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_email_adress), R.id.EditTextEnterprise);
+            CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_password), R.id.EditTextPassword);
 
-        // Appliquer le SpannableString au premier EditText
-        EditText entrepriseEditText = findViewById(R.id.EditTextEnterprise);
-        entrepriseEditText.setHint(spannableStringEntreprise);
+            LambaExpr exprLoginIn = () -> {
+                CommonHelper.changeActivity(this, new SigninEmployerActivity());
+            };
 
-        // Créer un SpannableString pour le deuxième hint ("Mot de Passe")
-        SpannableString spannableStringMotDePasse = new SpannableString("Mot de passe");
-        spannableStringMotDePasse.setSpan(new StyleSpan(Typeface.ITALIC), 0, spannableStringMotDePasse.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        spannableStringMotDePasse.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), 0, spannableStringMotDePasse.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_login_hint), exprLoginIn);
 
-        // Appliquer le SpannableString au deuxième EditText
-        EditText motDePasseEditText = findViewById(R.id.EditTextPassword);
-        motDePasseEditText.setHint(spannableStringMotDePasse);
-
-
+        }
     }
 }

@@ -4,7 +4,9 @@ package com.example;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
@@ -13,15 +15,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.util.List;
 import java.util.Random;
+
 
 import com.example.R;
 import com.example.utils.CommonHelper;
 import com.example.utils.JsonReader;
 import com.example.utils.LambaExpr;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.SignInMethodQueryResult;
 
 public class MainActivity extends Activity {
 
@@ -31,6 +42,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
@@ -42,7 +55,7 @@ public class MainActivity extends Activity {
 
 
         btnAnnonyme.setOnClickListener(view -> {
-            CommonHelper.makeNotification(this);
+            CommonHelper.makeNotification(this, "Test tile", "Some text for notification here", R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
         });
 
         btnInterimaire.setOnClickListener(view -> {
@@ -60,7 +73,7 @@ public class MainActivity extends Activity {
         animateBackground();
     }
 
-    private void animateBackground(){
+    private void animateBackground() {
         final ImageView backgroundOne = (ImageView) findViewById(R.id.background_one);
         final ImageView backgroundTwo = (ImageView) findViewById(R.id.background_two);
 

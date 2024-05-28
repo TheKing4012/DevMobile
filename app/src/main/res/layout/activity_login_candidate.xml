@@ -43,11 +43,12 @@
             android:textSize="30sp" />
 
         <EditText
-            android:id="@+id/EditTextName"
+            android:id="@+id/EditTextMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border_edittext"
-            android:hint="Nom"
+            android:hint="Adresse Mail"
+            android:inputType="textEmailAddress"
             android:padding="16dp"
             android:paddingStart="16dp"
             android:paddingTop="16dp"
@@ -55,19 +56,6 @@
             android:paddingBottom="16dp"
             android:textSize="30sp" />
 
-        <EditText
-            android:id="@+id/EditTextSurname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Prenom"
-            android:textSize="30sp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/border_edittext"
-            android:padding="16dp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp" />
 
         <EditText
             android:id="@+id/EditTextPassword"
@@ -98,10 +86,20 @@
             android:paddingEnd="16dp"
             android:paddingBottom="16dp"
             android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/textViewSignin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/sf_bold"
+            android:text="Vous n'avez pas de compte ?\nVous inscrire"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:clickable="true"  />
         <!-- Autres vues si nécessaire -->
 
     </LinearLayout>
-
 
     <FrameLayout
         android:layout_width="wrap_content"
