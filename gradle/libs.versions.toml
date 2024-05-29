@@ -15,6 +15,7 @@ androidx-fragment = "1.6.2"
 google-gms-google-services = "4.4.1"
 firebase-auth = "23.0.0"
 security-crypto = "1.1.0-alpha06"
+firebase-storage = "21.0.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -30,6 +31,7 @@ play-services-location = { group = "com.google.android.gms", name = "play-servic
 androidx-fragment = { group = "androidx.fragment", name = "fragment", version.ref = "androidx-fragment" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebase-auth" }
 androidx-security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "security-crypto" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebase-storage" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

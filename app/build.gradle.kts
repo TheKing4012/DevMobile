@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.androidx.fragment)
     implementation(libs.firebase.auth)
     implementation(libs.androidx.security.crypto)
+    implementation(libs.firebase.storage)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

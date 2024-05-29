@@ -33,6 +33,9 @@ import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -248,7 +251,7 @@ public class SigninCandidateActivity extends Activity {
 
     private void uploadPDFToStorage(Uri pdfUri) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        /*StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         StorageReference pdfRef = storageRef.child("pdfs/" + userId + "/" + System.currentTimeMillis() + ".pdf");
 
         pdfRef.putFile(pdfUri)
@@ -270,7 +273,6 @@ public class SigninCandidateActivity extends Activity {
                         Toast.makeText(SigninCandidateActivity.this, "Failed to upload PDF: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-         */
     }
 
     private void checkStoragePermissions() {
