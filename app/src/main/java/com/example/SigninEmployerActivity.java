@@ -228,11 +228,11 @@ public class SigninEmployerActivity extends Activity {
             }
         });
 
-        LambaExpr exprSignIn = () -> {
-            CommonHelper.changeActivity(this, new SigninEmployerActivity());
+        LambaExpr exprLogIn = () -> {
+            CommonHelper.changeActivity(this, new LoginEmployerActivity());
         };
 
-        CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_signin_hint), exprSignIn);
+        CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_signin_hint), exprLogIn);
     }
 
     public void openLink(EditText editTextFacebook, EditText editTextLinkedIn, View view) {
