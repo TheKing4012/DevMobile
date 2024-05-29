@@ -65,15 +65,13 @@ public class ListOffersActivity extends Activity {
         recyclerView.setItemAnimator(new FadeItemAnimator(this));
 
         recyclerItemList = new ArrayList<>();
-        recyclerItemList.add(new RecyclerItem("Item 1", "Description 1"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
+        recyclerItemList.add(new RecyclerItem("Item 1", "Description 1", "check"));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", null));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", null));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", null));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", null));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", null));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", null));
         // Ajoutez d'autres items ici
 
         adapter = new RecyclerItemAdapter(recyclerItemList);

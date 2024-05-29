@@ -273,33 +273,23 @@ public class SigninCandidateActivity extends Activity {
          */
     }
 
-    private static final int REQUEST_STORAGE_PERMISSION = 101;
     private void checkStoragePermissions() {
-        // Vérifier la version d'Android
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            // Vérifier la permission READ_EXTERNAL_STORAGE
-            if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                // Demander la permission READ_EXTERNAL_STORAGE
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        REQUEST_STORAGE_PERMISSION);
-            }
-
-            // Vérifier la permission WRITE_EXTERNAL_STORAGE
-            if (ContextCompat.checkSelfPermission(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                // Demander la permission WRITE_EXTERNAL_STORAGE
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        REQUEST_STORAGE_PERMISSION);
-            }
-        } else {
-            // Pour les versions antérieures à Marshmallow, les permissions sont accordées à l'installation
-            // Vous pouvez directement effectuer des actions qui nécessitent ces permissions ici
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 101) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted
+            } else {
+                Toast.makeText(this, "Storage permission is required to select PDF", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
     private void saveUserDataWithPDF(String pdfUrl) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String name = ((EditText) findViewById(R.id.EditTextNom)).getText().toString();

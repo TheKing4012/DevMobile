@@ -13,17 +13,17 @@ import com.example.R;
 
 import java.util.List;
 
-public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapter.RecyclerItemViewHolder> {
+public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapter.ViewHolder> {
 
     private List<RecyclerItem> recyclerItemList;
-    private OnItemClickListener listener;
+    private OnItemClickListener onItemClickListener;
 
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     public RecyclerItemAdapter(List<RecyclerItem> recyclerItemList) {
@@ -32,17 +32,41 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
 
     @NonNull
     @Override
-    public RecyclerItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
-        return new RecyclerItemViewHolder(view, listener);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerItemViewHolder holder, int position) {
-        RecyclerItem currentRecyclerItem = recyclerItemList.get(position);
-        holder.textView1.setText(currentRecyclerItem.getText1());
-        holder.textView2.setText(currentRecyclerItem.getText2());
-        holder.imageView.setImageDrawable(currentRecyclerItem.getImageView());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        RecyclerItem item = recyclerItemList.get(position);
+        holder.textView1.setText(item.getText1());
+        holder.textView2.setText(item.getText2());
+
+        if ("check".equals(item.getImageStatus())) {
+            holder.imageView.setVisibility(View.VISIBLE);
+            holder.imageView.setImageResource(R.drawable.hourglass);
+        } else if ("pending".equals(item.getImageStatus())) {
+            holder.imageView.setVisibility(View.VISIBLE);
+            holder.imageView.setImageResource(R.drawable.hourglass);
+        } else if ("deny".equals(item.getImageStatus())) {
+            holder.imageView.setVisibility(View.VISIBLE);
+            holder.imageView.setImageResource(R.drawable.hourglass);
+        } else {
+            holder.imageView.setVisibility(View.GONE);
+        }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    int adapterPosition = holder.getAdapterPosition();
+                    if (adapterPosition != RecyclerView.NO_POSITION) {
+                        onItemClickListener.onItemClick(adapterPosition);
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -50,31 +74,16 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
         return recyclerItemList.size();
     }
 
-    public static class RecyclerItemViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView textView1;
+        TextView textView2;
+        ImageView imageView;
 
-        public TextView textView1;
-        public TextView textView2;
-
-        public ImageView imageView;
-
-        public RecyclerItemViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView1 = itemView.findViewById(R.id.textView1);
             textView2 = itemView.findViewById(R.id.textView2);
             imageView = itemView.findViewById(R.id.imageView);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
-            });
         }
     }
 }
-
