@@ -9,7 +9,7 @@
     <string name="text_credit">Created by \nRichard Picole-Ollivier &amp; Romain Gallerne</string>
     <string name="text_login">Se Connecter</string>
     <string name="text_signin">S\'inscrire</string>
-    <string name="text_btn_application">Voir mes\n candidatures</string>
+    <string name="text_btn_application">Voir mes candidatures</string>
     <string name="text_signin_hint">Vous avez pas déjà un compte ?\nSe connecter</string>
     <string name="text_login_hint">Vous n\'avez pas de compte ?\nS\'inscrire</string>
     <string name="text_password">Mot de Passe</string>
@@ -31,6 +31,35 @@
     <string name="text_birth_date">Date de Naissance</string>
     <string name="text_description">Description</string>
     <string name="text_cv">Déposer CV</string>
+    <string-array name="type_interim">
+        <item>Mission temporaire</item>
+        <item>Mission de longue durée</item>
+        <item>Pré-embauche</item>
+        <item>Mission spécialisé</item>
+        <item>Remplacement</item>
+        <item>Saisonnier</item>
+    </string-array>
+    <string-array name="zones">
+        <item>Montpellier</item>
+        <item>Marseille</item>
+        <item>Sète</item>
+        <item>Béziers</item>
+        <item>Pézenas</item>
+        <item>Perpignan</item>
+        <item>Mèze</item>
+        <item>Montagnac</item>
+        <item>Lattes</item>
+    </string-array>
+    <string-array name="periodes">
+        <item>Printemps 2024</item>
+        <item>Été 2024</item>
+        <item>Automne 2024</item>
+        <item>Hiver 2024</item>
+        <item>Printemps 2025</item>
+        <item>Été 2025</item>
+        <item>Automne 2025</item>
+        <item>Hiver 2025</item>
+    </string-array>
 
     <string name="text_search">Rechercher</string>
 </resources>
