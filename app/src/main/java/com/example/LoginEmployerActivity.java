@@ -41,7 +41,6 @@ public class LoginEmployerActivity extends Activity {
         if (CommonHelper.isFireBaseUserConnected()) {
             CommonHelper.changeActivity(this, new ListOffersActivity());
         } else {
-            mAuth = FirebaseAuth.getInstance();
             setContentView(R.layout.activity_login_employer);
 
             CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
@@ -57,6 +56,7 @@ public class LoginEmployerActivity extends Activity {
 
             CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_login_hint), exprSignin);
 
+            mAuth = FirebaseAuth.getInstance();
             signInBtn = findViewById(R.id.button_send);
 
             LambaExpr exprLoginIn = () -> {

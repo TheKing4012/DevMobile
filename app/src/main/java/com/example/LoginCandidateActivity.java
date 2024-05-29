@@ -25,10 +25,13 @@ import androidx.annotation.NonNull;
 import com.example.utils.CommonHelper;
 import com.example.utils.LambaExpr;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 
 public class LoginCandidateActivity extends Activity {
 
@@ -41,57 +44,90 @@ public class LoginCandidateActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_candidate);
+        if (CommonHelper.isFireBaseUserConnected()) {
+            CommonHelper.changeActivity(this, new ListOffersActivity());
+        } else {
+            setContentView(R.layout.activity_login_candidate);
+            CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
-        CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
+            CommonHelper.addReturnBtnOnImg(this);
 
-        CommonHelper.addReturnBtnOnImg(this);
+            CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_email_adress), R.id.EditTextMail);
+            CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_password), R.id.EditTextPassword);
 
-        CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_email_adress), R.id.EditTextMail);
-        CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_password), R.id.EditTextPassword);
+            LambaExpr exprSignIn = () -> {
+                CommonHelper.changeActivity(this, new SigninCandidateActivity());
+            };
 
-        LambaExpr exprLoginIn = () -> {
-            CommonHelper.changeActivity(this, new SigninCandidateActivity());
-        };
+            CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_login_hint), exprSignIn);
 
-        CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_login_hint), exprLoginIn);
+            btnSend = findViewById(R.id.button_send);
 
+            mAuth = FirebaseAuth.getInstance();
 
-        btnSend = findViewById(R.id.button_send);
+            LambaExpr exprLoginIn = () -> {
+                String email = ((EditText) (findViewById(R.id.EditTextMail))).getText().toString();
+                String password = ((EditText) (findViewById(R.id.EditTextPassword))).getText().toString();
 
-        mAuth = FirebaseAuth.getInstance();
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email, password;
-                email = String.valueOf(entrepriseEditText.getText().toString());
-                password = String.valueOf(motDePasseEditText.getText().toString());
-
-                if(TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter Email", Toast.LENGTH_SHORT).show();
+                if (email.isEmpty()) {
+                    CommonHelper.makeNotification(this, getString(R.string.text_error), getString(R.string.text_error_login_employer_mail), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                    return;
+                }
+                if (password.isEmpty()) {
+                    CommonHelper.makeNotification(this, getString(R.string.text_error), getString(R.string.text_error_login_employer_password), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
                     return;
                 }
 
-                if(TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter Password", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                Activity activity = this;
 
-                mAuth.createUserWithEmailAndPassword(email, password)
+                mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "Account Created.",
-                                            Toast.LENGTH_SHORT).show();
+                                    // Connexion réussie
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    if (user != null) {
+                                        user.getIdToken(true)
+                                                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                                        if (task.isSuccessful()) {
+                                                            String token = task.getResult().getToken();
+                                                            // Stocker le token dans SharedPreferences
+                                                            CommonHelper.saveTokenToSharedPreferences(activity, token);
+                                                        }
+                                                    }
+                                                });
+                                    }
                                 } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(getApplicationContext(), "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                                    // Gérer les erreurs de connexion
                                 }
                             }
+                        })
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                CommonHelper.changeActivity(activity, new LoginEmployerActivity());
+                                finish();
+                            }
+                        })
+
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                CommonHelper.makeNotification(activity, getString(R.string.text_error), e.getMessage(), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+
+                            }
                         });
-            }
-        });
+            };
+
+            btnSend.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    exprLoginIn.exec();
+                }
+            });
+        }
     }
 }
