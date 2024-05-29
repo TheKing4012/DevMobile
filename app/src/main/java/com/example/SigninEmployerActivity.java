@@ -99,7 +99,7 @@ public class SigninEmployerActivity extends Activity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                    registerEmployer(activity, userId, companyName, phone, country, city, website, facebook, linkedin);
+                                    registerEmployer(activity, userId, phone, companyName, country, city, website, facebook, linkedin);
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {

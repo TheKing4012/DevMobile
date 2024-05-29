@@ -43,7 +43,16 @@ public class ListOffersActivity extends Activity {
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
-        CommonHelper.addReturnBtnOnImg(this);
+        LambaExpr exprImg = () -> {
+          if(CommonHelper.isFireBaseUserConnected()) {
+              CommonHelper.signOutFirebase(this);
+              CommonHelper.makeNotification(this, this.getResources().getString(R.string.text_disconnected), "", R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+              finish();
+          }
+          CommonHelper.changeActivity(this, new MainActivity());
+        };
+
+        CommonHelper.addReturnBtnOnImgWithLambda(this, exprImg);
 
         recyclerView = findViewById(R.id.recyclerView);
 
