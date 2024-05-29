@@ -31,6 +31,8 @@
     <string name="text_birth_date">Date de Naissance</string>
     <string name="text_description">Description</string>
     <string name="text_cv">Déposer CV</string>
+    <string name="text_see_offers">Voir les offres</string>
+
     <string-array name="type_interim">
         <item>Mission temporaire</item>
         <item>Mission de longue durée</item>
@@ -59,6 +61,12 @@
         <item>Été 2025</item>
         <item>Automne 2025</item>
         <item>Hiver 2025</item>
+    </string-array>
+
+    <string-array name="status">
+        <item>Validé</item>
+        <item>En attente</item>
+        <item>Rejeté</item>
     </string-array>
 
     <string name="text_search">Rechercher</string>

@@ -2,8 +2,11 @@ package com.example;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -27,7 +30,7 @@ public class ListApplicationActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_application);
+        setContentView(R.layout.activity_list_applications);
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
@@ -44,15 +47,15 @@ public class ListApplicationActivity extends Activity {
         recyclerView.setItemAnimator(new FadeItemAnimator(this));
 
         recyclerItemList = new ArrayList<>();
-        recyclerItemList.add(new RecyclerItem("Item 1", "Description 1"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2"));
+        recyclerItemList.add(new RecyclerItem("Item 1", "Description 1", "check"));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "pending"));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "check"));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "deny"));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "pending"));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "deny"));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "deny"));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "pending"));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "check"));
         // Ajoutez d'autres items ici
 
         adapter = new RecyclerItemAdapter(recyclerItemList);
@@ -70,21 +73,23 @@ public class ListApplicationActivity extends Activity {
             }
         });
 
-        Spinner typeSpinner = findViewById(R.id.SpinnerOfferType);
-        Spinner periodeSpinner = findViewById(R.id.SpinnerTime);
-        Spinner zoneSpinner = findViewById(R.id.SpinnerZone);
+        Button buttonOffers = findViewById(R.id.button_see_offers);
+        buttonOffers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Créer un Intent pour démarrer la nouvelle activité
+                Intent intent = new Intent(ListApplicationActivity.this, ListOffersActivity.class);
+                startActivity(intent); // Démarrer la nouvelle activité
+            }
+        });
 
-        ArrayAdapter<CharSequence> type_adapter = ArrayAdapter.createFromResource(this,
-                R.array.type_interim, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> periode_adapter = ArrayAdapter.createFromResource(this,
-                R.array.periodes, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> zone_adapter = ArrayAdapter.createFromResource(this,
-                R.array.zones, android.R.layout.simple_spinner_item);
+        Spinner statusSpinner = findViewById(R.id.SpinnerStatus);
+
+        ArrayAdapter<CharSequence> status_adapter = ArrayAdapter.createFromResource(this,
+                R.array.status, android.R.layout.simple_spinner_item);
 
 
-        typeSpinner.setAdapter(type_adapter);
-        periodeSpinner.setAdapter(periode_adapter);
-        zoneSpinner.setAdapter(zone_adapter);
+        statusSpinner.setAdapter(status_adapter);
 
     }
 }

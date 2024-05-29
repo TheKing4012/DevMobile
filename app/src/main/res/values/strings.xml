@@ -35,6 +35,8 @@
     <string name="text_birth_date">Birth date</string>
     <string name="text_description">Description</string>
     <string name="text_cv">Upload CV</string>
+    <string name="text_see_offers">See all offers</string>
+
     <string-array name="type_interim">
         <item>Temporaty work</item>
         <item>Long-term work</item>
@@ -65,5 +67,11 @@
         <item>Winter 2025</item>
     </string-array>
     <string name="text_error_not_same_password">The passwords sent are not the same</string>
+
+    <string-array name="status">
+        <item>Approved</item>
+        <item>Pending</item>
+        <item>Rejected</item>
+    </string-array>
 
 </resources>
