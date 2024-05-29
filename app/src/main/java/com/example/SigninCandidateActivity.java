@@ -41,11 +41,11 @@ public class SigninCandidateActivity extends Activity {
         CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_password), R.id.EditTextConfirmPassword);
         CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_description), R.id.EditTextDescription);
 
-        LambaExpr exprSignIn = () -> {
-            CommonHelper.changeActivity(this, new SigninCandidateActivity());
+        LambaExpr exprLogIn = () -> {
+            CommonHelper.changeActivity(this, new LoginCandidateActivity());
         };
 
-        CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_signin_hint), exprSignIn);
+        CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_signin_hint), exprLogIn);
 
         ImageView imageViewCV = findViewById(R.id.button_CV);
 

@@ -2,13 +2,9 @@ package com.example;
 
 
 import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,16 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utils.CommonHelper;
 import com.example.utils.FadeItemAnimator;
-import com.example.utils.LambaExpr;
 import com.example.utils.RecyclerItem;
 import com.example.utils.RecyclerItemAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListOffersActivity extends Activity {
-    EditText editTextFacebook;
-    EditText editTextLinkedIn;
+public class ListApplicationActivity extends Activity {
 
     private RecyclerView recyclerView;
     private RecyclerItemAdapter adapter;
@@ -34,20 +27,11 @@ public class ListOffersActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_offers);
+        setContentView(R.layout.activity_list_application);
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
-        LambaExpr exprImg = () -> {
-          if(CommonHelper.isFireBaseUserConnected()) {
-              CommonHelper.signOutFirebase(this);
-              CommonHelper.makeNotification(this, this.getResources().getString(R.string.text_disconnected), "", R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
-              finish();
-          }
-          CommonHelper.changeActivity(this, new MainActivity());
-        };
-
-        CommonHelper.addReturnBtnOnImgWithLambda(this, exprImg);
+        CommonHelper.addReturnBtnOnImg(this);
 
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -81,7 +65,7 @@ public class ListOffersActivity extends Activity {
                 intent.putExtra("item_position", position);
                 startActivity(intent);
                  */
-                CommonHelper.makeNotification(ListOffersActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                CommonHelper.makeNotification(ListApplicationActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
 
             }
         });

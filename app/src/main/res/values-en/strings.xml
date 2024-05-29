@@ -9,7 +9,7 @@
     <string name="text_credit">Created by \nRichard Picole-Ollivier &amp; Romain Gallerne</string>
     <string name="text_login">Login</string>
     <string name="text_signin">Signin</string>
-    <string name="text_btn_application">See my\n applications</string>
+    <string name="text_btn_application">See my applications</string>
     <string name="text_signin_hint">You already have an account ?\n Loggin in</string>
     <string name="text_login_hint">You don\'t have an account ?\nSign in</string>
     <string name="text_password">Password</string>
@@ -31,6 +31,35 @@
     <string name="text_birth_date">Birth date</string>
     <string name="text_description">Description</string>
     <string name="text_cv">Upload CV</string>
+    <string-array name="type_interim">
+        <item>Temporaty work</item>
+        <item>Long-term work</item>
+        <item>Temp-to-perm</item>
+        <item>Specialized work</item>
+        <item>Remplacement</item>
+        <item>Seasonal</item>
+    </string-array>
+    <string-array name="zones">
+        <item>Montpellier</item>
+        <item>Marseille</item>
+        <item>Sète</item>
+        <item>Béziers</item>
+        <item>Pézenas</item>
+        <item>Perpignan</item>
+        <item>Mèze</item>
+        <item>Montagnac</item>
+        <item>Lattes</item>
+    </string-array>
+    <string-array name="periodes">
+        <item>Spring 2024</item>
+        <item>Summer 2024</item>
+        <item>Fall 2024</item>
+        <item>Winter 2024</item>
+        <item>Spring 2025</item>
+        <item>Summer 2025</item>
+        <item>Fall 2025</item>
+        <item>Winter 2025</item>
+    </string-array>
 
     <string name="text_search">Search</string>
     <string name="text_error_login_employer_mail">Please indicate an email</string>
