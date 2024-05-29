@@ -15,20 +15,33 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.example.utils.CommonHelper;
 import com.example.utils.LambaExpr;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 
 public class LoginEmployerActivity extends Activity {
+
+    Button signInBtn;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //if(CommonHelper.isFireBaseUserConnected()) {
-            //TODO changeActivity() to listJobs
-        //} else {
+        if (CommonHelper.isFireBaseUserConnected()) {
+            CommonHelper.changeActivity(this, new ListOffersActivity());
+        } else {
+            mAuth = FirebaseAuth.getInstance();
             setContentView(R.layout.activity_login_employer);
 
             CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
@@ -38,12 +51,77 @@ public class LoginEmployerActivity extends Activity {
             CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_email_adress), R.id.EditTextEnterprise);
             CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_password), R.id.EditTextPassword);
 
-            LambaExpr exprLoginIn = () -> {
+            LambaExpr exprSignin = () -> {
                 CommonHelper.changeActivity(this, new SigninEmployerActivity());
             };
 
-            CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_login_hint), exprLoginIn);
+            CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_login_hint), exprSignin);
 
-        //}
+            signInBtn = findViewById(R.id.button_send);
+
+            LambaExpr exprLoginIn = () -> {
+                String email = ((EditText) (findViewById(R.id.EditTextEnterprise))).getText().toString();
+                String password = ((EditText) (findViewById(R.id.EditTextPassword))).getText().toString();
+
+                if (email.isEmpty()) {
+                    CommonHelper.makeNotification(this, getString(R.string.text_error), getString(R.string.text_error_login_employer_mail), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                    return;
+                }
+                if(password.isEmpty()) {
+                    CommonHelper.makeNotification(this, getString(R.string.text_error), getString(R.string.text_error_login_employer_password), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                    return;
+                }
+
+                Activity activity = this;
+
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Connexion réussie
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    if (user != null) {
+                                        user.getIdToken(true)
+                                                .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                                        if (task.isSuccessful()) {
+                                                            String token = task.getResult().getToken();
+                                                            // Stocker le token dans SharedPreferences
+                                                            CommonHelper.saveTokenToSharedPreferences(activity, token);
+                                                        }
+                                                    }
+                                                });
+                                    }
+                                } else {
+                                    // Gérer les erreurs de connexion
+                                }
+                            }
+                        })
+                        .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            @Override
+                            public void onSuccess(AuthResult authResult) {
+                                CommonHelper.changeActivity(activity, new LoginEmployerActivity());
+                                finish();
+                            }
+                        })
+
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                CommonHelper.makeNotification(activity, getString(R.string.text_error), e.getMessage(), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+
+                            }
+                        });
+            };
+
+            signInBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    exprLoginIn.exec();
+                }
+            });
+        }
     }
 }

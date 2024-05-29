@@ -229,7 +229,7 @@ public class SigninEmployerActivity extends Activity {
         });
 
         LambaExpr exprSignIn = () -> {
-            CommonHelper.changeActivity(this, new SigninEmployerActivity());
+            CommonHelper.changeActivity(this, new LoginEmployerActivity());
         };
 
         CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_signin_hint), exprSignIn);

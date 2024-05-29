@@ -193,14 +193,19 @@ public class CommonHelper {
     }
 
     public static void saveTokenToSharedPreferences(Activity from, String token) {
-        SharedPreferences sharedPreferences = from.getSharedPreferences("MyAppPrefs", from.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = from.getSharedPreferences("user_data", from.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("firebase_token", token);
         editor.apply();
     }
 
+    public static void signOutFirebase(Activity from) {
+        from.getSharedPreferences("user_data", from.MODE_PRIVATE).edit().remove("firebase_token").apply();
+        FirebaseAuth.getInstance().signOut();
+    }
+
     public static void checkTokenAndReauthenticate(Activity from, Activity to) {
-        SharedPreferences sharedPreferences = from.getSharedPreferences("MyAppPrefs", from.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = from.getSharedPreferences("user_data", from.MODE_PRIVATE);
         String token = sharedPreferences.getString("firebase_token", null);
 
         if (token != null) {
@@ -270,6 +275,15 @@ public class CommonHelper {
 
         imageView.setOnClickListener(view -> {
             CommonHelper.changeActivity(activity, new MainActivity());
+        });
+    }
+
+    public static void addReturnBtnOnImgWithLambda(Activity activity, LambaExpr expr) {
+        ImageView imageView;
+        imageView = (ImageView) activity.findViewById(R.id.imageViewLogo);
+
+        imageView.setOnClickListener(view -> {
+            expr.exec();
         });
     }
 }

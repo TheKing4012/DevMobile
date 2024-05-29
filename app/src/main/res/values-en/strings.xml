@@ -33,4 +33,6 @@
     <string name="text_cv">Upload CV</string>
 
     <string name="text_search">Search</string>
+    <string name="text_error_login_employer_mail">Please indicate an email</string>
+    <string name="text_error_login_employer_password">Please indicate a password</string>
 </resources>

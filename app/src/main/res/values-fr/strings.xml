@@ -33,4 +33,6 @@
     <string name="text_cv">Déposer CV</string>
 
     <string name="text_search">Rechercher</string>
+    <string name="text_error_login_employer_mail">Veuillez préciser une adresse mail</string>
+    <string name="text_error_login_employer_password">Veuillez préciser un mot de passe</string>
 </resources>
