@@ -131,7 +131,7 @@ public class SigninCandidateActivity extends Activity {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                    registerCandidate(userId, name, surname, dateofbirth, phone, country, city, website, desc);
+                                    registerCandidate(userId, name, surname, dateofbirth, phone, country, city, website, desc, null);
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -240,46 +240,40 @@ public class SigninCandidateActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_CODE_PICK_PDF && resultCode == RESULT_OK && data != null) {
+        if (requestCode == REQUEST_CODE_PICK_PDF && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri pdfUri = data.getData();
-            if (pdfUri != null) {
-                uploadPDFToFirebase(pdfUri);
-            }
+            uploadPDFToStorage(pdfUri);
         }
     }
 
-    private void uploadPDFToFirebase(Uri pdfUri) {
-        // Nom du fichier dans Firebase Storage (peut être modifié selon vos besoins)
-        String fileName = "mon_fichier.pdf";
+    private void uploadPDFToStorage(Uri pdfUri) {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        /*StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+        StorageReference pdfRef = storageRef.child("pdfs/" + userId + "/" + System.currentTimeMillis() + ".pdf");
 
-        /*
-        // Référence à l'emplacement de stockage dans Firebase Storage
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("pdfs/" + fileName);
-
-        // Téléchargement du fichier PDF sélectionné vers Firebase Storage
-        storageRef.putFile(pdfUri)
-                .addOnSuccessListener(taskSnapshot -> {
-                    // Succès du téléchargement
-                    // Récupérer l'URL du fichier téléchargé
-                    storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                        String pdfUrl = uri.toString();
-                        // Maintenant, vous pouvez utiliser pdfUrl pour enregistrer cette URL dans votre base de données Firebase
-                        // Par exemple, sauvegarder l'URL dans Realtime Database ou Firestore
-                        // firebaseDatabaseReference.child("pdfs").push().setValue(pdfUrl);
-                    }).addOnFailureListener(e -> {
-                        // Gestion des erreurs lors de la récupération de l'URL
-                    });
+        pdfRef.putFile(pdfUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        pdfRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                String pdfUrl = uri.toString();
+                                saveUserDataWithPDF(pdfUrl);
+                            }
+                        });
+                    }
                 })
-                .addOnFailureListener(e -> {
-                    // Échec du téléchargement
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(SigninCandidateActivity.this, "Failed to upload PDF: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
                 });
-
          */
     }
 
     private static final int REQUEST_STORAGE_PERMISSION = 101;
-
-    // Vérifier et demander les permissions de stockage si nécessaire
     private void checkStoragePermissions() {
         // Vérifier la version d'Android
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -306,18 +300,35 @@ public class SigninCandidateActivity extends Activity {
         }
     }
 
-    private void registerCandidate(String userId, String name, String surname, String dateOfBirth, String phone, String country, String city, String website, String desc) {
-        Map<String, Object> employerData = new HashMap<>();
-        employerData.put("name", name);
-        employerData.put("surname", surname);
-        employerData.put("dateOfBirth", dateOfBirth);
-        employerData.put("phone", phone);
-        employerData.put("website", website);
-        employerData.put("country", country);
-        employerData.put("city", city);
-        employerData.put("description", desc);
+    private void saveUserDataWithPDF(String pdfUrl) {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String name = ((EditText) findViewById(R.id.EditTextNom)).getText().toString();
+        String surname = ((EditText) findViewById(R.id.EditTextPrenom)).getText().toString();
+        String dateOfBirth = ((EditText) findViewById(R.id.EditTextDateNaissance)).getText().toString();
+        String phone = ((EditText) findViewById(R.id.EditTextTelephone)).getText().toString();
+        String country = ((EditText) findViewById(R.id.EditTextCountry)).getText().toString();
+        String city = ((EditText) findViewById(R.id.EditTextCity)).getText().toString();
+        String website = ((EditText) findViewById(R.id.EditTextWebsite)).getText().toString();
+        String desc = ((EditText) findViewById(R.id.EditTextDescription)).getText().toString();
 
-        DatabaseReference employersRef = database.child("users").child("candidates");
-        employersRef.child(userId).setValue(employerData);
+        registerCandidate(userId, name, surname, dateOfBirth, phone, country, city, website, desc, pdfUrl);
+    }
+
+    private void registerCandidate(String userId, String name, String surname, String dateOfBirth, String phone, String country, String city, String website, String desc, String pdfUrl) {
+        Map<String, Object> candidateData = new HashMap<>();
+        candidateData.put("name", name);
+        candidateData.put("surname", surname);
+        candidateData.put("dateOfBirth", dateOfBirth);
+        candidateData.put("phone", phone);
+        candidateData.put("website", website);
+        candidateData.put("country", country);
+        candidateData.put("city", city);
+        candidateData.put("description", desc);
+        if(pdfUrl != null) {
+            candidateData.put("pdfUrl", pdfUrl);
+        }
+
+        DatabaseReference candidatesRef = database.child("users").child("candidates");
+        candidatesRef.child(userId).setValue(candidateData);
     }
 }
