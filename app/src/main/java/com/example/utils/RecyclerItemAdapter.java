@@ -4,6 +4,7 @@ package com.example.utils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +42,7 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
         RecyclerItem currentRecyclerItem = recyclerItemList.get(position);
         holder.textView1.setText(currentRecyclerItem.getText1());
         holder.textView2.setText(currentRecyclerItem.getText2());
+        holder.imageView.setImageDrawable(currentRecyclerItem.getImageView());
     }
 
     @Override
@@ -53,10 +55,13 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
         public TextView textView1;
         public TextView textView2;
 
+        public ImageView imageView;
+
         public RecyclerItemViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             textView1 = itemView.findViewById(R.id.textView1);
             textView2 = itemView.findViewById(R.id.textView2);
+            imageView = itemView.findViewById(R.id.imageView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

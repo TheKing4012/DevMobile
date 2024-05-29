@@ -5,12 +5,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,17 +23,14 @@ import com.example.utils.FadeItemAnimator;
 import com.example.utils.LambaExpr;
 import com.example.utils.RecyclerItem;
 import com.example.utils.RecyclerItemAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListOffersActivity extends Activity {
-
-    final String facebookSearchURL = "https://www.facebook.com/search/top/?q=";
-    final String linkedInSearchURL = "https://www.linkedin.com/search/results/all/?keywords=";
-
-    EditText editTextFacebook;
-    EditText editTextLinkedIn;
 
     private RecyclerView recyclerView;
     private RecyclerItemAdapter adapter;
@@ -81,21 +82,30 @@ public class ListOffersActivity extends Activity {
             }
         });
 
+        Button buttonApplication = findViewById(R.id.button_see_application);
+
+        buttonApplication.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Créer un Intent pour démarrer la nouvelle activité
+                Intent intent = new Intent(ListOffersActivity.this, ListApplicationActivity.class);
+                startActivity(intent); // Démarrer la nouvelle activité
+            }
+        });
+
         Spinner typeSpinner = findViewById(R.id.SpinnerOfferType);
-        Spinner periodeSpinner = findViewById(R.id.SpinnerTime);
+        Spinner timeSpinner = findViewById(R.id.SpinnerTime);
         Spinner zoneSpinner = findViewById(R.id.SpinnerZone);
 
-        ArrayAdapter<CharSequence> type_adapter = ArrayAdapter.createFromResource(this,
-                R.array.type_interim, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> periode_adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> status_adapter = ArrayAdapter.createFromResource(this,
+                R.array.status, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> time_adapter = ArrayAdapter.createFromResource(this,
                 R.array.periodes, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> zone_adapter = ArrayAdapter.createFromResource(this,
                 R.array.zones, android.R.layout.simple_spinner_item);
 
-
-        typeSpinner.setAdapter(type_adapter);
-        periodeSpinner.setAdapter(periode_adapter);
+        typeSpinner.setAdapter(status_adapter);
+        timeSpinner.setAdapter(time_adapter);
         zoneSpinner.setAdapter(zone_adapter);
-
     }
 }
