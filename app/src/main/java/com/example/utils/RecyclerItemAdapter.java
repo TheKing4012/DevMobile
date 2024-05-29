@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.R;
 
 import java.util.List;
+import java.util.Objects;
 
 public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapter.ViewHolder> {
 
@@ -43,16 +44,19 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
         holder.textView1.setText(item.getText1());
         holder.textView2.setText(item.getText2());
 
-        if ("check".equals(item.getImageStatus())) {
+        if(Objects.equals(item.getImageStatus(), "check")) {
+            holder.imageView.setVisibility(View.VISIBLE);
+            holder.imageView.setImageResource(R.drawable.check);
+        }
+        if(Objects.equals(item.getImageStatus(), "pending")) {
             holder.imageView.setVisibility(View.VISIBLE);
             holder.imageView.setImageResource(R.drawable.hourglass);
-        } else if ("pending".equals(item.getImageStatus())) {
+        }
+        if(Objects.equals(item.getImageStatus(), "deny")) {
             holder.imageView.setVisibility(View.VISIBLE);
-            holder.imageView.setImageResource(R.drawable.hourglass);
-        } else if ("deny".equals(item.getImageStatus())) {
-            holder.imageView.setVisibility(View.VISIBLE);
-            holder.imageView.setImageResource(R.drawable.hourglass);
-        } else {
+            holder.imageView.setImageResource(R.drawable.deny);
+        }
+        if(item.getImageStatus()==null){
             holder.imageView.setVisibility(View.GONE);
         }
 
