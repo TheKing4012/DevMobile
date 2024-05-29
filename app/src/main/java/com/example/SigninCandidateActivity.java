@@ -3,23 +3,46 @@ package com.example;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.utils.CommonHelper;
 import com.example.utils.LambaExpr;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SigninCandidateActivity extends Activity {
+
+    Button signInBtn;
+
+    private FirebaseAuth mAuth;
+    private DatabaseReference database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,17 +79,159 @@ public class SigninCandidateActivity extends Activity {
             }
         });
 
+        signInBtn = findViewById(R.id.button_send);
+
+        mAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance().getReference();
+        Activity activity = this;
+
+        LambaExpr signinCandidate = () -> {
+            String email = ((EditText) (findViewById(R.id.EditTextMail))).getText().toString();
+            String password = ((EditText) (findViewById(R.id.EditTextPassword))).getText().toString();
+            String passwordCheck = ((EditText) (findViewById(R.id.EditTextConfirmPassword))).getText().toString();
+            String name = ((EditText) (findViewById(R.id.EditTextNom))).getText().toString();
+            String surname = ((EditText) (findViewById(R.id.EditTextPrenom))).getText().toString();
+            String dateofbirth = ((EditText) (findViewById(R.id.EditTextDateNaissance))).getText().toString();
+            String phone = ((EditText) (findViewById(R.id.EditTextTelephone))).getText().toString();
+            String country = ((EditText) (findViewById(R.id.EditTextCountry))).getText().toString();
+            String city = ((EditText) (findViewById(R.id.EditTextCity))).getText().toString();
+            String website = ((EditText) (findViewById(R.id.EditTextWebsite))).getText().toString();
+            String desc = ((EditText) (findViewById(R.id.EditTextDescription))).getText().toString();
+
+            if (!email.isEmpty() && !password.isEmpty()) {
+                if (password.length() < 6) {
+                    CommonHelper.makeNotification(this, getString(R.string.text_error), getString(R.string.text_error_signin_password), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+
+                } else {
+
+                    if(!password.equals(passwordCheck)) {
+                        CommonHelper.makeNotification(this, getString(R.string.text_error), getString(R.string.text_error_not_same_password), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                        return;
+                    }
+
+                    if(name.isEmpty()) {
+                        CommonHelper.makeNotification(this, getString(R.string.text_error), getString(R.string.text_error_signin_candidate).replaceAll("element", getString(R.string.text_name)), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                        return;
+                    }
+                    if(surname.isEmpty()) {
+                        CommonHelper.makeNotification(this, getString(R.string.text_error), getString(R.string.text_error_signin_candidate).replaceAll("element", getString(R.string.text_firstname)), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                        return;
+                    }
+                    if(desc.isEmpty()) {
+                        CommonHelper.makeNotification(this, getString(R.string.text_error), getString(R.string.text_error_signin_candidate).replaceAll("element", getString(R.string.text_description)), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                        return;
+                    }
+                    if(dateofbirth.isEmpty()) {
+                        CommonHelper.makeNotification(this, getString(R.string.text_error), getString(R.string.text_error_signin_candidate).replaceAll("element", getString(R.string.text_birth_date)), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                        return;
+                    }
+
+                    mAuth.createUserWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                    registerCandidate(userId, name, surname, dateofbirth, phone, country, city, website, desc);
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    if (e.getMessage().equalsIgnoreCase("The email address is already in use by another account.")) {
+                                        CommonHelper.makeNotification(activity, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                                    } else if (e != null) {
+                                        Toast.makeText(activity, "Employer registration failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(activity, "Employer registration failed. Please try again.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            })
+
+                            .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                @Override
+                                public void onSuccess(AuthResult authResult) {
+                                    FirebaseUser user = authResult.getUser();
+                                    String uid = user.getUid();
+                                    String mail = user.getEmail();
+                                    final String[] companyName = {""};
+                                    DatabaseReference employersRef = FirebaseDatabase.getInstance().getReference("users/employers/" + uid);
+
+                                    employersRef.get()
+                                            .addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                                @Override
+                                                public void onSuccess(@NonNull DataSnapshot dataSnapshot) {
+                                                    if (dataSnapshot.exists()) {
+                                                        Map<String, Object> userData = (Map<String, Object>) dataSnapshot.getValue();
+                                                        companyName[0] = userData.get("companyName").toString();
+                                                    }
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Log.w("TAG", "Échec de la lecture des données utilisateur.", e);
+                                                }
+                                            });
+                                    SharedPreferences preferences = getSharedPreferences("user_data", MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = preferences.edit();
+                                    editor.putString("uid", uid);
+                                    editor.putString("mail", mail);
+                                    editor.putString("companyName", companyName[0]);
+                                    editor.apply();
+
+                                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+                                    mAuth.signInWithEmailAndPassword(email, password)
+                                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                                    if (task.isSuccessful()) {
+                                                        // Connexion réussie
+                                                        FirebaseUser user = mAuth.getCurrentUser();
+                                                        if (user != null) {
+                                                            user.getIdToken(true)
+                                                                    .addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                                                                        @Override
+                                                                        public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                                                            if (task.isSuccessful()) {
+                                                                                String token = task.getResult().getToken();
+                                                                                // Stocker le token dans SharedPreferences
+                                                                                CommonHelper.saveTokenToSharedPreferences(activity, token);
+                                                                            }
+                                                                        }
+                                                                    });
+                                                        }
+                                                    } else {
+                                                        // Gérer les erreurs de connexion
+                                                    }
+                                                }
+                                            });
+
+                                    CommonHelper.changeActivity(activity, new LoginEmployerActivity());
+                                    finish();
+                                }
+                            });
+
+                }
+            } else {
+                CommonHelper.makeNotification(this, getString(R.string.text_error), getString(R.string.text_error_signin_employer), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+            }
+        };
+
+        signInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signinCandidate.exec();
+            }
+        });
     }
 
     private static final int REQUEST_CODE_PICK_PDF = 101;
 
     private void pickPDFFromStorage() {
-        // Créer une intention pour ouvrir l'explorateur de fichiers
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("application/pdf");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-        // Démarrer une activité pour sélectionner un fichier PDF
         checkStoragePermissions();
         startActivityForResult(Intent.createChooser(intent, "Sélectionner un fichier PDF"), REQUEST_CODE_PICK_PDF);
     }
@@ -78,19 +243,16 @@ public class SigninCandidateActivity extends Activity {
         if (requestCode == REQUEST_CODE_PICK_PDF && resultCode == RESULT_OK && data != null) {
             Uri pdfUri = data.getData();
             if (pdfUri != null) {
-                // Maintenant, vous pouvez utiliser pdfUri pour manipuler le fichier PDF sélectionné
-                // Par exemple, télécharger ce fichier vers Firebase Storage
                 uploadPDFToFirebase(pdfUri);
             }
         }
     }
 
     private void uploadPDFToFirebase(Uri pdfUri) {
-        Toast.makeText(SigninCandidateActivity.this, "coucouu", Toast.LENGTH_LONG);
-        /*
         // Nom du fichier dans Firebase Storage (peut être modifié selon vos besoins)
         String fileName = "mon_fichier.pdf";
 
+        /*
         // Référence à l'emplacement de stockage dans Firebase Storage
         StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("pdfs/" + fileName);
 
@@ -142,5 +304,20 @@ public class SigninCandidateActivity extends Activity {
             // Pour les versions antérieures à Marshmallow, les permissions sont accordées à l'installation
             // Vous pouvez directement effectuer des actions qui nécessitent ces permissions ici
         }
+    }
+
+    private void registerCandidate(String userId, String name, String surname, String dateOfBirth, String phone, String country, String city, String website, String desc) {
+        Map<String, Object> employerData = new HashMap<>();
+        employerData.put("name", name);
+        employerData.put("surname", surname);
+        employerData.put("dateOfBirth", dateOfBirth);
+        employerData.put("phone", phone);
+        employerData.put("website", website);
+        employerData.put("country", country);
+        employerData.put("city", city);
+        employerData.put("description", desc);
+
+        DatabaseReference employersRef = database.child("users").child("candidates");
+        employersRef.child(userId).setValue(employerData);
     }
 }
