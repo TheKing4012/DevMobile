@@ -2,32 +2,49 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="16dp"
     android:clickable="true"
     android:layout_margin="6dp"
     android:background="@drawable/rounded_border_black_yellow_background">
 
-    <TextView
-        android:id="@+id/textView1"
+    <!-- Éléments alignés à gauche -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView 1"
-        android:textSize="18sp" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView 2"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView 1"
+            android:textSize="18sp" />
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView 2"
+            android:textSize="18sp" />
 
+    </LinearLayout>
+
+    <!-- Vue invisible pour occuper l'espace restant -->
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Élément aligné à droite -->
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end|top"
+        android:layout_margin="10dp"
+        android:layout_weight="0"
         android:scaleType="fitXY"
-        android:visibility="gone"
         android:src="@drawable/hourglass" />
+
 </LinearLayout>
