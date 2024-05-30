@@ -86,4 +86,5 @@
     <string name="text_error_login_employer_password">Veuillez préciser un mot de passe</string>
     <string name="text_error_signin_candidate">Veuilleue préciser element</string>
     <string name="text_error_not_same_password">Les mots de passes inscrits de sont pas les mêmes</string>
+    <string name="text_download_cv">Télécharger CV</string>
 </resources>
