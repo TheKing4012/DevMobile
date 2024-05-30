@@ -19,13 +19,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utils.CommonHelper;
+import com.example.utils.CustomSpinnerAdapter;
 import com.example.utils.FadeItemAnimator;
 import com.example.utils.LambaExpr;
+import com.example.utils.OfferHelper;
 import com.example.utils.RecyclerItem;
 import com.example.utils.RecyclerItemAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,15 +109,46 @@ public class ListOffersActivity extends Activity {
         Spinner timeSpinner = findViewById(R.id.SpinnerTime);
         Spinner zoneSpinner = findViewById(R.id.SpinnerZone);
 
-        ArrayAdapter<CharSequence> type_adapter = ArrayAdapter.createFromResource(this,
-                R.array.type_interim, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> time_adapter = ArrayAdapter.createFromResource(this,
-                R.array.periodes, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> zone_adapter = ArrayAdapter.createFromResource(this,
-                R.array.zones, android.R.layout.simple_spinner_item);
+        CustomSpinnerAdapter statusAdapter = new CustomSpinnerAdapter(this,
+                android.R.layout.simple_spinner_item, getResources().getTextArray(R.array.status));
+        CustomSpinnerAdapter timeAdapter = new CustomSpinnerAdapter(this,
+                android.R.layout.simple_spinner_item, getResources().getTextArray(R.array.periodes));
+        CustomSpinnerAdapter zoneAdapter = new CustomSpinnerAdapter(this,
+                android.R.layout.simple_spinner_item, getResources().getTextArray(R.array.zones));
 
-        typeSpinner.setAdapter(type_adapter);
-        timeSpinner.setAdapter(time_adapter);
-        zoneSpinner.setAdapter(zone_adapter);
+        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        zoneAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        typeSpinner.setAdapter(statusAdapter);
+        timeSpinner.setAdapter(timeAdapter);
+        zoneSpinner.setAdapter(zoneAdapter);
+
+        // Sélectionner "Non défini" comme valeur par défaut
+        typeSpinner.setSelection(0);
+        timeSpinner.setSelection(0);
+        zoneSpinner.setSelection(0);
+    }
+
+    private void loadLast100Offers() {
+
+        OfferHelper offerHelper = new OfferHelper();
+        offerHelper.getLast100Offers(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                recyclerItemList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String title = snapshot.child("title").getValue(String.class);
+                    String description = snapshot.child("description").getValue(String.class);
+                    recyclerItemList.add(new RecyclerItem(title, description, "status"));
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(ListOffersActivity.this, "Failed to load offers: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

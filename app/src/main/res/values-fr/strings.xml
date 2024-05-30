@@ -41,6 +41,7 @@
     <string name="text_salary">Rémunération</string>
 
     <string-array name="type_interim">
+        <item>Non défini</item>
         <item>Mission temporaire</item>
         <item>Mission de longue durée</item>
         <item>Pré-embauche</item>
@@ -49,6 +50,7 @@
         <item>Saisonnier</item>
     </string-array>
     <string-array name="zones">
+        <item>Non défini</item>
         <item>Montpellier</item>
         <item>Marseille</item>
         <item>Sète</item>
@@ -60,6 +62,7 @@
         <item>Lattes</item>
     </string-array>
     <string-array name="periodes">
+        <item>Non défini</item>
         <item>Printemps 2024</item>
         <item>Été 2024</item>
         <item>Automne 2024</item>
@@ -71,6 +74,7 @@
     </string-array>
 
     <string-array name="status">
+        <item>Non défini</item>
         <item>Validé</item>
         <item>En attente</item>
         <item>Rejeté</item>
