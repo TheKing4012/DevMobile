@@ -87,4 +87,5 @@
     <string name="text_error_signin_candidate">Please at least indicate a element</string>
     <string name="text_error_not_same_password">The passwords sent are not the same</string>
     <string name="text_download_cv">Download CV</string>
+    <string name="postuler">Apply</string>
 </resources>

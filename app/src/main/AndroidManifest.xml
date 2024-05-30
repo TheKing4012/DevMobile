@@ -83,6 +83,10 @@
             android:name="com.example.Employer_CandidateProfilActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name="com.example.Candidate_SeeOfferActivity"
+            android:exported="true">
+        </activity>
         <meta-data
             android:name="com.google.firebase.auth.enable_persistance"
             android:value="true"/>

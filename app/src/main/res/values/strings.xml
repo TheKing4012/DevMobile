@@ -79,6 +79,7 @@
     </string-array>
     <string name="text_error_not_same_password">The passwords sent are not the same</string>
     <string name="text_download_cv">Download CV</string>
+    <string name="postuler">Apply</string>
 
     <string-array name="status">
         <item>Offer status</item>
