@@ -2,19 +2,19 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="Candidate_ApplyActivity">
+        <State />
+      </entry>
+      <entry key="Candidate_SeeApplicationActivity">
+        <State />
+      </entry>
       <entry key="Candidate_SeeOfferActivity">
         <State />
       </entry>
       <entry key="Employer_CandidateProfilActivity">
         <State />
       </entry>
-      <entry key="Employer_CreateOffer">
-        <State />
-      </entry>
       <entry key="Employer_MyApplicationsActivity">
-        <State />
-      </entry>
-      <entry key="Employers_MyOffersActivity">
         <State />
       </entry>
       <entry key="app">

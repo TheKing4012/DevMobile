@@ -6,18 +6,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.utils.CommonHelper;
-import com.example.utils.CustomSpinnerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
-public class Candidate_SeeOfferActivity extends Activity {
+public class Candidate_SeeApplicationActivity extends Activity {
 
     Button returnBtn;
-    Button applyBtn;
+    Button rejectBtn;
+    Button acceptBtn;
     ImageView positionImage;
     TextView textViewTitle;
     TextView textViewDescription;
@@ -31,7 +30,7 @@ public class Candidate_SeeOfferActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_candidate_seeoffer);
+        setContentView(R.layout.activity_candidate_seeapplication);
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
         CommonHelper.addReturnBtnOnImg(this);
@@ -49,7 +48,8 @@ public class Candidate_SeeOfferActivity extends Activity {
         textViewSalary.setText("4000€");
 
 
-        applyBtn = findViewById(R.id.button_apply);
+        rejectBtn = findViewById(R.id.button_reject);
+        acceptBtn = findViewById(R.id.button_accept);
         returnBtn = findViewById(R.id.button_return);
         positionImage = findViewById(R.id.button_position);
 
@@ -57,16 +57,7 @@ public class Candidate_SeeOfferActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // Créer un Intent pour démarrer la nouvelle activité
-                Intent intent = new Intent(Candidate_SeeOfferActivity.this, Candidate_ListOffersActivity.class);
-                startActivity(intent); // Démarrer la nouvelle activité
-            }
-        });
-
-        applyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Créer un Intent pour démarrer la nouvelle activité
-                Intent intent = new Intent(Candidate_SeeOfferActivity.this, Candidate_ApplyActivity.class);
+                Intent intent = new Intent(Candidate_SeeApplicationActivity.this, Candidate_MyApplicationsActivity.class);
                 startActivity(intent); // Démarrer la nouvelle activité
             }
         });

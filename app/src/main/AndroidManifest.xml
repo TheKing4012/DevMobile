@@ -87,6 +87,14 @@
             android:name="com.example.Candidate_SeeOfferActivity"
             android:exported="true">
         </activity>
+        <activity
+            android:name="com.example.Candidate_ApplyActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name="com.example.Candidate_SeeApplicationActivity"
+            android:exported="true">
+        </activity>
         <meta-data
             android:name="com.google.firebase.auth.enable_persistance"
             android:value="true"/>

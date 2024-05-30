@@ -88,4 +88,6 @@
     <string name="text_error_not_same_password">Les mots de passes inscrits de sont pas les mêmes</string>
     <string name="text_download_cv">Télécharger CV</string>
     <string name="postuler">Postuler</string>
+    <string name="text_deny">Rejeter</string>
+    <string name="text_approve">Accepter</string>
 </resources>
