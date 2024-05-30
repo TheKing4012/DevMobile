@@ -39,9 +39,10 @@
     <string name="text_my_offers">Mes offres</string>
     <string name="text_title">Titre</string>
     <string name="text_salary">Rémunération</string>
+    <string name="text_delete_offer">Supprimer cette offre</string>
 
     <string-array name="type_interim">
-        <item>Non défini</item>
+        <item>"Type d'interim"</item>
         <item>Mission temporaire</item>
         <item>Mission de longue durée</item>
         <item>Pré-embauche</item>
@@ -50,7 +51,7 @@
         <item>Saisonnier</item>
     </string-array>
     <string-array name="zones">
-        <item>Non défini</item>
+        <item>Zone</item>
         <item>Montpellier</item>
         <item>Marseille</item>
         <item>Sète</item>
@@ -62,7 +63,7 @@
         <item>Lattes</item>
     </string-array>
     <string-array name="periodes">
-        <item>Non défini</item>
+        <item>Période</item>
         <item>Printemps 2024</item>
         <item>Été 2024</item>
         <item>Automne 2024</item>
@@ -74,7 +75,7 @@
     </string-array>
 
     <string-array name="status">
-        <item>Non défini</item>
+        <item>Status</item>
         <item>Validé</item>
         <item>En attente</item>
         <item>Rejeté</item>

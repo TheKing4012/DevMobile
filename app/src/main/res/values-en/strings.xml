@@ -39,9 +39,10 @@
     <string name="text_my_offers">My offers</string>
     <string name="text_title">Title</string>
     <string name="text_salary">Salary</string>
+    <string name="text_delete_offer">Delete this offer</string>
 
     <string-array name="type_interim">
-        <item>Undefined</item>
+        <item>Type of interim</item>
         <item>Temporaty work</item>
         <item>Long-term work</item>
         <item>Temp-to-perm</item>
@@ -50,7 +51,7 @@
         <item>Seasonal</item>
     </string-array>
     <string-array name="zones">
-        <item>Undefined</item>
+        <item>Zone</item>
         <item>Montpellier</item>
         <item>Marseille</item>
         <item>Sète</item>
@@ -62,7 +63,7 @@
         <item>Lattes</item>
     </string-array>
     <string-array name="periodes">
-        <item>Undefined</item>
+        <item>Time periode</item>
         <item>Spring 2024</item>
         <item>Summer 2024</item>
         <item>Fall 2024</item>
@@ -74,7 +75,7 @@
     </string-array>
 
     <string-array name="status">
-        <item>Undefined</item>
+        <item>Offer status</item>
         <item>Approved</item>
         <item>Pending</item>
         <item>Rejected</item>

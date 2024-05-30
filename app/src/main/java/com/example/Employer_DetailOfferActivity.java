@@ -5,44 +5,40 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utils.CommonHelper;
 import com.example.utils.FadeItemAnimator;
-import com.example.utils.LambaExpr;
 import com.example.utils.RecyclerItem;
 import com.example.utils.RecyclerItemAdapter;
+import com.example.utils.RecyclerItemAdapter_buttons;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Employer_MyOffersActivity extends Activity {
+public class Employer_DetailOfferActivity extends Activity {
 
     private RecyclerView recyclerView;
-    private RecyclerItemAdapter adapter;
+    private TextView offerTitle;
+    private RecyclerItemAdapter_buttons adapter;
     private List<RecyclerItem> recyclerItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_employer_myoffers);
+        setContentView(R.layout.activity_employer_detailoffer);
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
-        LambaExpr exprImg = () -> {
-          if(CommonHelper.isFireBaseUserConnected()) {
-              CommonHelper.signOutFirebase(this);
-              CommonHelper.makeNotification(this, this.getResources().getString(R.string.text_disconnected), "", R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
-              finish();
-          }
-          CommonHelper.changeActivity(this, new MainActivity());
-        };
+        CommonHelper.addReturnBtnOnImg(this);
 
-        CommonHelper.addReturnBtnOnImgWithLambda(this, exprImg);
-
+        offerTitle = findViewById(R.id.textViewTitle);
         recyclerView = findViewById(R.id.recyclerView);
 
         // Vérifiez si recyclerView est null
@@ -61,32 +57,44 @@ public class Employer_MyOffersActivity extends Activity {
         recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", null));
         recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", null));
         recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", null));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", null));
+        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", null));
         // Ajoutez d'autres items ici
 
-        adapter = new RecyclerItemAdapter(recyclerItemList);
+        adapter = new RecyclerItemAdapter_buttons(recyclerItemList);
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new RecyclerItemAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new RecyclerItemAdapter_buttons.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 /*Intent intent = new Intent(ListOffersActivity.this, SecondActivity.class);
                 intent.putExtra("item_position", position);
                 startActivity(intent);
                  */
-                CommonHelper.makeNotification(Employer_MyOffersActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                CommonHelper.makeNotification(Employer_DetailOfferActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
 
             }
         });
 
-        Button buttonApplication = findViewById(R.id.button_create_offer);
-
-        buttonApplication.setOnClickListener(new View.OnClickListener() {
+        Button buttonOffers = findViewById(R.id.button_see_offers);
+        buttonOffers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Créer un Intent pour démarrer la nouvelle activité
-                Intent intent = new Intent(Employer_MyOffersActivity.this, Employer_CreateOfferActivity.class);
+                Intent intent = new Intent(Employer_DetailOfferActivity.this, Candidate_ListOffersActivity.class);
                 startActivity(intent); // Démarrer la nouvelle activité
             }
         });
+
+
+        //--------------------------------------------------------------------------
+
+        //METTRE LE TITRE DE LOFFRE SELECTIONNE
+
+        offerTitle.setText("TITRE DE LOFFRE A SET");
+
+        //METTRE LE TITRE DE LOFFRE SELECTIONNE
+
+        //--------------------------------------------------------------------------
     }
 }
