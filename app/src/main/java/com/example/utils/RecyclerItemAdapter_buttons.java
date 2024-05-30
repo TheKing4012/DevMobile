@@ -45,22 +45,10 @@ public class RecyclerItemAdapter_buttons extends RecyclerView.Adapter<RecyclerIt
         RecyclerItem item = recyclerItemList.get(position);
         holder.textView1.setText(item.getText1());
         holder.textView2.setText(item.getText2());
-
-        if(Objects.equals(item.getImageStatus(), "check")) {
-            holder.imageView.setVisibility(View.VISIBLE);
-            holder.imageView.setImageResource(R.drawable.check);
-        }
-        if(Objects.equals(item.getImageStatus(), "pending")) {
-            holder.imageView.setVisibility(View.VISIBLE);
-            holder.imageView.setImageResource(R.drawable.hourglass);
-        }
-        if(Objects.equals(item.getImageStatus(), "deny")) {
-            holder.imageView.setVisibility(View.VISIBLE);
-            holder.imageView.setImageResource(R.drawable.deny);
-        }
-        if(item.getImageStatus()==null){
-            holder.imageView.setVisibility(View.GONE);
-        }
+        holder.imageCheck.setVisibility(View.VISIBLE);
+        holder.imageCheck.setImageResource(R.drawable.check);
+        holder.imageDeny.setVisibility(View.VISIBLE);
+        holder.imageDeny.setImageResource(R.drawable.deny);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,13 +71,15 @@ public class RecyclerItemAdapter_buttons extends RecyclerView.Adapter<RecyclerIt
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView1;
         TextView textView2;
-        ImageView imageView;
+        ImageView imageCheck;
+        ImageView imageDeny;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView1 = itemView.findViewById(R.id.textView1);
             textView2 = itemView.findViewById(R.id.textView2);
-            imageView = itemView.findViewById(R.id.imageView);
+            imageCheck = itemView.findViewById(R.id.button_accept);
+            imageDeny = itemView.findViewById(R.id.button_deny);
         }
     }
 }

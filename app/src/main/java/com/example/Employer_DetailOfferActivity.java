@@ -5,9 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.utils.CommonHelper;
 import com.example.utils.FadeItemAnimator;
 import com.example.utils.RecyclerItem;
-import com.example.utils.RecyclerItemAdapter;
 import com.example.utils.RecyclerItemAdapter_buttons;
 
 import java.util.ArrayList;
@@ -64,18 +61,6 @@ public class Employer_DetailOfferActivity extends Activity {
         adapter = new RecyclerItemAdapter_buttons(recyclerItemList);
         recyclerView.setAdapter(adapter);
 
-        adapter.setOnItemClickListener(new RecyclerItemAdapter_buttons.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-                /*Intent intent = new Intent(ListOffersActivity.this, SecondActivity.class);
-                intent.putExtra("item_position", position);
-                startActivity(intent);
-                 */
-                CommonHelper.makeNotification(Employer_DetailOfferActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
-
-            }
-        });
-
         Button buttonOffers = findViewById(R.id.button_see_offers);
         buttonOffers.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +76,7 @@ public class Employer_DetailOfferActivity extends Activity {
 
         //METTRE LE TITRE DE LOFFRE SELECTIONNE
 
-        offerTitle.setText("TITRE DE LOFFRE A SET");
+        //offerTitle.setText("TITRE DE LOFFRE A SET");
 
         //METTRE LE TITRE DE LOFFRE SELECTIONNE
 
