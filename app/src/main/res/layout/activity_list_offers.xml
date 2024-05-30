@@ -38,7 +38,7 @@
             android:layout_marginLeft="60dp"
             android:layout_weight="1"
             android:fontFamily="@font/sf_bold"
-            android:text="Recherche\n de postes"
+            android:text="@string/list_offer"
             android:textSize="30sp" />
 
     </LinearLayout>

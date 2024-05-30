@@ -3,18 +3,12 @@ package com.example;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,14 +17,11 @@ import com.example.utils.FadeItemAnimator;
 import com.example.utils.LambaExpr;
 import com.example.utils.RecyclerItem;
 import com.example.utils.RecyclerItemAdapter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListOffersActivity extends Activity {
+public class Employers_MyOffersActivity extends Activity {
 
     private RecyclerView recyclerView;
     private RecyclerItemAdapter adapter;
@@ -39,7 +30,7 @@ public class ListOffersActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_offers);
+        setContentView(R.layout.activity_employer_myoffers);
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
@@ -84,35 +75,20 @@ public class ListOffersActivity extends Activity {
                 intent.putExtra("item_position", position);
                 startActivity(intent);
                  */
-                CommonHelper.makeNotification(ListOffersActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                CommonHelper.makeNotification(Employers_MyOffersActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
 
             }
         });
 
-        Button buttonApplication = findViewById(R.id.button_see_application);
+        Button buttonApplication = findViewById(R.id.button_create_offer);
 
         buttonApplication.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Créer un Intent pour démarrer la nouvelle activité
-                Intent intent = new Intent(ListOffersActivity.this, ListApplicationActivity.class);
-                startActivity(intent); // Démarrer la nouvelle activité
+                //Intent intent = new Intent(Employers_MyOffersActivity.this, ListApplicationActivity.class);
+                //startActivity(intent); // Démarrer la nouvelle activité
             }
         });
-
-        Spinner typeSpinner = findViewById(R.id.SpinnerOfferType);
-        Spinner timeSpinner = findViewById(R.id.SpinnerTime);
-        Spinner zoneSpinner = findViewById(R.id.SpinnerZone);
-
-        ArrayAdapter<CharSequence> type_adapter = ArrayAdapter.createFromResource(this,
-                R.array.type_interim, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> time_adapter = ArrayAdapter.createFromResource(this,
-                R.array.periodes, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> zone_adapter = ArrayAdapter.createFromResource(this,
-                R.array.zones, android.R.layout.simple_spinner_item);
-
-        typeSpinner.setAdapter(type_adapter);
-        timeSpinner.setAdapter(time_adapter);
-        zoneSpinner.setAdapter(zone_adapter);
     }
 }

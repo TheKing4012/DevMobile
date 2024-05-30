@@ -38,7 +38,7 @@
             android:layout_marginLeft="60dp"
             android:layout_weight="1"
             android:fontFamily="@font/sf_bold"
-            android:text="@string/text_application"
+            android:text="@string/text_my_offers"
             android:textSize="30sp" />
 
     </LinearLayout>
@@ -53,65 +53,24 @@
         android:orientation="vertical"
         android:layout_marginBottom="30dp">
 
-
-        <Spinner
-            android:id="@+id/SpinnerStatus"
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/border_edittext"
-            android:dropDownVerticalOffset="8dp"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:paddingEnd="16dp"
+            android:layout_height="500dp"
+            android:layout_marginTop="10dp"
             android:paddingBottom="16dp"
-            android:textSize="30sp" />
+            android:background="@drawable/rounded_border_black_blue_background">
 
-        <Button
-            android:id="@+id/button_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginHorizontal="80dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/background_button"
-            android:fontFamily="@font/sf"
-            android:foreground="@drawable/normal_button_border"
-            android:paddingStart="16dp"
-            android:paddingTop="4dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="4dp"
-            android:text="@string/text_search"
-            android:textSize="24sp" />
-
-        <LinearLayout
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="420dp"
-            android:orientation="vertical"
-            android:layout_marginBottom="8dp">
-
-            <ScrollView
-                android:id="@+id/scrollView"
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_margin="10dp"
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="420dp"
-                android:paddingBottom="16dp"
-                android:background="@drawable/rounded_border_black_blue_background">
+                android:layout_height="10dp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_margin="10dp"
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
-            </ScrollView>
-
-        </LinearLayout>
-
-
+        </ScrollView>
 
         <Button
-            android:id="@+id/button_see_offers"
+            android:id="@+id/button_create_offer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -124,7 +83,7 @@
             android:paddingTop="4dp"
             android:paddingEnd="16dp"
             android:paddingBottom="4dp"
-            android:text="@string/text_see_offers"
+            android:text="@string/text_create_offer"
             android:textSize="24sp" />
 
     </LinearLayout>

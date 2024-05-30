@@ -2,6 +2,12 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="Employer_CreateOffer">
+        <State />
+      </entry>
+      <entry key="Employers_MyOffersActivity">
+        <State />
+      </entry>
       <entry key="app">
         <State />
       </entry>

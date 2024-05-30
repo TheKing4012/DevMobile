@@ -36,6 +36,13 @@
     <string name="text_description">Description</string>
     <string name="text_cv">Upload CV</string>
     <string name="text_see_offers">See all offers</string>
+    <string name="text_create_offer">New offer</string>
+    <string name="text_recherche_post">Search offer</string>
+    <string name="list_offer">Offers list</string>
+    <string name="text_application">My applications</string>
+    <string name="text_my_offers">My offers</string>
+    <string name="text_title">Title</string>
+    <string name="text_salary">Salary</string>
 
     <string-array name="type_interim">
         <item>Temporaty work</item>
