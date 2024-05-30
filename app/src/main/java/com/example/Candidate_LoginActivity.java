@@ -2,20 +2,11 @@ package com.example;
 
 
 import android.app.Activity;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.Layout;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
-import android.text.style.AlignmentSpan;
-import android.text.style.ClickableSpan;
-import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 
@@ -30,44 +21,47 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
 
-public class LoginEmployerActivity extends Activity {
+public class Candidate_LoginActivity extends Activity {
 
-    Button signInBtn;
-    private FirebaseAuth mAuth;
+    Button btnSend;
+    EditText entrepriseEditText, motDePasseEditText, prenomEditText;
+    ImageView imageView;
+
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (CommonHelper.isFireBaseUserConnected()) {
-            CommonHelper.changeActivity(this, new ListOffersActivity());
+            CommonHelper.changeActivity(this, new Candidate_ListOffersActivity());
         } else {
-            setContentView(R.layout.activity_login_employer);
-
+            setContentView(R.layout.activity_candidate_login);
             CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
             CommonHelper.addReturnBtnOnImg(this);
 
-            CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_email_adress), R.id.EditTextEnterprise);
+            CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_email_adress), R.id.EditTextMail);
             CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_password), R.id.EditTextPassword);
 
-            LambaExpr exprSignin = () -> {
-                CommonHelper.changeActivity(this, new SigninEmployerActivity());
+            LambaExpr exprSignIn = () -> {
+                CommonHelper.changeActivity(this, new Candidate_SigninActivity());
             };
 
-            CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_login_hint), exprSignin);
+            CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_login_hint), exprSignIn);
+
+            btnSend = findViewById(R.id.button_send);
 
             mAuth = FirebaseAuth.getInstance();
-            signInBtn = findViewById(R.id.button_send);
 
             LambaExpr exprLoginIn = () -> {
-                String email = ((EditText) (findViewById(R.id.EditTextEnterprise))).getText().toString();
+                String email = ((EditText) (findViewById(R.id.EditTextMail))).getText().toString();
                 String password = ((EditText) (findViewById(R.id.EditTextPassword))).getText().toString();
 
                 if (email.isEmpty()) {
                     CommonHelper.makeNotification(this, getString(R.string.text_error), getString(R.string.text_error_login_employer_mail), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
                     return;
                 }
-                if(password.isEmpty()) {
+                if (password.isEmpty()) {
                     CommonHelper.makeNotification(this, getString(R.string.text_error), getString(R.string.text_error_login_employer_password), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
                     return;
                 }
@@ -102,7 +96,7 @@ public class LoginEmployerActivity extends Activity {
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
-                                CommonHelper.changeActivity(activity, new LoginEmployerActivity());
+                                CommonHelper.changeActivity(activity, new Employer_LoginActivity());
                                 finish();
                             }
                         })
@@ -116,7 +110,7 @@ public class LoginEmployerActivity extends Activity {
                         });
             };
 
-            signInBtn.setOnClickListener(new View.OnClickListener() {
+            btnSend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     exprLoginIn.exec();

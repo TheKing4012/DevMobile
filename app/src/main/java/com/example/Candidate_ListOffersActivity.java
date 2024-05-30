@@ -3,18 +3,12 @@ package com.example;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,9 +19,6 @@ import com.example.utils.LambaExpr;
 import com.example.utils.OfferHelper;
 import com.example.utils.RecyclerItem;
 import com.example.utils.RecyclerItemAdapter;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -35,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListOffersActivity extends Activity {
+public class Candidate_ListOffersActivity extends Activity {
 
     private RecyclerView recyclerView;
     private RecyclerItemAdapter adapter;
@@ -44,7 +35,7 @@ public class ListOffersActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_offers);
+        setContentView(R.layout.activity_candidate_listoffers);
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
@@ -89,7 +80,7 @@ public class ListOffersActivity extends Activity {
                 intent.putExtra("item_position", position);
                 startActivity(intent);
                  */
-                CommonHelper.makeNotification(ListOffersActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                CommonHelper.makeNotification(Candidate_ListOffersActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
 
             }
         });
@@ -100,7 +91,7 @@ public class ListOffersActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // Créer un Intent pour démarrer la nouvelle activité
-                Intent intent = new Intent(ListOffersActivity.this, ListApplicationActivity.class);
+                Intent intent = new Intent(Candidate_ListOffersActivity.this, Candidate_MyApplicationsActivity.class);
                 startActivity(intent); // Démarrer la nouvelle activité
             }
         });
@@ -147,7 +138,7 @@ public class ListOffersActivity extends Activity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(ListOffersActivity.this, "Failed to load offers: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Candidate_ListOffersActivity.this, "Failed to load offers: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

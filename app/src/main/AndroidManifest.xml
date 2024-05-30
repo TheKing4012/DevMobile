@@ -44,31 +44,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.LoginCandidateActivity"
+            android:name="com.example.Candidate_LoginActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name="com.example.LoginEmployerActivity"
+            android:name="com.example.Employer_LoginActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name="com.example.SigninEmployerActivity"
+            android:name="com.example.Employer_SigninActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name="com.example.SigninCandidateActivity"
+            android:name="com.example.Candidate_SigninActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name="com.example.ListOffersActivity"
+            android:name="com.example.Candidate_ListOffersActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name="com.example.ListApplicationActivity"
+            android:name="com.example.Candidate_MyApplicationsActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name="com.example.Employers_MyOffersActivity"
+            android:name="com.example.Employer_MyOffersActivity"
             android:exported="true">
         </activity>
         <activity

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,7 +20,7 @@ import com.example.utils.RecyclerItemAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListApplicationActivity extends Activity {
+public class Candidate_MyApplicationsActivity extends Activity {
 
     private RecyclerView recyclerView;
     private RecyclerItemAdapter adapter;
@@ -30,7 +29,7 @@ public class ListApplicationActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_applications);
+        setContentView(R.layout.activity_candidate_myapplications);
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
@@ -68,7 +67,7 @@ public class ListApplicationActivity extends Activity {
                 intent.putExtra("item_position", position);
                 startActivity(intent);
                  */
-                CommonHelper.makeNotification(ListApplicationActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                CommonHelper.makeNotification(Candidate_MyApplicationsActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
 
             }
         });
@@ -78,7 +77,7 @@ public class ListApplicationActivity extends Activity {
             @Override
             public void onClick(View v) {
                 // Créer un Intent pour démarrer la nouvelle activité
-                Intent intent = new Intent(ListApplicationActivity.this, ListOffersActivity.class);
+                Intent intent = new Intent(Candidate_MyApplicationsActivity.this, Candidate_ListOffersActivity.class);
                 startActivity(intent); // Démarrer la nouvelle activité
             }
         });

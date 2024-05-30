@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,7 +39,7 @@ import com.google.firebase.storage.UploadTask;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SigninCandidateActivity extends Activity {
+public class Candidate_SigninActivity extends Activity {
 
     Button signInBtn;
 
@@ -50,7 +49,7 @@ public class SigninCandidateActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signin_candidate);
+        setContentView(R.layout.activity_candidate_signin);
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
@@ -68,7 +67,7 @@ public class SigninCandidateActivity extends Activity {
         CommonHelper.centerAndIntalicEditTextHint(this, getString(R.string.text_description), R.id.EditTextDescription);
 
         LambaExpr exprLogIn = () -> {
-            CommonHelper.changeActivity(this, new LoginCandidateActivity());
+            CommonHelper.changeActivity(this, new Candidate_LoginActivity());
         };
 
         CommonHelper.setClickableTextFromString(this, '\n', R.id.textViewSignin, getString(R.string.text_signin_hint), exprLogIn);
@@ -209,7 +208,7 @@ public class SigninCandidateActivity extends Activity {
                                                 }
                                             });
 
-                                    CommonHelper.changeActivity(activity, new LoginEmployerActivity());
+                                    CommonHelper.changeActivity(activity, new Employer_LoginActivity());
                                     finish();
                                 }
                             });
@@ -270,7 +269,7 @@ public class SigninCandidateActivity extends Activity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SigninCandidateActivity.this, "Failed to upload PDF: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Candidate_SigninActivity.this, "Failed to upload PDF: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

@@ -1,38 +1,16 @@
 package com.example;
 
 
-import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.telecom.Call;
-import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentTransaction;
-
-import java.util.List;
-import java.util.Random;
 
 
-import com.example.R;
 import com.example.utils.CommonHelper;
-import com.example.utils.JsonReader;
 import com.example.utils.LambaExpr;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.SignInMethodQueryResult;
 
 public class MainActivity extends Activity {
 
@@ -56,16 +34,16 @@ public class MainActivity extends Activity {
 
         btnAnnonyme.setOnClickListener(view -> {
             //CommonHelper.makeNotification(this, "Test tile", "Some text for notification here", R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
-            CommonHelper.changeActivity(this, new ListOffersActivity());
+            CommonHelper.changeActivity(this, new Candidate_ListOffersActivity());
 
         });
 
         btnInterimaire.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new LoginCandidateActivity());
+            CommonHelper.changeActivity(this, new Candidate_LoginActivity());
         });
 
         btnEmployeur.setOnClickListener(view -> {
-            CommonHelper.changeActivity(this, new LoginEmployerActivity());
+            CommonHelper.changeActivity(this, new Employer_LoginActivity());
         });
 
         LambaExpr lambaExprSyncYes = () -> {

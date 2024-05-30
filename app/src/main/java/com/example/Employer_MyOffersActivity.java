@@ -2,12 +2,9 @@ package com.example;
 
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +18,7 @@ import com.example.utils.RecyclerItemAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Employers_MyOffersActivity extends Activity {
+public class Employer_MyOffersActivity extends Activity {
 
     private RecyclerView recyclerView;
     private RecyclerItemAdapter adapter;
@@ -75,7 +72,7 @@ public class Employers_MyOffersActivity extends Activity {
                 intent.putExtra("item_position", position);
                 startActivity(intent);
                  */
-                CommonHelper.makeNotification(Employers_MyOffersActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                CommonHelper.makeNotification(Employer_MyOffersActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
 
             }
         });

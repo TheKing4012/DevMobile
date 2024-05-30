@@ -1,7 +1,5 @@
 package com.example.utils;
 
-import static androidx.core.content.ContextCompat.getSystemService;
-
 import android.Manifest;
 import android.app.Activity;
 import android.app.NotificationChannel;
@@ -42,7 +40,6 @@ import androidx.fragment.app.Fragment;
 import com.example.MainActivity;
 import com.example.NotificationActivity;
 import com.example.R;
-import com.example.SigninEmployerActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
