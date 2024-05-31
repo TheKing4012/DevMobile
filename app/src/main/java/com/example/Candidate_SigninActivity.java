@@ -295,12 +295,7 @@ public class Candidate_SigninActivity extends Activity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 101) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission accordée, sélectionner le PDF
-                startPickPDFIntent();
-            } else {
-                Toast.makeText(this, "Permission de stockage requise pour sélectionner un PDF", Toast.LENGTH_SHORT).show();
-            }
+            startPickPDFIntent();
         }
     }
 
