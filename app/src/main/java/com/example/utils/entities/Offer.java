@@ -3,10 +3,10 @@ package com.example.utils.entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Offer implements Parcelable {
-
     private String title;
     private String description;
     private String status;
@@ -17,10 +17,8 @@ public class Offer implements Parcelable {
     private Map<String, Candidate> candidates;
     private String offerId;
 
-    // Constructeur par défaut (nécessaire pour Firebase)
     public Offer() {}
 
-    // Constructeur avec tous les champs
     public Offer(String title, String description, String type, String zone, String remuneration, String period, String employerID, Map<String, Candidate> candidates, String offerId) {
         this.title = title;
         this.description = description;
@@ -42,7 +40,8 @@ public class Offer implements Parcelable {
         period = in.readString();
         employerID = in.readString();
         offerId = in.readString();
-        candidates = in.readHashMap(Candidate.class.getClassLoader());
+        candidates = new HashMap<>();
+        in.readMap(candidates, Candidate.class.getClassLoader());
     }
 
     public static final Creator<Offer> CREATOR = new Creator<Offer>() {

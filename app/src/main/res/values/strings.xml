@@ -27,6 +27,7 @@
     <string name="text_error_login_employer_mail">Please indicate an email</string>
     <string name="text_error_create_offer">Please fill all the fields</string>
     <string name="text_error_login_employer_password">Please indicate a password</string>
+    <string name="text_error_no_phone">No phone number precised</string>
     <string name="text_error">Error</string>
     <string name="text_error_signin_password">Please have at least a 6 chars long password</string>
     <string name="text_error_mail_already_used">This email address is already used by an account</string>
@@ -35,6 +36,7 @@
     <string name="text_delete_successs">The offer has been deleted</string>
     <string name="text_cv_upload_successs">The CV has been uploaded</string>
     <string name="text_apply_successs">Successfully applied to the application</string>
+    <string name="text_see_profile">Click here to see his profile</string>
     <string name="text_account_creation_successs">Account Created</string>
     <string name="text_post_cv">You can post a cv or quit the page by clicking the main image</string>
     <string name="text_name">Name</string>

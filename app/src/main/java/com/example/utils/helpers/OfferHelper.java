@@ -2,7 +2,9 @@ package com.example.utils.helpers;
 
 import androidx.annotation.NonNull;
 
+import com.example.utils.entities.Candidate;
 import com.example.utils.listeners.CandidateStatusListener;
+import com.example.utils.listeners.FilteredCandidatesListener;
 import com.example.utils.listeners.FilteredOffersListener;
 import com.example.utils.entities.Offer;
 import com.google.firebase.database.DataSnapshot;
@@ -173,8 +175,75 @@ public class OfferHelper {
         });
     }
 
+    public void getCandidatesByOfferID(String offerID, FilteredCandidatesListener listener) {
+        DatabaseReference offersRef = FirebaseDatabase.getInstance().getReference().child("offers").child(offerID).child("candidates");
+        offersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Candidate> candidates = new ArrayList<>();
+                for (DataSnapshot candidateSnapshot : dataSnapshot.getChildren()) {
+                    Candidate candidate = candidateSnapshot.getValue(Candidate.class);
+                    if (candidate != null) {
+                        candidate.setCandidateId(candidateSnapshot.getKey()); // Set the candidateId
 
+                        // Pour chaque candidat, vérifiez s'il existe également dans users/candidates/{id}
+                        DatabaseReference userCandidateRef = FirebaseDatabase.getInstance().getReference().child("users").child("candidates").child(candidate.getCandidateId());
+                        userCandidateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot userSnapshot) {
+                                if (userSnapshot.exists()) {
+                                    String phoneNumber = userSnapshot.child("phone").getValue(String.class);
+                                    String city = userSnapshot.child("city").getValue(String.class);
+                                    String userId = userSnapshot.child("userId").getValue(String.class); // Récupération du userId
 
+                                    candidate.setPhoneNumber(phoneNumber);
+                                    candidate.setCity(city);
+
+                                    // Utilisation de FirebaseHelper pour récupérer l'email à partir du userID
+                                    FirebaseHelper.fetchEmailFromUserID(userId, new FirebaseHelper.EmailFetchListener() {
+                                        @Override
+                                        public void onEmailFetched(String email) {
+                                            candidate.setEmail(email); // Définition de l'email
+
+                                            // Ajoutez le candidat à la liste après avoir traité toutes les données nécessaires
+                                            candidates.add(candidate);
+
+                                            // Informez le listener une fois tous les candidats récupérés
+                                            if (candidates.size() == dataSnapshot.getChildrenCount()) {
+                                                listener.onFilteredCandidates(candidates);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onError(String errorMessage) {
+                                            // Gestion des erreurs lors de la récupération de l'email
+                                            // Ajoutez le candidat à la liste même en cas d'erreur
+                                            candidates.add(candidate);
+
+                                            // Informez le listener une fois tous les candidats récupérés
+                                            if (candidates.size() == dataSnapshot.getChildrenCount()) {
+                                                listener.onFilteredCandidates(candidates);
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                listener.onCancelled(databaseError);
+                            }
+                        });
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onCancelled(databaseError);
+            }
+        });
+    }
 
 
     public void deleteOffer(String offerId, DatabaseReference.CompletionListener listener) {
