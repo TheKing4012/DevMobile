@@ -1,4 +1,4 @@
-package com.example;
+package com.example.candidate;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,19 +8,13 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.example.utils.CommonHelper;
-import com.example.utils.CustomSpinnerAdapter;
-import com.example.utils.Offer;
-import com.example.utils.OfferHelper;
+import com.example.R;
+import com.example.utils.helpers.CommonHelper;
+import com.example.utils.entities.Offer;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 public class Candidate_SeeOfferActivity extends Activity {

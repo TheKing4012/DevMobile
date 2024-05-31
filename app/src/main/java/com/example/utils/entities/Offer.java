@@ -1,31 +1,30 @@
-package com.example.utils;
+package com.example.utils.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Map;
 
 public class Offer implements Parcelable {
 
     private String title;
     private String description;
-    private String type;
+    private String status;
     private String zone;
     private String remuneration;
     private String period;
     private String employerID;
-    private List<String> candidates;
+    private Map<String, Candidate> candidates;
     private String offerId;
 
     // Constructeur par défaut (nécessaire pour Firebase)
     public Offer() {}
 
     // Constructeur avec tous les champs
-    public Offer(String title, String description, String type, String zone, String remuneration, String period, String employerID, List<String> candidates, String offerId) {
+    public Offer(String title, String description, String type, String zone, String remuneration, String period, String employerID, Map<String, Candidate> candidates, String offerId) {
         this.title = title;
         this.description = description;
-        this.type = type;
+        this.status = type;
         this.zone = zone;
         this.remuneration = remuneration;
         this.period = period;
@@ -37,13 +36,13 @@ public class Offer implements Parcelable {
     protected Offer(Parcel in) {
         title = in.readString();
         description = in.readString();
-        type = in.readString();
+        status = in.readString();
         zone = in.readString();
         remuneration = in.readString();
         period = in.readString();
         employerID = in.readString();
-        candidates = in.createStringArrayList();
         offerId = in.readString();
+        candidates = in.readHashMap(Candidate.class.getClassLoader());
     }
 
     public static final Creator<Offer> CREATOR = new Creator<Offer>() {
@@ -74,12 +73,12 @@ public class Offer implements Parcelable {
         this.description = description;
     }
 
-    public String getType() {
-        return type;
+    public String getStatus() {
+        return status;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getZone() {
@@ -114,11 +113,11 @@ public class Offer implements Parcelable {
         this.employerID = employerID;
     }
 
-    public List<String> getCandidates() {
+    public Map<String, Candidate> getCandidates() {
         return candidates;
     }
 
-    public void setCandidates(List<String> candidates) {
+    public void setCandidates(Map<String, Candidate> candidates) {
         this.candidates = candidates;
     }
 
@@ -139,12 +138,12 @@ public class Offer implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(description);
-        dest.writeString(type);
+        dest.writeString(status);
         dest.writeString(zone);
         dest.writeString(remuneration);
         dest.writeString(period);
         dest.writeString(employerID);
-        dest.writeStringList(candidates);
         dest.writeString(offerId);
+        dest.writeMap(candidates);
     }
 }

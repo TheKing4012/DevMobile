@@ -9,7 +9,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 
-import com.example.utils.CommonHelper;
+import com.example.candidate.Candidate_ListOffersActivity;
+import com.example.candidate.Candidate_LoginActivity;
+import com.example.employer.Employer_LoginActivity;
+import com.example.utils.helpers.CommonHelper;
 import com.example.utils.LambaExpr;
 
 public class MainActivity extends Activity {

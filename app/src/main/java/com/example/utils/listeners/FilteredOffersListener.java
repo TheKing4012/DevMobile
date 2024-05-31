@@ -1,5 +1,6 @@
-package com.example.utils;
+package com.example.utils.listeners;
 
+import com.example.utils.entities.Offer;
 import com.google.firebase.database.DatabaseError;
 
 import java.util.List;

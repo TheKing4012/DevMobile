@@ -1,9 +1,7 @@
 package com.example.utils;
 
-import android.graphics.drawable.Drawable;
-
-import java.security.InvalidParameterException;
-import java.util.Objects;
+import com.example.utils.entities.Offer;
+import com.example.utils.helpers.CommonHelper;
 
 public class RecyclerItem {
     private Offer offer;

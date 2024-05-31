@@ -1,4 +1,4 @@
-package com.example;
+package com.example.candidate;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.utils.CommonHelper;
+import com.example.R;
+import com.example.utils.helpers.CommonHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 

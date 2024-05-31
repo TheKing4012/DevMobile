@@ -1,5 +1,10 @@
-package com.example.utils;
+package com.example.utils.helpers;
 
+import androidx.annotation.NonNull;
+
+import com.example.utils.listeners.CandidateStatusListener;
+import com.example.utils.listeners.FilteredOffersListener;
+import com.example.utils.entities.Offer;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +39,7 @@ public class OfferHelper {
                     Offer offer = new Offer();
                     offer.setTitle(snapshot.child("title").getValue(String.class));
                     offer.setDescription(snapshot.child("description").getValue(String.class));
-                    offer.setType(snapshot.child("type").getValue(String.class));
+                    offer.setStatus(snapshot.child("type").getValue(String.class));
                     offer.setZone(snapshot.child("zone").getValue(String.class));
                     offer.setRemuneration(snapshot.child("remuneration").getValue(String.class));
                     offer.setPeriod(snapshot.child("period").getValue(String.class));
@@ -66,7 +71,7 @@ public class OfferHelper {
                     Offer offer = snapshot.getValue(Offer.class);
                     if (offer != null && offer.getZone().equals(zone)
                             && offer.getPeriod().equals(period)
-                            && offer.getType().equals(status)) {
+                            && offer.getStatus().equals(status)) {
                         filteredOffers.add(offer);
                     }
                 }
@@ -119,6 +124,58 @@ public class OfferHelper {
             }
         });
     }
+
+    public void getOffersByCandidateID(String candidateID, FilteredOffersListener listener) {
+        DatabaseReference offersRef = FirebaseDatabase.getInstance().getReference().child("offers");
+        offersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Offer> candidateOffers = new ArrayList<>();
+                for (DataSnapshot offerSnapshot : dataSnapshot.getChildren()) {
+                    Offer offer = offerSnapshot.getValue(Offer.class);
+                    if (offer != null && offerSnapshot.hasChild("candidates")) {
+                        DataSnapshot candidatesSnapshot = offerSnapshot.child("candidates");
+                        if (candidatesSnapshot.hasChild(candidateID)) {
+                            candidateOffers.add(offer);
+                        }
+                    }
+                }
+                listener.onFilteredOffers(candidateOffers);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onCancelled(databaseError);
+            }
+        });
+    }
+
+
+
+    public void getCandidateStatusForOffer(String offerId, String candidateID, CandidateStatusListener listener) {
+        DatabaseReference offerRef = FirebaseDatabase.getInstance().getReference()
+                .child("offers").child(offerId).child("candidates").child(candidateID);
+        offerRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String status = dataSnapshot.child("status").getValue(String.class);
+                    listener.onStatusRetrieved(status);
+                } else {
+                    listener.onStatusRetrieved(null);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onCancelled(databaseError);
+            }
+        });
+    }
+
+
+
+
 
     public void deleteOffer(String offerId, DatabaseReference.CompletionListener listener) {
         DatabaseReference offerRef = databaseReference.child(offerId);
