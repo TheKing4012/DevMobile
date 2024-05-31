@@ -75,7 +75,7 @@ public class Employer_MyOffersActivity extends Activity {
                 recyclerItemList.clear();
                 for (Offer offer : offers) {
                     myOffers.add(offer);
-                    recyclerItemList.add(new RecyclerItem(offer, ""));
+                    recyclerItemList.add(new RecyclerItem(offer, null));
                 }
                 adapter.notifyDataSetChanged();
             }

@@ -141,7 +141,7 @@ public class Candidate_ListOffersActivity extends Activity {
             public void onFilteredOffers(List<Offer> offers) {
                 recyclerItemList.clear();
                 for (Offer offer : offers) {
-                    recyclerItemList.add(new RecyclerItem(offer, offer.getStatus()));
+                    recyclerItemList.add(new RecyclerItem(offer, null));
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -160,7 +160,7 @@ public class Candidate_ListOffersActivity extends Activity {
             public void onFilteredOffers(List<Offer> offers) {
                 recyclerItemList.clear();
                 for (Offer offer : offers) {
-                    recyclerItemList.add(new RecyclerItem(offer, status));
+                    recyclerItemList.add(new RecyclerItem(offer, null));
                 }
                 adapter.notifyDataSetChanged();
             }
