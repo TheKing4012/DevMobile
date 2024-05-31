@@ -45,7 +45,7 @@ public class Candidate_ListOffersActivity extends Activity {
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
         LambaExpr exprImg = () -> {
-            if(CommonHelper.isFireBaseUserConnected()) {
+            if (CommonHelper.isFireBaseUserConnected()) {
                 CommonHelper.signOutFirebase(this);
                 CommonHelper.makeNotification(this, this.getResources().getString(R.string.text_disconnected), "", R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
                 finish();
@@ -121,6 +121,16 @@ public class Candidate_ListOffersActivity extends Activity {
                 } else {
                     loadLast100Offers();
                 }
+            }
+        });
+
+        adapter.setOnItemClickListener(new RecyclerItemAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Offer offer = recyclerItemList.get(position).getOffer();
+                Intent intent = new Intent(Candidate_ListOffersActivity.this, Candidate_SeeOfferActivity.class);
+                intent.putExtra("offer", offer);
+                startActivity(intent);
             }
         });
     }

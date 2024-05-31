@@ -9,9 +9,15 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.example.utils.CommonHelper;
 import com.example.utils.CustomSpinnerAdapter;
+import com.example.utils.Offer;
+import com.example.utils.OfferHelper;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 public class Candidate_SeeOfferActivity extends Activity {
@@ -42,11 +48,19 @@ public class Candidate_SeeOfferActivity extends Activity {
         textViewPeriode = findViewById(R.id.TextViewPeriode);
         textViewSalary = findViewById(R.id.TextViewSalary);
 
-        textViewTitle.setText("Découvrir le secret de la licorne");
-        textViewDescription.setText("Embarquer avec TinTin à la recherche du secret du navire : 'La Licorne'");
-        textViewZone.setText("Béziers");
-        textViewPeriode.setText("Fall 2023");
-        textViewSalary.setText("4000€");
+        Intent intent = getIntent();
+        Offer offer;
+        Activity activity = this;
+        if (intent != null) {
+            offer = intent.getParcelableExtra("offer");
+            if (offer != null) {
+                textViewTitle.setText(offer.getTitle());
+                textViewDescription.setText(offer.getDescription());
+                textViewZone.setText(offer.getZone());
+                textViewPeriode.setText(offer.getPeriod());
+                textViewSalary.setText(offer.getRemuneration() + "€");
+            }
+        }
 
 
         applyBtn = findViewById(R.id.button_apply);
@@ -62,13 +76,17 @@ public class Candidate_SeeOfferActivity extends Activity {
             }
         });
 
-        applyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Créer un Intent pour démarrer la nouvelle activité
-                Intent intent = new Intent(Candidate_SeeOfferActivity.this, Candidate_ApplyActivity.class);
-                startActivity(intent); // Démarrer la nouvelle activité
-            }
-        });
+        if(!CommonHelper.isFireBaseUserConnected()) {
+            applyBtn.setVisibility(View.GONE);
+        } else {
+            applyBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Créer un Intent pour démarrer la nouvelle activité
+                    Intent intent = new Intent(Candidate_SeeOfferActivity.this, Candidate_ApplyActivity.class);
+                    startActivity(intent); // Démarrer la nouvelle activité
+                }
+            });
+        }
     }
 }
