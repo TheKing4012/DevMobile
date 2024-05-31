@@ -230,9 +230,14 @@ public class Candidate_SigninActivity extends Activity {
 
     private void pickPDFFromStorage() {
         // Vérifier d'abord les autorisations
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             // Si les autorisations ne sont pas accordées, demander à l'utilisateur
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
+            ActivityCompat.requestPermissions(
+                    this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    101);
         } else {
             // Les autorisations sont déjà accordées, donc sélectionner le PDF
             startPickPDFIntent();
@@ -244,7 +249,10 @@ public class Candidate_SigninActivity extends Activity {
         intent.setType("application/pdf");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-        startActivityForResult(Intent.createChooser(intent, "Sélectionner un fichier PDF"), REQUEST_CODE_PICK_PDF);
+        startActivityForResult(Intent.createChooser(
+                intent,
+                "Sélectionner un fichier PDF"),
+                REQUEST_CODE_PICK_PDF);
     }
 
 
@@ -265,11 +273,10 @@ public class Candidate_SigninActivity extends Activity {
             Toast.makeText(this, "Utilisateur non connecté", Toast.LENGTH_SHORT).show();
             return;
         }
-
         String userId = currentUser.getUid();
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference pdfRef = storageRef.child("pdfs/" + userId + "/" + System.currentTimeMillis() + ".pdf");
-
+        StorageReference pdfRef = storageRef.child(
+                "pdfs/" + userId + "/" + System.currentTimeMillis() + ".pdf");
         pdfRef.putFile(pdfUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
