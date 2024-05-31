@@ -221,6 +221,21 @@ public class CommonHelper {
         }
     }
 
+    public static String shortenText(String text) {
+        if (text == null) {
+            return null;
+        }
+
+        if (text.length() <= 30) {
+            if(text.length() <= 20) {
+                return text;
+            }
+            return text.substring(0, 20)+"\n"+text.substring(21);
+        }
+
+        return text.substring(0, 20)+"\n"+text.substring(21,32)+"...";
+    }
+
     public static void makeNotification(Activity from, String title, String descShort, int iconID, int colorID, String dataString, String descDetailled) {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if(ContextCompat.checkSelfPermission(from,

@@ -29,7 +29,7 @@ public class Employer_LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (CommonHelper.isFireBaseUserConnected()) {
-            CommonHelper.changeActivity(this, new Candidate_ListOffersActivity());
+            CommonHelper.changeActivity(this, new Employer_MyOffersActivity());
         } else {
             setContentView(R.layout.activity_employer_login);
 

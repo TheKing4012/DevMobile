@@ -230,13 +230,24 @@ public class Candidate_SigninActivity extends Activity {
     private static final int REQUEST_CODE_PICK_PDF = 101;
 
     private void pickPDFFromStorage() {
+        // Vérifier d'abord les autorisations
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // Si les autorisations ne sont pas accordées, demander à l'utilisateur
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
+        } else {
+            // Les autorisations sont déjà accordées, donc sélectionner le PDF
+            startPickPDFIntent();
+        }
+    }
+
+    private void startPickPDFIntent() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("application/pdf");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-        checkStoragePermissions();
         startActivityForResult(Intent.createChooser(intent, "Sélectionner un fichier PDF"), REQUEST_CODE_PICK_PDF);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -285,12 +296,14 @@ public class Candidate_SigninActivity extends Activity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 101) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted
+                // Permission accordée, sélectionner le PDF
+                startPickPDFIntent();
             } else {
-                Toast.makeText(this, "Storage permission is required to select PDF", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission de stockage requise pour sélectionner un PDF", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
     private void saveUserDataWithPDF(String pdfUrl) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String name = ((EditText) findViewById(R.id.EditTextNom)).getText().toString();

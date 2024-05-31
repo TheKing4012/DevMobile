@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utils.CommonHelper;
 import com.example.utils.FadeItemAnimator;
+import com.example.utils.LambaExpr;
 import com.example.utils.RecyclerItem;
 import com.example.utils.RecyclerItemAdapter;
 
@@ -33,7 +34,16 @@ public class Candidate_MyApplicationsActivity extends Activity {
 
         CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
 
-        CommonHelper.addReturnBtnOnImg(this);
+        LambaExpr exprImg = () -> {
+            if(CommonHelper.isFireBaseUserConnected()) {
+                CommonHelper.signOutFirebase(this);
+                CommonHelper.makeNotification(this, this.getResources().getString(R.string.text_disconnected), "", R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                finish();
+            }
+            CommonHelper.changeActivity(this, new MainActivity());
+        };
+
+        CommonHelper.addReturnBtnOnImgWithLambda(this, exprImg);
 
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -46,15 +56,6 @@ public class Candidate_MyApplicationsActivity extends Activity {
         recyclerView.setItemAnimator(new FadeItemAnimator(this));
 
         recyclerItemList = new ArrayList<>();
-        recyclerItemList.add(new RecyclerItem("Item 1", "Description 1", "check"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "pending"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "check"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "deny"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "pending"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "deny"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "deny"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "pending"));
-        recyclerItemList.add(new RecyclerItem("Item 2", "Description 2", "check"));
         // Ajoutez d'autres items ici
 
         adapter = new RecyclerItemAdapter(recyclerItemList);

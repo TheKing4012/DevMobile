@@ -6,27 +6,22 @@ import java.security.InvalidParameterException;
 import java.util.Objects;
 
 public class RecyclerItem {
-    private String text1;
+    private Offer offer;
     private String text2;
     private String imageStatus; // can be "check", "pending", "deny" or null
 
-    public RecyclerItem(String text1, String text2, String imageStatus) {
-        this.text1 = text1;
-        this.text2 = text2;
+    public RecyclerItem(Offer offer, String imageStatus) {
+        this.offer = offer;
         this.imageStatus = imageStatus;
     }
 
     // Getters and setters
     public String getText1() {
-        return text1;
-    }
-
-    public void setText1(String text1) {
-        this.text1 = text1;
+        return offer.getTitle();
     }
 
     public String getText2() {
-        return text2;
+        return CommonHelper.shortenText(offer.getDescription());
     }
 
     public void setText2(String text2) {
@@ -39,5 +34,13 @@ public class RecyclerItem {
 
     public void setImageStatus(String imageStatus) {
         this.imageStatus = imageStatus;
+    }
+
+    public Offer getOffer() {
+        return offer;
+    }
+
+    public void setOffer(Offer offer) {
+        this.offer = offer;
     }
 }

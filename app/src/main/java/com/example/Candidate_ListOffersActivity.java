@@ -126,24 +126,23 @@ public class Candidate_ListOffersActivity extends Activity {
     }
 
     private void loadLast100Offers() {
-        offerHelper.getLast100Offers(new ValueEventListener() {
+        offerHelper.getLast100Offers(new FilteredOffersListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onFilteredOffers(List<Offer> offers) {
                 recyclerItemList.clear();
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String title = snapshot.child("title").getValue(String.class);
-                    String description = snapshot.child("description").getValue(String.class);
-                    recyclerItemList.add(new RecyclerItem(title, description, "status"));
+                for (Offer offer : offers) {
+                    recyclerItemList.add(new RecyclerItem(offer, offer.getType()));
                 }
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(Candidate_ListOffersActivity.this, "Failed to load offers: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Candidate_ListOffersActivity.this, "Failed to filter offers: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
     private void loadLast100OffersWithCriteria(String zone, String period, String status) {
         offerHelper.getLast100OffersWithCriteria(zone, period, status, new FilteredOffersListener() {
@@ -151,8 +150,7 @@ public class Candidate_ListOffersActivity extends Activity {
             public void onFilteredOffers(List<Offer> offers) {
                 recyclerItemList.clear();
                 for (Offer offer : offers) {
-                    recyclerItemList.add(new RecyclerItem(offer.getTitle(), offer.getDescription(), status));
-                    System.out.println(offer);
+                    recyclerItemList.add(new RecyclerItem(offer, status));
                 }
                 adapter.notifyDataSetChanged();
             }
