@@ -90,4 +90,6 @@
     <string name="postuler">Apply</string>
     <string name="text_deny">Reject</string>
     <string name="text_approve">Accept</string>
+    <string name="text_error_create_offer">Please fill all the fields</string>
+    <string name="text_offer_created">Offer created</string>
 </resources>

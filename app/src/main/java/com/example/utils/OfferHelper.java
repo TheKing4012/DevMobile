@@ -20,10 +20,42 @@ public class OfferHelper {
         databaseReference = FirebaseDatabase.getInstance().getReference("offers");
     }
 
-    public void getLast100Offers(ValueEventListener listener) {
+    public void getLast100Offers(FilteredOffersListener listener) {
         Query query = databaseReference.orderByKey().limitToLast(100);
-        query.addListenerForSingleValueEvent(listener);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<DataSnapshot> snapshotList = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    snapshotList.add(snapshot);
+                }
+                List<Offer> offers = new ArrayList<>();
+                for (DataSnapshot snapshot : snapshotList) {
+                    Offer offer = new Offer();
+                    offer.setTitle(snapshot.child("title").getValue(String.class));
+                    offer.setDescription(snapshot.child("description").getValue(String.class));
+                    offer.setType(snapshot.child("type").getValue(String.class));
+                    offer.setZone(snapshot.child("zone").getValue(String.class));
+                    offer.setRemuneration(snapshot.child("remuneration").getValue(String.class));
+                    offer.setPeriod(snapshot.child("period").getValue(String.class));
+                    offer.setEmployerID(snapshot.child("employerID").getValue(String.class));
+                    offer.setOfferId(snapshot.child("offerId").getValue(String.class));
+
+                    offers.add(offer);
+                }
+                listener.onFilteredOffers(offers);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                listener.onCancelled(databaseError);
+            }
+        });
     }
+
+
+
+
 
     public void getLast100OffersWithCriteria(String zone, String period, String status, FilteredOffersListener listener) {
         databaseReference.orderByKey().limitToLast(100).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -34,7 +66,7 @@ public class OfferHelper {
                     Offer offer = snapshot.getValue(Offer.class);
                     if (offer != null && offer.getZone().equals(zone)
                             && offer.getPeriod().equals(period)
-                            && offer.getStatus().equals(status)) {
+                            && offer.getType().equals(status)) {
                         filteredOffers.add(offer);
                     }
                 }
@@ -48,7 +80,7 @@ public class OfferHelper {
         });
     }
 
-    public void addOffer(String title, String description, String type, String zone, String remuneration, String period, DatabaseReference.CompletionListener listener) {
+    public void addOffer(String title, String description, String type, String zone, String remuneration, String period, String employerID, DatabaseReference.CompletionListener listener) {
         DatabaseReference offersRef = databaseReference.push();
         String offerId = offersRef.getKey();
 
@@ -59,10 +91,35 @@ public class OfferHelper {
         offerData.put("zone", zone);
         offerData.put("remuneration", remuneration);
         offerData.put("period", period);
+        offerData.put("employerID", employerID);
+        offerData.put("candidates", new ArrayList<>());
         offerData.put("offerId", offerId);
 
         offersRef.setValue(offerData, listener);
     }
+
+    public void getOffersByEmployerID(String employerID, FilteredOffersListener listener) {
+        Query query = databaseReference.orderByKey();
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<Offer> employerOffers = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Offer offer = snapshot.getValue(Offer.class);
+                    if (offer != null && employerID.equals(offer.getEmployerID())) {
+                        employerOffers.add(offer);
+                    }
+                }
+                listener.onFilteredOffers(employerOffers);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                listener.onCancelled(databaseError);
+            }
+        });
+    }
+
 
     public void removeOffer(DatabaseReference.CompletionListener listener) {
         DatabaseReference offersRef = databaseReference.push();

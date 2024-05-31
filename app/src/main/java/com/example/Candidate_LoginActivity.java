@@ -33,7 +33,7 @@ public class Candidate_LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (CommonHelper.isFireBaseUserConnected()) {
-            CommonHelper.changeActivity(this, new Candidate_ListOffersActivity());
+            CommonHelper.changeActivity(this, new Candidate_MyApplicationsActivity());
         } else {
             setContentView(R.layout.activity_candidate_login);
             CommonHelper.changeActionbarColor(this, getResources().getColor(R.color.blue));
