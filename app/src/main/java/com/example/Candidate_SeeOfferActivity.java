@@ -3,6 +3,7 @@ package com.example;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -62,6 +63,8 @@ public class Candidate_SeeOfferActivity extends Activity {
             }
         }
 
+        TextView desc = findViewById(R.id.TextViewDescription);
+        desc.setMovementMethod(new ScrollingMovementMethod());
 
         applyBtn = findViewById(R.id.button_apply);
         returnBtn = findViewById(R.id.button_return);

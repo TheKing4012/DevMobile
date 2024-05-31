@@ -72,76 +72,75 @@
                     android:textSize="24sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/border_edittext"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/TextViewTitle"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:hint="@string/text_title"
-                    android:paddingStart="16dp"
-                    android:paddingTop="8dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="8dp"
-                    android:textSize="30sp" />
+                    android:layout_height="match_parent"
+                    android:background="@drawable/border_edittext"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/TextViewDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="4dp"
-                    android:hint="@string/text_description"
-                    android:paddingStart="16dp"
-                    android:paddingTop="8dp"
-                    android:lines="8"
-                    android:maxLines="10"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="8dp"
-                    android:scrollbars="vertical"
-                    android:textSize="25sp" />
+                    <TextView
+                        android:id="@+id/TextViewTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:hint="@string/text_title"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="30sp" />
 
-                <TextView
-                    android:id="@+id/TextViewPeriode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:hint="Time"
-                    android:paddingStart="16dp"
-                    android:paddingTop="8dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="8dp"
-                    android:textSize="30sp" />
+                    <TextView
+                        android:id="@+id/TextViewDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:hint="@string/text_description"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:lines="8"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="8dp"
+                        android:scrollbars="vertical"
+                        android:textSize="25sp" />
 
-                <TextView
-                    android:id="@+id/TextViewZone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:hint="Zone"
-                    android:paddingStart="16dp"
-                    android:paddingTop="8dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="8dp"
-                    android:textSize="30sp" />
+                    <TextView
+                        android:id="@+id/TextViewPeriode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:hint="Time"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="30sp" />
 
-                <TextView
-                    android:id="@+id/TextViewSalary"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:hint="Salary"
-                    android:paddingStart="16dp"
-                    android:paddingTop="8dp"
-                    android:paddingEnd="16dp"
-                    android:paddingBottom="8dp"
-                    android:textSize="30sp" />
+                    <TextView
+                        android:id="@+id/TextViewZone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:hint="Zone"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="30sp" />
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/TextViewSalary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:hint="Salary"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="8dp"
+                        android:textSize="30sp" />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
