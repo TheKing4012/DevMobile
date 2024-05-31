@@ -208,8 +208,7 @@ public class Candidate_SigninActivity extends Activity {
                                                 }
                                             });
 
-                                    CommonHelper.changeActivity(activity, new Employer_LoginActivity());
-                                    finish();
+                                    CommonHelper.makeNotification(activity, getString(R.string.text_account_creation_successs), getString(R.string.text_cv), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
                                 }
                             });
 
@@ -260,7 +259,14 @@ public class Candidate_SigninActivity extends Activity {
     }
 
     private void uploadPDFToStorage(Uri pdfUri) {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            // Utilisateur non connecté, gérer l'erreur ou rediriger vers l'écran de connexion
+            Toast.makeText(this, "Utilisateur non connecté", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String userId = currentUser.getUid();
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         StorageReference pdfRef = storageRef.child("pdfs/" + userId + "/" + System.currentTimeMillis() + ".pdf");
 
@@ -273,6 +279,8 @@ public class Candidate_SigninActivity extends Activity {
                             public void onSuccess(Uri uri) {
                                 String pdfUrl = uri.toString();
                                 saveUserDataWithPDF(pdfUrl);
+                                CommonHelper.makeNotification(Candidate_SigninActivity.this, getString(R.string.text_cv_upload_successs), getString(R.string.text_cv), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                                CommonHelper.changeActivity(Candidate_SigninActivity.this, new Candidate_LoginActivity());
                             }
                         });
                     }
@@ -280,7 +288,7 @@ public class Candidate_SigninActivity extends Activity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Candidate_SigninActivity.this, "Failed to upload PDF: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Candidate_SigninActivity.this, "Échec de l'envoi du PDF: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

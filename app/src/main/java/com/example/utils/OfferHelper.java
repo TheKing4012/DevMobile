@@ -120,16 +120,8 @@ public class OfferHelper {
         });
     }
 
-
-    public void removeOffer(DatabaseReference.CompletionListener listener) {
-        DatabaseReference offersRef = databaseReference.push();
-        String offerId = offersRef.getKey();
-
-        offersRef = databaseReference.child(offerId);
-        offersRef.removeValue(listener);
-    }
-
-    public void addCandidateToOffer(String offerId, String candidateId, DatabaseReference.CompletionListener listener) {
-        databaseReference.child(offerId).child("candidates").child(candidateId).setValue(true, listener);
+    public void deleteOffer(String offerId, DatabaseReference.CompletionListener listener) {
+        DatabaseReference offerRef = databaseReference.child(offerId);
+        offerRef.removeValue(listener);
     }
 }

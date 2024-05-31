@@ -93,4 +93,8 @@
     <string name="text_error_create_offer">Veuillez remplir tous les champs</string>
     <string name="text_offer_created">Offre créée avec succès</string>
     <string name="create_offer">Déposer une offre</string>
+    <string name="text_delete_successs">L\'offre a bien été supprimée</string>
+    <string name="text_account_creation_successs">Compte créé</string>
+    <string name="text_post_cv">Vous pouvez déposer un CV ou cliquer sur l\'image principale pour revenir au menu</string>
+    <string name="text_cv_upload_successs">Le CV a été téléchargé</string>
 </resources>

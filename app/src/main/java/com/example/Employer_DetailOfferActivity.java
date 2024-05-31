@@ -8,14 +8,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utils.CommonHelper;
 import com.example.utils.FadeItemAnimator;
 import com.example.utils.Offer;
+import com.example.utils.OfferHelper;
 import com.example.utils.RecyclerItem;
 import com.example.utils.RecyclerItemAdapter_buttons;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,10 +70,26 @@ public class Employer_DetailOfferActivity extends Activity {
 
         Intent intent = getIntent();
         Offer offer;
+        Activity activity = this;
         if (intent != null) {
             offer = intent.getParcelableExtra("offer");
             if (offer != null) {
                 offerTitle.setText(offer.getTitle()); // Par exemple, pour afficher le titre de l'offre
+                Button btnDelete = findViewById(R.id.button_see_offers);
+
+                btnDelete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        OfferHelper offerHelper = new OfferHelper();
+                        offerHelper.deleteOffer(offer.getOfferId(), new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                CommonHelper.makeNotification(activity, activity.getResources().getString(R.string.text_delete_successs), "", R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                                CommonHelper.changeActivity(Employer_DetailOfferActivity.this, new Employer_MyOffersActivity());
+                            }
+                        });
+                    }
+                });
             }
         }
 

@@ -93,4 +93,8 @@
     <string name="text_error_create_offer">Please fill all the fields</string>
     <string name="text_offer_created">Offer created</string>
     <string name="create_offer">Create an offer</string>
+    <string name="text_delete_successs">The offer has been deleted</string>
+    <string name="text_account_creation_successs">Account Created</string>
+    <string name="text_post_cv">You can post a cv or quit the page by clicking the main image</string>
+    <string name="text_cv_upload_successs">The CV has been uploaded</string>
 </resources>
