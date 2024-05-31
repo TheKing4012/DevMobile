@@ -19,6 +19,7 @@ import com.example.utils.listeners.FilteredCandidatesListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -66,9 +67,6 @@ public class Candidate_SeeApplicationActivity extends Activity {
             }
         });
 
-        acceptBtn.setVisibility(View.VISIBLE);
-        rejectBtn.setVisibility(View.VISIBLE);
-
         Intent intent = getIntent();
         Offer offer = null;
         Activity activity = this;
@@ -80,6 +78,33 @@ public class Candidate_SeeApplicationActivity extends Activity {
                 textViewZone.setText(offer.getZone());
                 textViewPeriode.setText(offer.getPeriod());
                 textViewSalary.setText(offer.getRemuneration() + "€");
+
+                Candidate candidate = offer.getCandidates().get(FirebaseAuth.getInstance().getUid());
+                String answer = candidate.getAnswer();
+                System.out.println(answer);
+
+                if(answer.isEmpty() || answer == null) {
+                    acceptBtn.setVisibility(View.GONE);
+                    rejectBtn.setVisibility(View.GONE);
+                } else {
+                    acceptBtn.setVisibility(View.VISIBLE);
+                    rejectBtn.setVisibility(View.VISIBLE);
+
+                    Offer finalOffer = offer;
+                    acceptBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            updateOfferStatus(finalOffer, "check", Candidate_SeeApplicationActivity.this);
+                        }
+                    });
+
+                    rejectBtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            updateOfferStatus(finalOffer, "deny", Candidate_SeeApplicationActivity.this);
+                        }
+                    });
+                }
             }
         }
 
@@ -90,32 +115,6 @@ public class Candidate_SeeApplicationActivity extends Activity {
             @Override
             public void onClick(View v) {
                 openMapForZone(finalOffer);
-            }
-        });
-
-        OfferHelper offerHelper = new OfferHelper();
-        offerHelper.getCandidateInfo(offer.getOfferId(), FirebaseAuth.getInstance().getUid(), new FilteredCandidatesListener() {
-            @Override
-            public void onFilteredCandidates(List<Candidate> candidates) {
-                if (!candidates.isEmpty()) {
-                    Candidate candidate = candidates.get(0); // Assuming you expect only one candidate per offer
-                    String status = candidate.getAnswer();
-
-                    System.out.println("Candidate status: " + status); // Log candidate status
-
-                    // Assuming acceptBtn and rejectBtn are properly defined in your activity layout
-                    acceptBtn.setVisibility(View.VISIBLE);
-                    rejectBtn.setVisibility(View.VISIBLE);
-                } else {
-                    // Handle case where no candidates are found
-                    System.out.println("No candidates found for offer: " + finalOffer.getOfferId());
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Handle database error
-                CommonHelper.makeNotification(activity, getString(R.string.text_error), databaseError.getMessage(), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
             }
         });
 
@@ -139,4 +138,23 @@ public class Candidate_SeeApplicationActivity extends Activity {
             Toast.makeText(this, "Aucune application de carte disponible", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void updateOfferStatus(Offer offer, String status, Activity activity) {
+        String candidateId = FirebaseAuth.getInstance().getUid();
+        DatabaseReference offerRef = FirebaseDatabase.getInstance().getReference()
+                .child("offers")
+                .child(offer.getOfferId())
+                .child("candidates")
+                .child(candidateId)
+                .child("status");
+
+        offerRef.setValue(status)
+                .addOnSuccessListener(aVoid -> {
+                    CommonHelper.changeActivity(activity, new Candidate_MyApplicationsActivity());
+                })
+                .addOnFailureListener(e -> {
+                    CommonHelper.changeActivity(activity, new Candidate_MyApplicationsActivity());
+                });
+    }
+
 }
