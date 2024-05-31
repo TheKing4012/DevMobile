@@ -92,4 +92,5 @@
     <string name="text_approve">Accepter</string>
     <string name="text_error_create_offer">Veuillez remplir tous les champs</string>
     <string name="text_offer_created">Offre créée avec succès</string>
+    <string name="create_offer">Déposer une offre</string>
 </resources>
