@@ -15,12 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.R;
 import com.example.candidate.Candidate_ListOffersActivity;
+import com.example.utils.entities.Candidate;
 import com.example.utils.helpers.CommonHelper;
 import com.example.utils.animators.FadeItemAnimator;
 import com.example.utils.entities.Offer;
 import com.example.utils.helpers.OfferHelper;
 import com.example.utils.RecyclerItem;
 import com.example.utils.adapters.RecyclerItemAdapter_buttons;
+import com.example.utils.listeners.FilteredCandidatesListener;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
@@ -58,6 +60,8 @@ public class Employer_DetailOfferActivity extends Activity {
         // Ajoutez d'autres items ici
 
         adapter = new RecyclerItemAdapter_buttons(recyclerItemList);
+        adapter.setActivity(this);
+        adapter.setTextProfile(this.getResources().getString(R.string.text_see_profile));
         recyclerView.setAdapter(adapter);
 
         Button buttonOffers = findViewById(R.id.button_see_offers);
@@ -76,6 +80,7 @@ public class Employer_DetailOfferActivity extends Activity {
         if (intent != null) {
             offer = intent.getParcelableExtra("offer");
             if (offer != null) {
+                adapter.setOfferID(offer.getOfferId());
                 offerTitle.setText(offer.getTitle()); // Par exemple, pour afficher le titre de l'offre
                 Button btnDelete = findViewById(R.id.button_see_offers);
 
@@ -90,6 +95,23 @@ public class Employer_DetailOfferActivity extends Activity {
                                 CommonHelper.changeActivity(Employer_DetailOfferActivity.this, new Employer_MyOffersActivity());
                             }
                         });
+                    }
+                });
+
+                OfferHelper offerHelper = new OfferHelper();
+                offerHelper.getCandidatesByOfferID(offer.getOfferId(), new FilteredCandidatesListener() {
+                    @Override
+                    public void onFilteredCandidates(List<Candidate> candidates) {
+                        recyclerItemList.clear();
+                        for (Candidate candidate : candidates) {
+                            recyclerItemList.add(new RecyclerItem(candidate, null));
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        // Handle possible errors.
                     }
                 });
             }

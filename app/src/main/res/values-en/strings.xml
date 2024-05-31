@@ -99,4 +99,8 @@
     <string name="text_cv_upload_successs">The CV has been uploaded</string>
     <string name="text_error_already_apply">You have already applied to this application</string>
     <string name="text_apply_successs">Successfully applied to the application</string>
+    <string name="text_see_profile">Click here to see his profile</string>
+    <string name="text_error_no_phone">No phone number precised</string>
+    <string name="text_answer_success">The offer has been anwsered</string>
+    <string name="text_error_not_connected">Please connect</string>
 </resources>
