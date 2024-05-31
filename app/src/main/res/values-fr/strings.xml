@@ -10,7 +10,7 @@
     <string name="text_login">Se Connecter</string>
     <string name="text_signin">S\'inscrire</string>
     <string name="text_btn_application">Voir mes candidatures</string>
-    <string name="text_signin_hint">"Vous n'avez pas déjà un compte ?\nSe connecter"</string>
+    <string name="text_signin_hint">"Vous avez déjà un compte ?\nSe connecter"</string>
     <string name="text_login_hint">"Vous n'avez pas de compte ?\n S'inscrire"</string>
     <string name="text_password">Mot de Passe</string>
     <string name="text_company_name">"Nom de l'entreprise"</string>

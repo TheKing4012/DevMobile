@@ -273,10 +273,11 @@
 
             <TextView
                 android:id="@+id/textViewSignin"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:fontFamily="@font/sf_bold"
+                android:gravity="center"
                 android:text="@string/text_signin_hint"
                 android:textAlignment="center"
                 android:textSize="20sp" />
