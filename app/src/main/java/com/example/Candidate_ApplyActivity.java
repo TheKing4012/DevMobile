@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.utils.CommonHelper;
 import com.example.utils.LambaExpr;
+import com.example.utils.Offer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,6 +45,8 @@ public class Candidate_ApplyActivity extends Activity {
 
     Button applyBtn;
     Button returnBtn;
+
+    String pdfUrl = "";
 
     private FirebaseAuth mAuth;
     private DatabaseReference database;
@@ -77,26 +81,57 @@ public class Candidate_ApplyActivity extends Activity {
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Créer un Intent pour démarrer la nouvelle activité
                 Intent intent = new Intent(Candidate_ApplyActivity.this, Candidate_SeeOfferActivity.class);
-                startActivity(intent); // Démarrer la nouvelle activité
+                startActivity(intent);
             }
         });
 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference();
+
+        Intent intent = getIntent();
+        Offer offer = null;
+        Activity activity = this;
+        if (intent != null) {
+            offer = intent.getParcelableExtra("offer");
+            if (offer != null) {
+                TextView textViewTitle = findViewById(R.id.TextViewTitle);
+                textViewTitle.setText(offer.getTitle());
+
+                Button btnApply = findViewById(R.id.button_apply);
+
+                Offer finalOffer = offer;
+                btnApply.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        saveUserDataWithPDF(finalOffer);
+                    }
+                });
+            }
+        }
     }
 
     private static final int REQUEST_CODE_PICK_PDF = 101;
 
     private void pickPDFFromStorage() {
+        // Vérifier d'abord les autorisations
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // Si les autorisations ne sont pas accordées, demander à l'utilisateur
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
+        } else {
+            // Les autorisations sont déjà accordées, donc sélectionner le PDF
+            startPickPDFIntent();
+        }
+    }
+
+    private void startPickPDFIntent() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("application/pdf");
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-        checkStoragePermissions();
         startActivityForResult(Intent.createChooser(intent, "Sélectionner un fichier PDF"), REQUEST_CODE_PICK_PDF);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -109,7 +144,9 @@ public class Candidate_ApplyActivity extends Activity {
     }
 
     private void uploadPDFToStorage(Uri pdfUri) {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        String userId = currentUser.getUid();
         StorageReference storageRef = FirebaseStorage.getInstance().getReference();
         StorageReference pdfRef = storageRef.child("pdfs/" + userId + "/" + System.currentTimeMillis() + ".pdf");
 
@@ -120,8 +157,8 @@ public class Candidate_ApplyActivity extends Activity {
                         pdfRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                String pdfUrl = uri.toString();
-                                saveUserDataWithPDF(pdfUrl);
+                                pdfUrl = uri.toString();
+                                CommonHelper.makeNotification(Candidate_ApplyActivity.this, getString(R.string.text_cv_upload_successs), getString(R.string.text_cv), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
                             }
                         });
                     }
@@ -129,57 +166,73 @@ public class Candidate_ApplyActivity extends Activity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Candidate_ApplyActivity.this, "Failed to upload PDF: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        CommonHelper.makeNotification(Candidate_ApplyActivity.this, getString(R.string.text_error), e.getMessage(), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
                     }
                 });
-    }
-
-    private void checkStoragePermissions() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
-        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 101) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted
-            } else {
-                Toast.makeText(this, "Storage permission is required to select PDF", Toast.LENGTH_SHORT).show();
-            }
+            startPickPDFIntent();
         }
     }
-    private void saveUserDataWithPDF(String pdfUrl) {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+    private void saveUserDataWithPDF(Offer offer) {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        String userId = currentUser.getUid();
         String name = ((EditText) findViewById(R.id.EditTextNom)).getText().toString();
         String surname = ((EditText) findViewById(R.id.EditTextPrenom)).getText().toString();
         String dateOfBirth = ((EditText) findViewById(R.id.EditTextDateNaissance)).getText().toString();
-        String phone = ((EditText) findViewById(R.id.EditTextTelephone)).getText().toString();
         String country = ((EditText) findViewById(R.id.EditTextCountry)).getText().toString();
-        String city = ((EditText) findViewById(R.id.EditTextCity)).getText().toString();
-        String website = ((EditText) findViewById(R.id.EditTextWebsite)).getText().toString();
         String desc = ((EditText) findViewById(R.id.EditTextDescription)).getText().toString();
 
-        registerCandidate(userId, name, surname, dateOfBirth, phone, country, city, website, desc, pdfUrl);
-    }
 
-    private void registerCandidate(String userId, String name, String surname, String dateOfBirth, String phone, String country, String city, String website, String desc, String pdfUrl) {
         Map<String, Object> candidateData = new HashMap<>();
         candidateData.put("name", name);
         candidateData.put("surname", surname);
         candidateData.put("dateOfBirth", dateOfBirth);
-        candidateData.put("phone", phone);
-        candidateData.put("website", website);
         candidateData.put("country", country);
-        candidateData.put("city", city);
         candidateData.put("description", desc);
-        if(pdfUrl != null) {
-            candidateData.put("pdfUrl", pdfUrl);
-        }
+        candidateData.put("pdfUrl", pdfUrl);
 
-        DatabaseReference candidatesRef = database.child("users").child("candidates");
-        candidatesRef.child(userId).setValue(candidateData);
+        DatabaseReference offerRef = database.child("offers").child(offer.getOfferId());
+
+        offerRef.child("candidates").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DataSnapshot userCandidateSnapshot = task.getResult();
+                    if (userCandidateSnapshot.exists()) {
+                        CommonHelper.makeNotification(Candidate_ApplyActivity.this, getString(R.string.text_error), getString(R.string.text_error_already_apply), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                        CommonHelper.changeActivity(Candidate_ApplyActivity.this, new Candidate_ListOffersActivity());
+                    } else {
+                        addCandidateToOffer(offerRef, userId, candidateData);
+                    }
+                } else {
+                    CommonHelper.makeNotification(Candidate_ApplyActivity.this, getString(R.string.text_error), task.getException().getMessage(), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                }
+            }
+        });
     }
+
+    private void addCandidateToOffer(DatabaseReference offerRef, String userId, Map<String, Object> candidateData) {
+        offerRef.child("candidates").child(userId).setValue(candidateData)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        CommonHelper.makeNotification(Candidate_ApplyActivity.this, getString(R.string.text_apply_successs), "", R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                        CommonHelper.changeActivity(Candidate_ApplyActivity.this, new Candidate_ListOffersActivity());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        CommonHelper.makeNotification(Candidate_ApplyActivity.this, getString(R.string.text_error), e.getMessage(), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                    }
+                });
+    }
+
 }

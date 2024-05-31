@@ -30,9 +30,11 @@
     <string name="text_error">Error</string>
     <string name="text_error_signin_password">Please have at least a 6 chars long password</string>
     <string name="text_error_mail_already_used">This email address is already used by an account</string>
+    <string name="text_error_already_apply">You have already applied to this application</string>
     <string name="text_disconnected">You have been disconneted from your last session</string>
     <string name="text_delete_successs">The offer has been deleted</string>
     <string name="text_cv_upload_successs">The CV has been uploaded</string>
+    <string name="text_apply_successs">Successfully applied to the application</string>
     <string name="text_account_creation_successs">Account Created</string>
     <string name="text_post_cv">You can post a cv or quit the page by clicking the main image</string>
     <string name="text_name">Name</string>

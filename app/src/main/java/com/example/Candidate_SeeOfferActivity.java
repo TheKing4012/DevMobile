@@ -97,6 +97,9 @@ public class Candidate_SeeOfferActivity extends Activity {
                 public void onClick(View v) {
                     // Créer un Intent pour démarrer la nouvelle activité
                     Intent intent = new Intent(Candidate_SeeOfferActivity.this, Candidate_ApplyActivity.class);
+                    if(finalOffer != null) {
+                        intent.putExtra("offer", finalOffer);
+                    }
                     startActivity(intent); // Démarrer la nouvelle activité
                 }
             });

@@ -140,7 +140,7 @@
                     android:layout_margin="4dp"
                     android:background="@drawable/border_edittext"
                     android:hint="@string/text_country"
-                    android:inputType="date"
+                    android:inputType="textPersonName"
                     android:paddingStart="16dp"
                     android:paddingTop="8dp"
                     android:paddingEnd="16dp"
