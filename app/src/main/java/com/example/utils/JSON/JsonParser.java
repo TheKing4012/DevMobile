@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.example.utils.JSON;
 
 import android.content.Context;
 import org.json.JSONArray;

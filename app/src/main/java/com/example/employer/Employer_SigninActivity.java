@@ -1,4 +1,4 @@
-package com.example;
+package com.example.employer;
 
 
 import android.app.Activity;
@@ -15,7 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.utils.CommonHelper;
+import com.example.R;
+import com.example.utils.helpers.CommonHelper;
 import com.example.utils.LambaExpr;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

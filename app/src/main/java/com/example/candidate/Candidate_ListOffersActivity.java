@@ -1,4 +1,4 @@
-package com.example;
+package com.example.candidate;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,18 +11,18 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.utils.CommonHelper;
-import com.example.utils.CustomSpinnerAdapter;
-import com.example.utils.FadeItemAnimator;
-import com.example.utils.FilteredOffersListener;
+import com.example.MainActivity;
+import com.example.R;
+import com.example.utils.helpers.CommonHelper;
+import com.example.utils.adapters.CustomSpinnerAdapter;
+import com.example.utils.animators.FadeItemAnimator;
+import com.example.utils.listeners.FilteredOffersListener;
 import com.example.utils.LambaExpr;
-import com.example.utils.Offer;
-import com.example.utils.OfferHelper;
+import com.example.utils.entities.Offer;
+import com.example.utils.helpers.OfferHelper;
 import com.example.utils.RecyclerItem;
-import com.example.utils.RecyclerItemAdapter;
-import com.google.firebase.database.DataSnapshot;
+import com.example.utils.adapters.RecyclerItemAdapter;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -141,7 +141,7 @@ public class Candidate_ListOffersActivity extends Activity {
             public void onFilteredOffers(List<Offer> offers) {
                 recyclerItemList.clear();
                 for (Offer offer : offers) {
-                    recyclerItemList.add(new RecyclerItem(offer, offer.getType()));
+                    recyclerItemList.add(new RecyclerItem(offer, offer.getStatus()));
                 }
                 adapter.notifyDataSetChanged();
             }

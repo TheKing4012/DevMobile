@@ -1,20 +1,22 @@
-package com.example.utils;
+package com.example.utils.adapters;
 
 // RecyclerItemAdapter.java
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.R;
+import com.example.utils.RecyclerItem;
 
 import java.util.List;
-import java.util.Objects;
 
-public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapter.ViewHolder> {
+public class RecyclerItemAdapter_buttons extends RecyclerView.Adapter<RecyclerItemAdapter_buttons.ViewHolder> {
 
     private List<RecyclerItem> recyclerItemList;
     private OnItemClickListener onItemClickListener;
@@ -27,14 +29,14 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
         this.onItemClickListener = onItemClickListener;
     }
 
-    public RecyclerItemAdapter(List<RecyclerItem> recyclerItemList) {
+    public RecyclerItemAdapter_buttons(List<RecyclerItem> recyclerItemList) {
         this.recyclerItemList = recyclerItemList;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout_buttons, parent, false);
         return new ViewHolder(view);
     }
 
@@ -43,22 +45,10 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
         RecyclerItem item = recyclerItemList.get(position);
         holder.textView1.setText(item.getText1());
         holder.textView2.setText(item.getText2());
-
-        if(Objects.equals(item.getImageStatus(), "check")) {
-            holder.imageView.setVisibility(View.VISIBLE);
-            holder.imageView.setImageResource(R.drawable.check);
-        }
-        if(Objects.equals(item.getImageStatus(), "pending")) {
-            holder.imageView.setVisibility(View.VISIBLE);
-            holder.imageView.setImageResource(R.drawable.hourglass);
-        }
-        if(Objects.equals(item.getImageStatus(), "deny")) {
-            holder.imageView.setVisibility(View.VISIBLE);
-            holder.imageView.setImageResource(R.drawable.deny);
-        }
-        if(item.getImageStatus()==null){
-            holder.imageView.setVisibility(View.GONE);
-        }
+        holder.imageCheck.setVisibility(View.VISIBLE);
+        holder.imageCheck.setImageResource(R.drawable.check);
+        holder.imageDeny.setVisibility(View.VISIBLE);
+        holder.imageDeny.setImageResource(R.drawable.deny);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,13 +71,15 @@ public class RecyclerItemAdapter extends RecyclerView.Adapter<RecyclerItemAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView1;
         TextView textView2;
-        ImageView imageView;
+        ImageView imageCheck;
+        ImageView imageDeny;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView1 = itemView.findViewById(R.id.textView1);
             textView2 = itemView.findViewById(R.id.textView2);
-            imageView = itemView.findViewById(R.id.imageView);
+            imageCheck = itemView.findViewById(R.id.button_accept);
+            imageDeny = itemView.findViewById(R.id.button_deny);
         }
     }
 }

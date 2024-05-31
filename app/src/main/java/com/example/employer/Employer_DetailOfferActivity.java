@@ -1,4 +1,4 @@
-package com.example;
+package com.example.employer;
 
 
 import android.app.Activity;
@@ -13,12 +13,14 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.utils.CommonHelper;
-import com.example.utils.FadeItemAnimator;
-import com.example.utils.Offer;
-import com.example.utils.OfferHelper;
+import com.example.R;
+import com.example.candidate.Candidate_ListOffersActivity;
+import com.example.utils.helpers.CommonHelper;
+import com.example.utils.animators.FadeItemAnimator;
+import com.example.utils.entities.Offer;
+import com.example.utils.helpers.OfferHelper;
 import com.example.utils.RecyclerItem;
-import com.example.utils.RecyclerItemAdapter_buttons;
+import com.example.utils.adapters.RecyclerItemAdapter_buttons;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 

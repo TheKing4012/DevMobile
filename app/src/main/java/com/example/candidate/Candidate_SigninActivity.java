@@ -1,4 +1,4 @@
-package com.example;
+package com.example.candidate;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,7 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.utils.CommonHelper;
+import com.example.R;
+import com.example.utils.helpers.CommonHelper;
 import com.example.utils.LambaExpr;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

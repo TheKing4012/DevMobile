@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.example.utils.helpers;
 
 import android.Manifest;
 import android.app.Activity;
@@ -40,6 +40,7 @@ import androidx.fragment.app.Fragment;
 import com.example.MainActivity;
 import com.example.NotificationActivity;
 import com.example.R;
+import com.example.utils.LambaExpr;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

@@ -1,4 +1,4 @@
-package com.example;
+package com.example.employer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.example.utils.CommonHelper;
-import com.example.utils.CustomSpinnerAdapter;
-import com.example.utils.OfferHelper;
+import com.example.R;
+import com.example.utils.helpers.CommonHelper;
+import com.example.utils.adapters.CustomSpinnerAdapter;
+import com.example.utils.helpers.OfferHelper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;

@@ -1,4 +1,4 @@
-package com.example;
+package com.example.employer;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,15 +9,16 @@ import android.widget.Button;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.utils.CommonHelper;
-import com.example.utils.FadeItemAnimator;
-import com.example.utils.FilteredOffersListener;
+import com.example.MainActivity;
+import com.example.R;
+import com.example.utils.helpers.CommonHelper;
+import com.example.utils.animators.FadeItemAnimator;
+import com.example.utils.listeners.FilteredOffersListener;
 import com.example.utils.LambaExpr;
-import com.example.utils.Offer;
-import com.example.utils.OfferHelper;
+import com.example.utils.entities.Offer;
+import com.example.utils.helpers.OfferHelper;
 import com.example.utils.RecyclerItem;
-import com.example.utils.RecyclerItemAdapter;
-import com.example.utils.RecyclerItemAdapter_buttons;
+import com.example.utils.adapters.RecyclerItemAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
