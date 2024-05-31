@@ -35,6 +35,7 @@
     <string name="text_disconnected">You have been disconneted from your last session</string>
     <string name="text_delete_successs">The offer has been deleted</string>
     <string name="text_cv_upload_successs">The CV has been uploaded</string>
+    <string name="text_answer_success">The offer has been anwsered</string>
     <string name="text_apply_successs">Successfully applied to the application</string>
     <string name="text_see_profile">Click here to see his profile</string>
     <string name="text_account_creation_successs">Account Created</string>

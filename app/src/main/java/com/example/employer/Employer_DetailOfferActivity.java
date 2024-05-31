@@ -80,6 +80,7 @@ public class Employer_DetailOfferActivity extends Activity {
         if (intent != null) {
             offer = intent.getParcelableExtra("offer");
             if (offer != null) {
+                adapter.setOfferID(offer.getOfferId());
                 offerTitle.setText(offer.getTitle()); // Par exemple, pour afficher le titre de l'offre
                 Button btnDelete = findViewById(R.id.button_see_offers);
 

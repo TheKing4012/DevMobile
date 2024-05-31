@@ -101,4 +101,5 @@
     <string name="text_apply_successs">Candidature soumise avec succès</string>
     <string name="text_see_profile">Cliquez ici pour voir son profile</string>
     <string name="text_error_no_phone">Aucun numéro associé</string>
+    <string name="text_answer_success">L\'offre a été répondu</string>
 </resources>

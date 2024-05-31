@@ -21,9 +21,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.R;
 import com.example.employer.Employer_CandidateProfilActivity;
+import com.example.employer.Employer_DetailOfferActivity;
+import com.example.employer.Employer_MyOffersActivity;
 import com.example.utils.RecyclerItem;
 import com.example.utils.entities.Candidate;
 import com.example.utils.helpers.CommonHelper;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -33,6 +37,8 @@ public class RecyclerItemAdapter_buttons extends RecyclerView.Adapter<RecyclerIt
     private OnItemClickListener onItemClickListener;
     private Activity activity;
     private String textProfile = "";
+
+    private String offerID = "";
 
     public interface OnItemClickListener {
         void onItemClick(int position);
@@ -52,6 +58,10 @@ public class RecyclerItemAdapter_buttons extends RecyclerView.Adapter<RecyclerIt
 
     public void setTextProfile(String textProfile) {
         this.textProfile = textProfile;
+    }
+
+    public void setOfferID(String offerID) {
+        this.offerID = offerID;
     }
 
     @NonNull
@@ -97,6 +107,20 @@ public class RecyclerItemAdapter_buttons extends RecyclerView.Adapter<RecyclerIt
         holder.imageDeny.setVisibility(View.VISIBLE);
         holder.imageDeny.setImageResource(R.drawable.deny);
 
+        holder.imageCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateAnswer(candidate, "accept");
+            }
+        });
+
+        holder.imageDeny.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateAnswer(candidate, "deny");
+            }
+        });
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +135,19 @@ public class RecyclerItemAdapter_buttons extends RecyclerView.Adapter<RecyclerIt
                 }
             }
         });
+    }
+
+    private void updateAnswer(Candidate candidate, String answer) {
+        DatabaseReference offerRef = FirebaseDatabase.getInstance().getReference().child("offers").child(offerID).child("candidates").child(candidate.getCandidateId());
+        offerRef.child("answer").setValue(answer)
+                .addOnSuccessListener(aVoid -> {
+                    notifyDataSetChanged();
+                    CommonHelper.makeNotification(activity, activity.getResources().getString(R.string.text_answer_success), "", R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                    CommonHelper.changeActivity(activity, new Employer_MyOffersActivity());
+                })
+                .addOnFailureListener(e -> {
+                    CommonHelper.makeNotification(activity, activity.getResources().getString(R.string.text_error), e.getMessage(), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                });
     }
 
 
