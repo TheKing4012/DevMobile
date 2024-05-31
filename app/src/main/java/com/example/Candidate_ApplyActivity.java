@@ -197,6 +197,7 @@ public class Candidate_ApplyActivity extends Activity {
         candidateData.put("country", country);
         candidateData.put("description", desc);
         candidateData.put("pdfUrl", pdfUrl);
+        candidateData.put("status", "Pending");
 
         DatabaseReference offerRef = database.child("offers").child(offer.getOfferId());
 
