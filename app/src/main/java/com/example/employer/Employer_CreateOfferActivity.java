@@ -44,7 +44,7 @@ public class Employer_CreateOfferActivity extends Activity {
         Spinner zoneSpinner = findViewById(R.id.SpinnerZone);
 
         CustomSpinnerAdapter statusAdapter = new CustomSpinnerAdapter(this,
-                android.R.layout.simple_spinner_item, getResources().getTextArray(R.array.status));
+                android.R.layout.simple_spinner_item, getResources().getTextArray(R.array.type_interim));
         CustomSpinnerAdapter timeAdapter = new CustomSpinnerAdapter(this,
                 android.R.layout.simple_spinner_item, getResources().getTextArray(R.array.periodes));
         CustomSpinnerAdapter zoneAdapter = new CustomSpinnerAdapter(this,
