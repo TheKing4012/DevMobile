@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.utils.CommonHelper;
 import com.example.utils.FadeItemAnimator;
+import com.example.utils.Offer;
 import com.example.utils.RecyclerItem;
 import com.example.utils.RecyclerItemAdapter_buttons;
 
@@ -61,6 +62,15 @@ public class Employer_DetailOfferActivity extends Activity {
                 startActivity(intent); // Démarrer la nouvelle activité
             }
         });
+
+        Intent intent = getIntent();
+        Offer offer;
+        if (intent != null) {
+            offer = intent.getParcelableExtra("offer");
+            if (offer != null) {
+                offerTitle.setText(offer.getTitle()); // Par exemple, pour afficher le titre de l'offre
+            }
+        }
 
 
         //--------------------------------------------------------------------------

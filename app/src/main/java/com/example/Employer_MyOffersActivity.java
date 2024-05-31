@@ -3,6 +3,8 @@ package com.example;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -90,6 +92,15 @@ public class Employer_MyOffersActivity extends Activity {
                 Intent intent = new Intent(Employer_MyOffersActivity.this, Employer_DetailOfferActivity.class);
                 intent.putExtra("offer", offer);
                 startActivity(intent);
+            }
+        });
+
+        Button btnNewOffer = findViewById(R.id.button_create_offer);
+
+        btnNewOffer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommonHelper.changeActivity(Employer_MyOffersActivity.this, new Employer_CreateOfferActivity());
             }
         });
     }

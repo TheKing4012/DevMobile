@@ -96,7 +96,7 @@ public class Candidate_LoginActivity extends Activity {
                         .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                             @Override
                             public void onSuccess(AuthResult authResult) {
-                                CommonHelper.changeActivity(activity, new Employer_LoginActivity());
+                                CommonHelper.changeActivity(activity, new Candidate_LoginActivity());
                                 finish();
                             }
                         })

@@ -79,7 +79,7 @@
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/sf_bold"
                 android:layout_marginBottom="10dp"
-                android:text="@string/list_offer"
+                android:text="@string/create_offer"
                 android:textSize="30sp" />
 
             <EditText
