@@ -245,6 +245,49 @@ public class OfferHelper {
         });
     }
 
+    public void getCandidateInfo(String offerID, String candidateID, FilteredCandidatesListener listener) {
+        DatabaseReference candidateRef = FirebaseDatabase.getInstance().getReference()
+                .child("offers").child(offerID).child("candidates").child(candidateID);
+
+        candidateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Candidate candidate = dataSnapshot.getValue(Candidate.class);
+                if (candidate != null) {
+                    candidate.setCandidateId(dataSnapshot.getKey());
+
+                    // Pour chaque candidat, vérifiez s'il existe également dans users/candidates/{id}
+                    DatabaseReference userCandidateRef = FirebaseDatabase.getInstance().getReference()
+                            .child("users").child("candidates").child(candidate.getCandidateId());
+
+                    userCandidateRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot userSnapshot) {
+                            if (userSnapshot.exists()) {
+                                String phoneNumber = userSnapshot.child("phone").getValue(String.class);
+                                String city = userSnapshot.child("city").getValue(String.class);
+                                String userId = userSnapshot.child("userId").getValue(String.class); // Récupération du userId
+
+                                candidate.setPhoneNumber(phoneNumber);
+                                candidate.setCity(city);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            listener.onCancelled(databaseError);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onCancelled(databaseError);
+            }
+        });
+    }
+
 
     public void deleteOffer(String offerId, DatabaseReference.CompletionListener listener) {
         DatabaseReference offerRef = databaseReference.child(offerId);

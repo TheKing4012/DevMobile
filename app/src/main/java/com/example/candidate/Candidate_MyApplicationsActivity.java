@@ -98,7 +98,10 @@ public class Candidate_MyApplicationsActivity extends Activity {
         adapter.setOnItemClickListener(new RecyclerItemAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                CommonHelper.makeNotification(Candidate_MyApplicationsActivity.this, getString(R.string.text_error), getString(R.string.text_error_mail_already_used), R.drawable.baseline_warning_24, R.color.ruby, "Some data string passed here", "Some LONGtext for notification here");
+                Offer offer = recyclerItemList.get(position).getOffer();
+                Intent intent = new Intent(Candidate_MyApplicationsActivity.this, Candidate_SeeApplicationActivity.class);
+                intent.putExtra("offer", offer);
+                startActivity(intent);
             }
         });
 

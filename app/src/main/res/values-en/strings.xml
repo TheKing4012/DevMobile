@@ -102,4 +102,5 @@
     <string name="text_see_profile">Click here to see his profile</string>
     <string name="text_error_no_phone">No phone number precised</string>
     <string name="text_answer_success">The offer has been anwsered</string>
+    <string name="text_error_not_connected">Please connect</string>
 </resources>
