@@ -94,16 +94,5 @@ public class Employer_DetailOfferActivity extends Activity {
                 });
             }
         }
-
-
-        //--------------------------------------------------------------------------
-
-        //METTRE LE TITRE DE LOFFRE SELECTIONNE
-
-        //offerTitle.setText("TITRE DE LOFFRE A SET");
-
-        //METTRE LE TITRE DE LOFFRE SELECTIONNE
-
-        //--------------------------------------------------------------------------
     }
 }
