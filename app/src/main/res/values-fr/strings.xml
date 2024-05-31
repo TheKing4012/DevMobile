@@ -97,4 +97,6 @@
     <string name="text_account_creation_successs">Compte créé</string>
     <string name="text_post_cv">Vous pouvez déposer un CV ou cliquer sur l\'image principale pour revenir au menu</string>
     <string name="text_cv_upload_successs">Le CV a été téléchargé</string>
+    <string name="text_error_already_apply">Vous avez déjà candidaté pour cette offre</string>
+    <string name="text_apply_successs">Candidature soumise avec succès</string>
 </resources>

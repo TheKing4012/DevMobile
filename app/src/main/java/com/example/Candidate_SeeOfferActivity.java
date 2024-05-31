@@ -2,6 +2,7 @@ package com.example;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,7 +52,7 @@ public class Candidate_SeeOfferActivity extends Activity {
         textViewSalary = findViewById(R.id.TextViewSalary);
 
         Intent intent = getIntent();
-        Offer offer;
+        Offer offer = null;
         Activity activity = this;
         if (intent != null) {
             offer = intent.getParcelableExtra("offer");
@@ -73,9 +75,20 @@ public class Candidate_SeeOfferActivity extends Activity {
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Créer un Intent pour démarrer la nouvelle activité
                 Intent intent = new Intent(Candidate_SeeOfferActivity.this, Candidate_ListOffersActivity.class);
-                startActivity(intent); // Démarrer la nouvelle activité
+                startActivity(intent);
+            }
+        });
+
+        ImageView btnMap = findViewById(R.id.button_position);
+
+        Offer finalOffer = offer;
+        btnMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(finalOffer != null) {
+                    openMapForZone(finalOffer);
+                }
             }
         });
 
@@ -87,9 +100,31 @@ public class Candidate_SeeOfferActivity extends Activity {
                 public void onClick(View v) {
                     // Créer un Intent pour démarrer la nouvelle activité
                     Intent intent = new Intent(Candidate_SeeOfferActivity.this, Candidate_ApplyActivity.class);
+                    if(finalOffer != null) {
+                        intent.putExtra("offer", finalOffer);
+                    }
                     startActivity(intent); // Démarrer la nouvelle activité
                 }
             });
+        }
+    }
+
+    public void openMapForZone(Offer offer) {
+        String zone = offer.getZone();
+
+        if (zone == null || zone.isEmpty()) {
+            Toast.makeText(this, "Zone non spécifiée", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Uri geoLocation = Uri.parse("geo:0,0?q=" + Uri.encode(zone));
+
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, geoLocation);
+
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+            Toast.makeText(this, "Aucune application de carte disponible", Toast.LENGTH_SHORT).show();
         }
     }
 }
